@@ -62,5 +62,8 @@ Contributions to the project are welcome! If you have any ideas, enhancements, o
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
 ```
+
+References:
+- threads, process & forks : https://medium.com/@jalal92/lets-discuss-threads-grab-a-coffee-ad4d4ebf7181
+- Process & forks          : https://medium.com/@jalal92/what-is-a-process-248468ce10f0

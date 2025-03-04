@@ -41,14 +41,14 @@ Let’s write a small C program to see `fork()` in action. This example will sho
 
 ```c
 #include <stdio.h>
-#include <unistd.h> // Needed for fork()
-#include <sys/types.h> // Needed for pid_t
+#include <unistd.h>		// Needed for fork()
+#include <sys/types.h>	// Needed for pid_t
 
 int main() {
 	pid_t pid;																	// This is a variable to store the process ID
 
-	// Call fork() to create a new process
-	pid = fork();
+	
+	pid = fork();																// Call fork() to create a new process
 
 	if (pid < 0) { 																// If fork() fails
 		printf("Error: Fork failed!\n");
