@@ -1,4 +1,6 @@
-I’ll explain processes, threads, and the `fork()` function in C in a simple way, like I’m teaching a beginner. Let’s break it down step by step, and I’ll include easy examples you can try.
+
+# Processes, Threads, `fork()`
+_Processes, Threads, and the `fork()` function in C in a simple way_
 
 ---
 
@@ -43,22 +45,22 @@ Let’s write a small C program to see `fork()` in action. This example will sho
 #include <sys/types.h> // Needed for pid_t
 
 int main() {
-    pid_t pid; // This is a variable to store the process ID
+	pid_t pid;																	// This is a variable to store the process ID
 
-    // Call fork() to create a new process
-    pid = fork();
+	// Call fork() to create a new process
+	pid = fork();
 
-    if (pid < 0) { // If fork() fails
-        printf("Error: Fork failed!\n");
-    }
-    else if (pid == 0) { // This code runs in the child process
-        printf("Hello, I am the child process! My PID is %d\n", getpid());
-    }
-    else { // This code runs in the parent process
-        printf("Hello, I am the parent process! My child's PID is %d\n", pid);
-    }
+	if (pid < 0) { 																// If fork() fails
+		printf("Error: Fork failed!\n");
+	}
+	else if (pid == 0) {														// This code runs in the child process
+		printf("Hello, I am the child process! My PID is %d\n", getpid());
+	}
+	else {																		// This code runs in the parent process
+		printf("Hello, I am the parent process! My child's PID is %d\n", pid);
+	}
 
-    return 0;
+	return 0;
 }
 ```
 
@@ -100,23 +102,23 @@ Here’s a basic example using threads with the `pthread` library in C. This sho
 
 // This is the function each thread will run
 void* say_hello(void* arg) {
-    printf("Hello from a thread!\n");
-    return NULL;
+	printf("Hello from a thread!\n");
+	return NULL;
 }
 
 int main() {
-    pthread_t thread1, thread2; // Variables to hold thread IDs
+	pthread_t thread1, thread2;								// Variables to hold thread IDs
 
-    // Create two threads
-    pthread_create(&thread1, NULL, say_hello, NULL);
-    pthread_create(&thread2, NULL, say_hello, NULL);
+	// Create two threads
+	pthread_create(&thread1, NULL, say_hello, NULL);
+	pthread_create(&thread2, NULL, say_hello, NULL);
 
-    // Wait for threads to finish
-    pthread_join(thread1, NULL);
-    pthread_join(thread2, NULL);
+	// Wait for threads to finish
+	pthread_join(thread1, NULL);
+	pthread_join(thread2, NULL);
 
-    printf("Main program done!\n");
-    return 0;
+	printf("Main program done!\n");
+	return 0;
 }
 ```
 
@@ -139,5 +141,3 @@ Main program done!
 - **Process**: A full program running on its own. Use `fork()` to make a new one.
 - **Thread**: A smaller task inside a process. Use `pthread` to create them.
 - **`fork()`**: Splits a process into two (parent and child).
-
-Try running the examples! If you have questions or want more examples, just ask—I’m here to help!
