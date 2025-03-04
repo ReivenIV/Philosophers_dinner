@@ -2,11 +2,7 @@ references
 comands.txt
 *.gch
 
-# so long
-minilibx-linux.tgz
-minilibx-linux
-*.tgz
-
+# Philo 
 
 # System files
 .DS_Store
@@ -23,7 +19,6 @@ minilibx-linux
 *.exe
 test
 test.*
-so_long
 
 # Temp files
 *.swp
