@@ -1,5 +1,8 @@
 # Philosophers Project
 
+
+
+
 ## Description
 
 The Philosophers project is a multi-threading and synchronization project aimed at simulating the classical dining philosophers problem. The goal is to implement a solution in which a set of philosophers seated at a round table engage in actions of thinking and eating while avoiding deadlock and starvation.
@@ -48,10 +51,22 @@ Replace the placeholders with appropriate values:
 - `[time_to_sleep]`: The time (in milliseconds) a philosopher spends sleeping after eating or thinking.
 - `[number_of_times_each_philosopher_must_eat]`: The number of times each philosopher must eat before the simulation ends.
 
+### Keep in mind before input data : 
+- even amount of philosophers :
+   - t_die = t_eat + t_sleep + 10
+- odd amount of philosophers :
+   - t_die = t_eat * 2 + t_sleep + 10
+
+
 Example:
 
 ```bash
-./philo 5 800 200 200 7
+./philo 4 410 200 200 5
+
+valgrind ./philo 4 410 200 200 5
+
+valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 4 410 200 200 5
+
 ```
 
 This will run the simulation with 5 philosophers, a time to die of 800ms, time to eat of 200ms, time to sleep of 200ms, and each philosopher must eat 7 times.
@@ -70,3 +85,4 @@ References:
 
 Ref proyects : 
 - https://github.com/zelhajou/ft_unix_philosophers?tab=readme-ov-file
+- https://github.com/MarkosComK/42-Philosophers
