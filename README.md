@@ -49,17 +49,38 @@ Replace the placeholders with appropriate values:
 - `[time_to_die]`: The time (in milliseconds) after which a philosopher dies if they haven't eaten.
 - `[time_to_eat]`: The time (in milliseconds) it takes for a philosopher to finish eating.
 - `[time_to_sleep]`: The time (in milliseconds) a philosopher spends sleeping after eating or thinking.
-- `[number_of_times_each_philosopher_must_eat]`: The number of times each philosopher must eat before the simulation ends.
+- optional `[number_of_times_each_philosopher_must_eat]`: The number of times each philosopher must eat before the simulation ends.
 
 ### Keep in mind before input data : 
-- even amount of philosophers :
+
+Thinking time or "t_think" is the contention time waiting for the forks
+If
+#### Even amount of philosophers 
    - t_die = t_eat + t_sleep + 10
-- odd amount of philosophers :
+   - if (t_eat <= t_sleep) === 0 t_think
+      - No contention and the process is symetric philos will sleep and eat.
+      - exs: 
+         - ./philo 4 800 200 350
+         - ./philo 4 800 200 200
+   - if (t_eat > t_sleep) ===  t_think = t_eat - t_sleep
+         - ./philo 4 800 200 100
+         - ./philo 4 800 200 60
+
+#### Odd amount of philosophers :
    - t_die = t_eat * 2 + t_sleep + 10
+   - if (t_eat = t_sleep) === t_think = t_eat 
+      - ./philo 3 800 200 200
+      - ./philo 3 800 100 100
+   - if (t_eat < t_sleep) === t_think = t_eat *2 - t_sleep
+      - ./philo 3 800 200 300
+      - ./philo 3 800 200 350
+      - ./philo 3 800 200 400
 
 
-Example:
+   
 
+
+exec examples:
 ```bash
 ./philo 4 410 200 200 5
 
@@ -69,7 +90,6 @@ valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds
 
 ```
 
-This will run the simulation with 5 philosophers, a time to die of 800ms, time to eat of 200ms, time to sleep of 200ms, and each philosopher must eat 7 times.
 
 ## Contributing
 
