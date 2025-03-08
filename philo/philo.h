@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/08 14:50:36 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:28:26 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ typedef enum e_status
 
 // tools_time: 
 time_t	get_current_time(void);
+
+// tools_strs
+int	ft_strlen(char *str);
+int	nbs_atoi(char *str);
 
 
 
