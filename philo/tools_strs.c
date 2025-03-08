@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:27:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/08 15:28:05 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:49:53 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,4 @@ int	nbs_atoi(char *str)
 		return (-1);
 	return ((int)nb);
 }
+

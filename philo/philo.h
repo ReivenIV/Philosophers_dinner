@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/08 15:28:26 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/08 17:03:28 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ typedef enum e_status
 //	-------------
 //	::  Tools  ::
 //	-------------
+
+// parser
+bool	are_inputs_valid(int ac, char **av);
 
 // tools_time: 
 time_t	get_current_time(void);
