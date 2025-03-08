@@ -51,7 +51,7 @@ Replace the placeholders with appropriate values:
 - `[time_to_sleep]`: The time (in milliseconds) a philosopher spends sleeping after eating or thinking.
 - optional `[number_of_times_each_philosopher_must_eat]`: The number of times each philosopher must eat before the simulation ends.
 
-### Keep in mind before input data : 
+## Keep in mind before input data : 
 
 Thinking time or "t_think" is the contention time waiting for the forks
 If

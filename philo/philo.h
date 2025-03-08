@@ -6,18 +6,19 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/07 17:48:07 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:50:36 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
-# include <limits.h>
+# include <pthread.h>	// to create threads and mutex
+# include <limits.h>	// INT_MIN/MAX
 # include <unistd.h>	// for usleep() & write
 # include <stdio.h>		// malloc
-# include <sys/time.h>	// ??
+# include <stdlib.h>
+# include <sys/time.h>	// To get current time
 # include <stdbool.h>	// because i love bools
 
 
@@ -80,6 +81,11 @@ typedef enum e_status
 //	-------------
 //	::  Tools  ::
 //	-------------
+
+// tools_time: 
+time_t	get_current_time(void);
+
+
 
 //	------------
 //	::  Free  ::
