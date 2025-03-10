@@ -108,7 +108,7 @@ t_table			*init_table(int ac, char **av);
 void			*philosopher(void *data);
 
 // tools_setters.c
-void	assign_forks(t_philo *philo);
+void	set_forks(t_philo *philo);
 
 //	time.c
 time_t			get_time_in_ms(void);

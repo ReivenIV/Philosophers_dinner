@@ -62,7 +62,7 @@ static t_philo	**init_philosophers(t_table *table)
 		arr_philos[i]->table = table;
 		arr_philos[i]->id = i;
 		arr_philos[i]->times_ate = 0;
-		assign_forks(arr_philos[i]);
+		set_forks(arr_philos[i]);
 		i++;
 	}
 	return (arr_philos);

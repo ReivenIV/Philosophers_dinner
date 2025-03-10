@@ -6,13 +6,13 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 15:02:16 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:04:33 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* assign_forks:
+/* set_forks:
 *	Assigns two fork ids to each philosopher. Even-numbered philosophers
 *	get their fork order switched. This is because the order in which
 *	philosophers take their forks matters.
@@ -35,7 +35,7 @@
 */
 
 // TODO in setters
-void	assign_forks(t_philo *philo)
+void	set_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)												// set forks to philo even
 	{
