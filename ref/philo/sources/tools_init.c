@@ -127,19 +127,17 @@ static bool	init_global_mutexes(t_table *table)
 t_table	*init_table(int ac, char **av)
 {
 	t_table	*table;
-	int		i;
 
-	i = 1;
 	table = malloc(sizeof(t_table));					// we need only 1 table (always)
 	if (!table)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));
-	table->amount_philos = nbs_atoi(av[i++]);
-	table->time_to_die = nbs_atoi(av[i++]);
-	table->time_to_eat = nbs_atoi(av[i++]);
-	table->time_to_sleep = nbs_atoi(av[i++]);
+	table->amount_philos = nbs_atoi(av[1]);
+	table->time_to_die = nbs_atoi(av[2]);
+	table->time_to_eat = nbs_atoi(av[3]);
+	table->time_to_sleep = nbs_atoi(av[4]);
 	table->min_amount_meals = -1;						// set by default to "NULL"
 	if (ac == 6)										// if we have 6 we update it to the inputed number
-		table->min_amount_meals = nbs_atoi(av[i]);
+		table->min_amount_meals = nbs_atoi(av[5]);
 	table->philos = init_philosophers(table);
 	if (!table->philos)
 		return (NULL);
