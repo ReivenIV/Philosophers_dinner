@@ -6,11 +6,24 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 15:04:33 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:46:51 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/* set_sim_should_stop_flag:
+*	Sets the simulation stop flag to true or false. Only the grim
+*	reaper thread can set this flag. If the simulation stop flag is
+*	set to true, that means the simulation has met an end condition.
+*/
+void	set_sim_should_stop_flag(t_table *table, bool state)
+{
+	pthread_mutex_lock(&table->sim_stop_lock);
+		table->sim_should_stop = state;
+	pthread_mutex_unlock(&table->sim_stop_lock);
+}
+
 
 /* set_forks:
 *	Assigns two fork ids to each philosopher. Even-numbered philosophers
@@ -18,19 +31,19 @@
 *	philosophers take their forks matters.
 *
 *	For example with 3 philos:
-*		Philo #1 (id: 0) will want fork 0 and fork 1
-*		Philo #2 (id: 1) will want fork 1 and fork 2
-*		Philo #3 (id: 2) will want fork 2 and fork 0
-*	If philo #1 takes fork 0, philo #2 takes fork 1 and philo #3 takes fork 2,
+*		Philo #0 (id: 0) will want fork 0 and fork 1
+*		Philo #1 (id: 1) will want fork 1 and fork 2
+*		Philo #2 (id: 2) will want fork 2 and fork 0
+*	If philo #0 takes fork 0, philo #1 takes fork 1 and philo #2 takes fork 2,
 *	there is a deadlock. Each will be waiting for their second fork which is
 *	in use by another philo.
 *
 *	Making even id philos "left-handed" helps:
-*		Philo #1 (id: 0) takes fork 1 and then fork 0
-*		Philo #2 (id: 1) takes fork 1 and then fork 2
-*		Philo #3 (id: 2) takes fork 0 and then fork 2
-*	Now, philo #1 takes fork 1, philo #3 takes fork 0 and philo #2 waits patiently.
-*	Fork 2 is free for philo #3 to take, so he eats. When he is done philo #1 can
+*		Philo #0 (id: 0) takes fork 1 and then fork 0
+*		Philo #1 (id: 1) takes fork 1 and then fork 2
+*		Philo #2 (id: 2) takes fork 0 and then fork 2
+*	Now, philo #0 takes fork 1, philo #2 takes fork 0 and philo #1 waits patiently.
+*	Fork 2 is free for philo #2 to take, so he eats. When he is done philo #0 can
 *	take fork 0 and eat. When he is done, philo #2 can finally get fork 1 and eat.
 */
 
@@ -66,3 +79,4 @@ void	set_philo_sleep(t_table *table, time_t sleep_time)
 		usleep(100);
 	}
 }
+

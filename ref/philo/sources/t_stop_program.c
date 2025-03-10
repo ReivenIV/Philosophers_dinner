@@ -12,36 +12,9 @@
 
 #include "philo.h"
 
-/* set_sim_should_stop_flag:
-*	Sets the simulation stop flag to true or false. Only the grim
-*	reaper thread can set this flag. If the simulation stop flag is
-*	set to true, that means the simulation has met an end condition.
-*/
-static void	set_sim_should_stop_flag(t_table *table, bool state)
-{
-	pthread_mutex_lock(&table->sim_stop_lock);
-		table->sim_should_stop = state;
-	pthread_mutex_unlock(&table->sim_stop_lock);
-}
 
-/* has_simulation_stopped:
-*	Checks whether the simulation is at an end. The stop flag
-*	is protected by a mutex lock to allow any thread to check
-*	the simulation status without conflict.
-*	Returns true if the simulation stop flag is set to true,
-*	false if the flag is set to false. 
-*/
-bool	has_simulation_stopped(t_table *table)
-{
-	bool	r;
 
-	r = false;
-	pthread_mutex_lock(&table->sim_stop_lock);
-	if (table->sim_should_stop == true)
-		r = true;
-	pthread_mutex_unlock(&table->sim_stop_lock);
-	return (r);
-}
+
 
 /* kill_philo:
 *	Checks if the philosopher must be killed by comparing the
@@ -99,7 +72,7 @@ static bool	end_condition_reached(t_table *table)
 }
 
 /* t_stop_program:
-*	The grim reaper thread's routine. Checks if a philosopher must
+*	The t_stop_program thread's routine. Checks if a philosopher must
 *	be killed and if all philosophers ate enough. If one of those two
 *	end conditions are reached, it stops the simulation.
 */
