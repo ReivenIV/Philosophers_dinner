@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 15:46:51 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:08:33 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	set_philo_sleep(t_table *table, time_t sleep_time)
 	wake_up = get_time_in_ms() + sleep_time;
 	while (get_time_in_ms() < wake_up)
 	{
-		if (has_simulation_stopped(table))
+		if (should_sim_end(table))
 			break ;
 		usleep(100);
 	}

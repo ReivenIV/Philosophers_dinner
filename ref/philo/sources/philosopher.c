@@ -29,7 +29,7 @@ static void	eat_sleep_routine(t_philo *philo)
 	philo->last_meal_at = get_time_in_ms();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	set_philo_sleep(philo->table, philo->table->time_to_eat);
-	if (has_simulation_stopped(philo->table) == false)
+	if (should_sim_end(philo->table) == false)
 	{
 		pthread_mutex_lock(&philo->meal_time_lock);
 		philo->times_ate += 1;
@@ -113,7 +113,7 @@ void	*philosopher(void *data)
 		return (lone_philo_routine(philo));
 	else if (philo->id % 2)
 		think_routine(philo, true);
-	while (has_simulation_stopped(philo->table) == false)
+	while (should_sim_end(philo->table) == false)
 	{
 		eat_sleep_routine(philo);
 		think_routine(philo, false);

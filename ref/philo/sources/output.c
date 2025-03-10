@@ -79,7 +79,7 @@ static void	print_status(t_philo *philo, char *str)
 void	write_status(t_philo *philo, bool reaper_report, t_status status)
 {
 	pthread_mutex_lock(&philo->table->write_lock);
-	if (has_simulation_stopped(philo->table) == true && reaper_report == false)
+	if (should_sim_end(philo->table) == true && reaper_report == false)
 	{
 		pthread_mutex_unlock(&philo->table->write_lock);
 		return ;

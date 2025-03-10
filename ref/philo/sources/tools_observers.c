@@ -6,20 +6,20 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:44:34 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 15:53:45 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:08:33 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* has_simulation_stopped:
+/* should_sim_end:
 *	Checks whether the simulation is at an end. The stop flag
 *	is protected by a mutex lock to allow any thread to check
 *	the simulation status without conflict.
 *	Returns true if the simulation stop flag is set to true,
 *	false if the flag is set to false. 
 */
-bool	has_simulation_stopped(t_table *table)
+bool	should_sim_end(t_table *table)
 {
 	bool	res;
 

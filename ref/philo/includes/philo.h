@@ -112,7 +112,7 @@ void	set_forks(t_philo *philo);
 void	set_sim_should_stop_flag(t_table *table, bool state);
 
 // tools_observers
-bool			has_simulation_stopped(t_table *table);
+bool			should_sim_end(t_table *table);
 
 //	time.c
 time_t			get_time_in_ms(void);

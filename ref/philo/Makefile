@@ -25,7 +25,7 @@ SRC		=	main.c \
 			tools_init.c \
 			tools_free.c \
 			tools_setters.c \
-			tools_observers.c
+			tools_observers.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
