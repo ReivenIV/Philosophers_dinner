@@ -21,7 +21,6 @@ SRC		=	main.c \
 			t_stop_program.c \
 			philosopher.c \
 			output.c \
-			set_philo.c \
 			tools_time.c \
 			tools_init.c \
 			tools_free.c \

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 14:58:58 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:02:16 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,23 @@ void	assign_forks(t_philo *philo)
 	{
 		philo->fork[0] = (philo->id + 1) % philo->table->amount_philos;
 		philo->fork[1] = philo->id;
+	}
+}
+
+/* philo_sleep:
+*	Pauses the philosopher thread for a certain amount of time in miliseconds.
+*	Periodically checks to see if the simulation has ended during the sleep
+*	time and cuts the sleep short if it has.
+*/
+void	set_philo_sleep(t_table *table, time_t sleep_time)
+{
+	time_t	wake_up;
+
+	wake_up = get_time_in_ms() + sleep_time;
+	while (get_time_in_ms() < wake_up)
+	{
+		if (has_simulation_stopped(table))
+			break ;
+		usleep(100);
 	}
 }
