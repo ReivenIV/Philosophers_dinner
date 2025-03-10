@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 14:00:42 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:34:23 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static t_philo	**init_philos(t_table *table)
 	return (arr_philos);
 }
 
+// Will init global muetexes (mutexes in struct table)
 static bool	init_g_mutexs(t_table *table)
 {
 	table->fork_locks = init_forks(table);
@@ -71,7 +72,7 @@ static bool	init_g_mutexs(t_table *table)
 	return (true);
 }
 
-
+// Will init table, g_mutexes, philos array
 t_table	*init_table(int ac, char **av)
 {
 	t_table	*table;

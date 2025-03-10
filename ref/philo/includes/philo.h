@@ -107,6 +107,9 @@ t_table			*init_table(int ac, char **av);
 //	routines.c
 void			*philosopher(void *data);
 
+// tools_setters.c
+void	assign_forks(t_philo *philo);
+
 //	time.c
 time_t			get_time_in_ms(void);
 void			set_philo_sleep(t_table *table, time_t sleep_time);
