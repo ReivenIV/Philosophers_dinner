@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 17:08:33 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:31:43 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	set_forks(t_philo *philo)
 *	Periodically checks to see if the simulation has ended during the sleep
 *	time and cuts the sleep short if it has.
 */
-void	set_philo_sleep(t_table *table, time_t sleep_time)
+void	set_philo_to(t_table *table, time_t activity_time)
 {
 	time_t	wake_up;
 
-	wake_up = get_time_in_ms() + sleep_time;
+	wake_up = get_time_in_ms() + activity_time;
 	while (get_time_in_ms() < wake_up)
 	{
 		if (should_sim_end(table))

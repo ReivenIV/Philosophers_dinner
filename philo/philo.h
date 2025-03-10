@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 14:00:23 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:33:51 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,13 @@ t_table	*init_table(int ac, char **av);
 
 // tools_time: 
 time_t	get_current_time(void);
+
+// tools_setters
+void	set_philo_to(t_table *table, time_t activity_time);
+void	set_forks(t_philo *philo);
+
+// tools_obersevers
+bool	should_sim_end(t_table *table);
 
 // tools_strs
 int	ft_strlen(char *str);

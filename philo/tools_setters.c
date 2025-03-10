@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 15:37:02 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:31:50 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,22 @@ void	set_forks(t_philo *philo)
 		philo->fork[1] = philo->id;
 	}
 }
+/*
+ In given activity_time the philo thread will be sleeping 
+ (or IRL procesing untill the current date match the wake up time)
+*/
 
-void	set_philo_sleep(t_table *table, time_t sleep_time)
+// TODO a function that will set philo to "eat", "sleep", "think"
+// actually these function will pause the threads. 
+void	set_philo_to(t_table *table, time_t activity_time)
 {
 	time_t	wake_up;
 
-	wake_up = get_current_time() + sleep_time;
+	wake_up = get_current_time() + activity_time;
 	while (get_current_time() < wake_up)
 	{
-		if ()
+		if (should_sim_end(table) == true);
+			break ;
+		usleep(100);
 	}
-	
 }

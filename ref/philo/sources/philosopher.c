@@ -22,13 +22,16 @@ static void	eat_sleep_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	write_status(philo, false, GOT_FORK_1);
+
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[1]]);
 	write_status(philo, false, GOT_FORK_2);
 	write_status(philo, false, EATING);
+	
 	pthread_mutex_lock(&philo->meal_time_lock);
 	philo->last_meal_at = get_time_in_ms();
+
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	set_philo_sleep(philo->table, philo->table->time_to_eat);
+	set_philo_to(philo->table, philo->table->time_to_eat);
 	if (should_sim_end(philo->table) == false)
 	{
 		pthread_mutex_lock(&philo->meal_time_lock);
@@ -38,7 +41,7 @@ static void	eat_sleep_routine(t_philo *philo)
 	write_status(philo, false, SLEEPING);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
-	set_philo_sleep(philo->table, philo->table->time_to_sleep);
+	set_philo_to(philo->table, philo->table->time_to_sleep);
 }
 
 /* think_routine:
@@ -55,9 +58,7 @@ static void	think_routine(t_philo *philo, bool silent)
 	time_t	time_to_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	time_to_think = (philo->table->time_to_die
-			- (get_time_in_ms() - philo->last_meal_at)
-			- philo->table->time_to_eat) / 2;
+	time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
 		time_to_think = 0;
@@ -67,7 +68,7 @@ static void	think_routine(t_philo *philo, bool silent)
 		time_to_think = 200;
 	if (silent == false)
 		write_status(philo, false, THINKING);
-	set_philo_sleep(philo->table, time_to_think);
+	set_philo_to(philo->table, time_to_think);
 }
 
 /* lone_philo_routine:
@@ -81,7 +82,7 @@ static void	*lone_philo_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	write_status(philo, false, GOT_FORK_1);
-	set_philo_sleep(philo->table, philo->table->time_to_die);
+	set_philo_to(philo->table, philo->table->time_to_die);
 	write_status(philo, false, DIED);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	return (NULL);

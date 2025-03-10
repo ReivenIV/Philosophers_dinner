@@ -116,7 +116,7 @@ bool			should_sim_end(t_table *table);
 
 //	time.c
 time_t			get_time_in_ms(void);
-void			set_philo_sleep(t_table *table, time_t sleep_time);
+void			set_philo_to(t_table *table, time_t activity_time);
 void			sim_start_delay(time_t start_meeting_at);
 
 //	output.c
