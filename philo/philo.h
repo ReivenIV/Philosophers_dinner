@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/08 17:03:28 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:32:32 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ typedef enum e_status
 	GOT_FORK_2 = 5
 }	t_status;
 
-
-
-
 //	----------------
 //	::  Handlers  ::
 //	----------------
@@ -92,7 +89,9 @@ time_t	get_current_time(void);
 int	ft_strlen(char *str);
 int	nbs_atoi(char *str);
 
-
+// tools_free
+void	free_table(t_table *table);
+void	free_mutexes(t_table *table);
 
 //	------------
 //	::  Free  ::
