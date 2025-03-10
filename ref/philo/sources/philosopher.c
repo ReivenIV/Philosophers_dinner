@@ -108,8 +108,8 @@ void	*philosopher(void *data)
 
 
 	sim_start_delay(philo->table->start_meeting_at);
-	if (philo->table->time_to_die == 0)
-		return (NULL);
+	// // if (philo->table->time_to_die == 0)					//! These should be at the parser stage
+	// // 	return (NULL);										//! These should be at the parser stage
 	if (philo->table->amount_philos == 1)
 		return (lone_philo_routine(philo));
 	else if (philo->id % 2)

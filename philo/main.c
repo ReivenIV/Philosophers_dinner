@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 14:02:48 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:04:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@ int	main(int ac, char **av)
 	table = NULL;
 	if (ac < 5 || ac > 6)
 		return (printf("wrong amount ac"));
-	//TODO parser
+	// parser
 	if (!are_inputs_valid(ac, av))
 		exit (1);
-	//TODO inits
+	// inits: table g_mutexes, forks, array of philosophers
 	table = init_table(ac, av);
 	if (!table)
 		exit (1);
 	
+	// Seeters, routines(eat, think, sleep), all processes threads / mutex activities
 	//TODO eat, sleep, think time
-
+	
 	//TODO end process free all. 
 	
 	return (0);
