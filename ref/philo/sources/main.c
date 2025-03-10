@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 		return (msg(STR_USAGE, NULL, EXIT_FAILURE));
 	if (!are_valid_input(ac, av))
 		return (EXIT_FAILURE);
-	table = init_table(ac, av, 1);
+	table = init_table(ac, av);
 	if (!table)
 		return (EXIT_FAILURE);
 	if (!start_simulation(table))

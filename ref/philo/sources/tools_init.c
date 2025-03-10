@@ -124,10 +124,12 @@ static bool	init_global_mutexes(t_table *table)
 *	Returns a pointer to the allocated table structure, or NULL if
 *	an error occured during initialization.
 */
-t_table	*init_table(int ac, char **av, int i)
+t_table	*init_table(int ac, char **av)
 {
 	t_table	*table;
+	int		i;
 
+	i = 1;
 	table = malloc(sizeof(t_table));					// we need only 1 table (always)
 	if (!table)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));

@@ -102,7 +102,7 @@ bool			are_valid_input(int ac, char **av);
 int				nbs_atoi(char *str);
 
 //	init.c
-t_table			*init_table(int ac, char **av, int i);
+t_table			*init_table(int ac, char **av);
 
 //	routines.c
 void			*philosopher(void *data);
