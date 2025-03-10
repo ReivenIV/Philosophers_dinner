@@ -80,7 +80,7 @@ If
    
 
 
-exec examples:
+exec projet ex:
 ```bash
 # Normal launch
 ./philo 4 410 200 200 5
@@ -97,6 +97,14 @@ valgrind --tool=helgrind --history-level=full -s ./philo 2 8000000 20 20 1
 valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 8000000 20 20 1
 ```
 
+usefull comands : 
+```bash
+# clean vs-code cash
+rm -rf ~/.config/Code/CachedData
+
+# While the project is running you can check the proces (PID) data with these comand : 
+ps aux | grep "path of your projet"
+```
 
 ## Contributing
 
