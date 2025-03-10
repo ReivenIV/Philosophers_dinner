@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/08 17:05:45 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:02:48 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	main(int ac, char **av)
 	if (!are_inputs_valid(ac, av))
 		exit (1);
 	//TODO inits
+	table = init_table(ac, av);
+	if (!table)
+		exit (1);
 	
 	//TODO eat, sleep, think time
 
