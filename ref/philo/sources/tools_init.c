@@ -75,29 +75,29 @@ static void	assign_forks(t_philo *philo) // TODO
 */
 static t_philo	**init_philosophers(t_table *table)
 {
-	t_philo			**arr_philo;
+	t_philo			**arr_philos;
 	unsigned int	i;
 
 	if (!table)
 		return (printf("IP: no table"), NULL);
-	arr_philo = malloc(sizeof(t_philo) * table->amount_philos);
-	if (!arr_philo)
+	arr_philos = malloc(sizeof(t_philo) * table->amount_philos);
+	if (!arr_philos)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));
 	i = 0;
 	while (i < table->amount_philos)
 	{
-		arr_philo[i] = malloc(sizeof(t_philo) * 1);
-		if (!arr_philo[i])
+		arr_philos[i] = malloc(sizeof(t_philo) * 1);
+		if (!arr_philos[i])
 			return (error_null(STR_ERR_MALLOC, NULL, 0));
-		if (pthread_mutex_init(&arr_philo[i]->meal_time_lock, 0) != 0)
+		if (pthread_mutex_init(&arr_philos[i]->meal_time_lock, 0) != 0)
 			return (error_null(STR_ERR_MUTEX, NULL, 0));
-		arr_philo[i]->table = table;
-		arr_philo[i]->id = i;
-		arr_philo[i]->times_ate = 0;
-		assign_forks(arr_philo[i]);
+		arr_philos[i]->table = table;
+		arr_philos[i]->id = i;
+		arr_philos[i]->times_ate = 0;
+		assign_forks(arr_philos[i]);
 		i++;
 	}
-	return (arr_philo);
+	return (arr_philos);
 }
 
 /* init_global_mutexes:
