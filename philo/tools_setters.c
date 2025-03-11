@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 13:45:42 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:09:37 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ void	set_philo_to(t_table *table, time_t activity_time)
 			break ;
 		usleep(100);
 	}
+}
+// Will update the state of var sim_should_stop to True. 
+void	update_sim_should_stop(t_table *table, bool state)
+{
+	pthread_mutex_lock(&table->sim_stop_lock);
+		table->sim_should_stop = state;
+	pthread_mutex_unlock(&table->sim_stop_lock);
 }

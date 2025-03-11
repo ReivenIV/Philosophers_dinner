@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 13:47:20 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:03:59 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,4 @@ int	main(int ac, char **av)
 	
 	return (0);
 }
+//! leaks when closing the process (in infinit loop mode)
