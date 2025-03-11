@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:10:19 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 17:43:38 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:07:42 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	are_inputs_valid(int ac, char **av)
 		nb = nbs_atoi(av[i]);
 		if (i == 1 && (nb <= 0 || nb > 200))
 			return(printf("wrong amount of philos my dear\n"), false);
-		if (i > 1 && nb < 60)
+		if ((i > 1 && i < 5) && nb < 60)
 			return(printf("invalid inputs format my dear\n"), false);
 		i++;
 	}
