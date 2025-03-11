@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:44:34 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 17:08:33 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:51:41 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,36 @@ bool	should_sim_end(t_table *table)
 		res = true;
 	pthread_mutex_unlock(&table->sim_stop_lock);
 	return (res);
+}
+
+/* end_condition_reached:
+*	Checks each philosopher to see if one of two end conditions
+*	has been reached. Stops the simulation if a philosopher needs
+*	to be killed, or if every philosopher has eaten enough.
+*	Returns true if an end condition has been reached, false if not.
+*/
+bool	end_condition_reached(t_table *table)
+{
+	unsigned int	i;
+	bool			all_ate_enough;
+
+	all_ate_enough = true;
+	i = 0;
+	while (i < table->amount_philos)
+	{
+		pthread_mutex_lock(&table->philos[i]->meal_time_lock);
+		if (kill_philo(table->philos[i]))
+			return (true);
+		if (table->min_amount_meals != -1) //!
+			if (table->philos[i]->times_ate	< (unsigned int)table->min_amount_meals)
+				all_ate_enough = false;
+		pthread_mutex_unlock(&table->philos[i]->meal_time_lock);
+		i++;
+	}
+	if (table->min_amount_meals != -1 && all_ate_enough == true)
+	{
+		set_sim_should_stop_flag(table, true);
+		return (true);
+	}
+	return (false);
 }
