@@ -35,7 +35,7 @@ void	*t_stop_program(void *data)
 	sim_start_delay(table->start_meeting_at);
 	while (true)
 	{
-		if (end_condition_reached(table) == true)
+		if (are_all_conditions_reached(table) == true)
 			return (NULL);
 		usleep(1000);
 	}

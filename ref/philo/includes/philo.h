@@ -113,7 +113,7 @@ void	set_sim_should_stop_flag(t_table *table, bool state);
 
 // tools_observers
 bool			should_sim_end(t_table *table);
-bool			end_condition_reached(t_table *table);
+bool			are_all_conditions_reached(t_table *table);
 
 
 //	time.c
