@@ -13,12 +13,6 @@
 #include "philo.h"
 
 
-
-
-
-
-
-
 /* t_stop_program:
 *	The t_stop_program thread's routine. Checks if a philosopher must
 *	be killed and if all philosophers ate enough. If one of those two
