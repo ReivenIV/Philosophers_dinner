@@ -1,6 +1,21 @@
 # Philosophers Project
 
+exec projet ex:
+```bash
+# Normal launch
+./philo 4 410 200 200 5
 
+# Leaks
+valgrind ./philo 2 800000 60 60 1
+
+valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 60 60 1
+
+# Data races
+valgrind --tool=helgrind ./philo 2 800000 60 60 1
+valgrind --tool=helgrind --history-level=full -s ./philo 2 800000 60 60 1
+# data races complet report :
+valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 800000 60 60 1
+```
 
 
 ## Description
@@ -80,22 +95,7 @@ If
    
 
 
-exec projet ex:
-```bash
-# Normal launch
-./philo 4 410 200 200 5
 
-# Leaks
-valgrind ./philo 2 800000 20 20 1
-
-valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 20 20 1
-
-# Data races
-valgrind --tool=helgrind ./philo 2 8000000 20 20 1
-valgrind --tool=helgrind --history-level=full -s ./philo 2 8000000 20 20 1
-# data races complet report :
-valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 8000000 20 20 1
-```
 
 usefull comands : 
 ```bash
