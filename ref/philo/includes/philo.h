@@ -97,6 +97,11 @@ typedef enum e_status
 *                           Function Prototypes                               *
 ******************************************************************************/
 
+// 0_1_process.c
+bool			begin_process(t_table *table);
+void			end_process(t_table	*table);
+
+
 //	parsing.c
 bool			are_valid_input(int ac, char **av);
 int				nbs_atoi(char *str);
@@ -129,7 +134,7 @@ int				msg(char *str, char *detail, int exit_no);
 
 //	t_stop_program.c
 void			*t_stop_program(void *data);
-bool			kill_philo(t_philo *philo);
+bool			is_philo_dead(t_philo *philo);
 
 //	exit.c
 int				error_failure(char *str, char *details, t_table *table);

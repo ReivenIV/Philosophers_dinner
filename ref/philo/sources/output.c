@@ -12,6 +12,22 @@
 
 #include "philo.h"
 
+
+/* print_status:
+*	Prints a philosopher's status in plain text as required by the project
+*	subject:
+*		timestamp_in_ms X status
+*/
+static void	print_status(t_philo *philo, char *str)
+{
+	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
+}
+
+//  '------------------'
+//!    not necesary
+//  ,------------------,
+
+
 /* print_status_debug:
 *	Prints the philosopher's status in an easier to read,
 *	colorful format to help with debugging. For fork-taking
@@ -19,7 +35,7 @@
 *	the philosopher has taken.
 */
 static void	print_status_debug(t_philo *philo, char *color,
-								char *str, t_status status)
+								char *str, t_status status)					//! not necesary 
 {
 	if (status == GOT_FORK_1)
 		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
@@ -39,7 +55,7 @@ static void	print_status_debug(t_philo *philo, char *color,
 *	Redirects the status writing for debug mode. For this option,
 *	the DEBUG_FORMATTING option must be set to 1 in philo.h.
 */
-static void	write_status_debug(t_philo *philo, t_status status)
+static void	write_status_debug(t_philo *philo, t_status status)				//! not necesary 
 {
 	if (status == DIED)
 		print_status_debug(philo, RED, "died", status);
@@ -55,17 +71,6 @@ static void	write_status_debug(t_philo *philo, t_status status)
 		print_status_debug(philo, PURPLE, "has taken a fork", status);
 }
 
-/* print_status:
-*	Prints a philosopher's status in plain text as required by the project
-*	subject:
-*		timestamp_in_ms X status
-*/
-static void	print_status(t_philo *philo, char *str)
-{
-	printf("%ld %d %s\n", get_time_in_ms() - philo->table->start_meeting_at,
-		philo->id + 1, str);
-}
-
 /* write_status:
 *	Prints the status of a philosopher as long as the simulation is
 *	still active. Locks the write mutex to avoid intertwined messages
@@ -76,7 +81,7 @@ static void	print_status(t_philo *philo, char *str)
 *	Otherwise the output will be the regular format required by the project
 *	subject.
 */
-void	write_status(t_philo *philo, bool reaper_report, t_status status)
+void	write_status(t_philo *philo, bool reaper_report, t_status status)		//! not necesary 
 {
 	pthread_mutex_lock(&philo->table->write_lock);
 	if (should_sim_end(philo->table) == true && reaper_report == false)
@@ -107,7 +112,7 @@ void	write_status(t_philo *philo, bool reaper_report, t_status status)
 *	Prints the outcome of the simulation if a number of times to
 *	eat was specified. Only used for debug purposes.
 */
-void	write_outcome(t_table *table)
+void	write_outcome(t_table *table) 											//! not necesary 
 {
 	unsigned int	i;
 	unsigned int	full_count;

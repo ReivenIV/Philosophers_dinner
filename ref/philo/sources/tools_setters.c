@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 13:57:18 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:38:33 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,3 @@ void	set_philo_to(t_table *table, time_t activity_time)
 	}
 }
 
-
-/* kill_philo:
-*	Checks if the philosopher must be killed by comparing the
-*	time since the philosopher's last meal and the time_to_die parameter.
-*	If it is time for the philosopher to die, sets the simulation stop
-*	flag and displays the death status.
-*	Returns true if the philosopher has been killed, false if not.
-*/
-bool	kill_philo(t_philo *philo)
-{
-	time_t	current_time;
-
-	current_time = get_time_in_ms();
-	if ((current_time - philo->last_meal_at) >= philo->table->time_to_die)
-	{
-		set_sim_should_stop_flag(philo->table, true);
-		write_status(philo, true, DIED);
-		pthread_mutex_unlock(&philo->meal_time_lock);
-		return (true);
-	}
-	return (false);
-}
