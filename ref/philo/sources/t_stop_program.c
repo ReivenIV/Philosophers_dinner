@@ -25,7 +25,7 @@ void	*t_stop_program(void *data)
 	table = (t_table *)data;
 	if (table->min_amount_meals == 0)
 		return (NULL);
-	set_sim_should_stop_flag(table, false);
+	update_sim_should_stop(table, false);
 	sim_start_delay(table->start_meeting_at);
 	while (true)
 	{

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:44:34 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 15:40:43 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:16:23 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	are_all_conditions_reached(t_table *table)
 	}
 	if (amount_min_meals_reached == true)
 	{
-		set_sim_should_stop_flag(table, true);
+		update_sim_should_stop(table, true);
 		return (true);
 	}
 	return (false);
@@ -73,7 +73,7 @@ bool	is_philo_dead(t_philo *philo)
 	current_time = get_time_in_ms();
 	if ((current_time - philo->last_meal_at) >= philo->table->time_to_die)
 	{
-		set_sim_should_stop_flag(philo->table, true);
+		update_sim_should_stop(philo->table, true);
 		write_status(philo, true, DIED);
 		pthread_mutex_unlock(&philo->meal_time_lock);
 		return (true);

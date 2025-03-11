@@ -6,18 +6,18 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 15:38:33 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:07:14 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* set_sim_should_stop_flag:
+/* update_sim_should_stop:
 *	Sets the simulation stop flag to true or false. Only the grim
 *	reaper thread can set this flag. If the simulation stop flag is
 *	set to true, that means the simulation has met an end condition.
 */
-void	set_sim_should_stop_flag(t_table *table, bool state)
+void	update_sim_should_stop(t_table *table, bool state)
 {
 	pthread_mutex_lock(&table->sim_stop_lock);
 		table->sim_should_stop = state;

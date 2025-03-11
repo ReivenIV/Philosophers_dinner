@@ -114,7 +114,7 @@ void			*philosopher(void *data);
 
 // tools_setters.c
 void	set_forks(t_philo *philo);
-void	set_sim_should_stop_flag(t_table *table, bool state);
+void	update_sim_should_stop(t_table *table, bool state);
 
 // tools_observers
 bool			should_sim_end(t_table *table);

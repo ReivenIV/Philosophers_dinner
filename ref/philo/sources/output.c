@@ -23,54 +23,6 @@ static void	print_status(t_philo *philo, char *str)
 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
 }
 
-//  '------------------'
-//!    not necesary
-//  ,------------------,
-
-
-/* print_status_debug:
-*	Prints the philosopher's status in an easier to read,
-*	colorful format to help with debugging. For fork-taking
-*	statuses, extra information is displayed to show which fork
-*	the philosopher has taken.
-*/
-static void	print_status_debug(t_philo *philo, char *color,
-								char *str, t_status status)					//! not necesary 
-{
-	if (status == GOT_FORK_1)
-		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
-			get_time_in_ms() - philo->table->start_meeting_at,
-			color, philo->id + 1, str, philo->fork[0]);
-	else if (status == GOT_FORK_2)
-		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
-			get_time_in_ms() - philo->table->start_meeting_at,
-			color, philo->id + 1, str, philo->fork[1]);
-	else
-		printf("[%10ld]\t%s%03d\t%s\e[0m\n",
-			get_time_in_ms() - philo->table->start_meeting_at,
-			color, philo->id + 1, str);
-}
-
-/* write_status_debug:
-*	Redirects the status writing for debug mode. For this option,
-*	the DEBUG_FORMATTING option must be set to 1 in philo.h.
-*/
-static void	write_status_debug(t_philo *philo, t_status status)				//! not necesary 
-{
-	if (status == DIED)
-		print_status_debug(philo, RED, "died", status);
-	else if (status == EATING)
-		print_status_debug(philo, GREEN, "is eating", status);
-	else if (status == SLEEPING)
-		print_status_debug(philo, CYAN, "is sleeping", status);
-	else if (status == THINKING)
-		print_status_debug(philo, CYAN, "is thinking", status);
-	else if (status == GOT_FORK_1)
-		print_status_debug(philo, PURPLE, "has taken a fork", status);
-	else if (status == GOT_FORK_2)
-		print_status_debug(philo, PURPLE, "has taken a fork", status);
-}
-
 /* write_status:
 *	Prints the status of a philosopher as long as the simulation is
 *	still active. Locks the write mutex to avoid intertwined messages
@@ -81,20 +33,48 @@ static void	write_status_debug(t_philo *philo, t_status status)				//! not neces
 *	Otherwise the output will be the regular format required by the project
 *	subject.
 */
-void	write_status(t_philo *philo, bool reaper_report, t_status status)		//! not necesary 
+// void	write_status(t_philo *philo, bool reaper_report, t_status status)
+// {
+// 	pthread_mutex_lock(&philo->table->write_lock);
+// 	if (should_sim_end(philo->table) == true && reaper_report == false)
+// 	{
+// 		pthread_mutex_unlock(&philo->table->write_lock);
+// 		return ;
+// 	}
+// 	// // if (DEBUG_FORMATTING == true)
+// 	// // {
+// 	// // 	write_status_debug(philo, status);
+// 	// // 	pthread_mutex_unlock(&philo->table->write_lock);
+// 	// // 	return ;
+// 	// // }
+// 	if (status == DIED)
+// 		print_status(philo, "died");
+// 	else if (status == EATING)
+// 		print_status(philo, "is eating");
+// 	else if (status == SLEEPING)
+// 		print_status(philo, "is sleeping");
+// 	else if (status == THINKING)
+// 		print_status(philo, "is thinking");
+// 	else if (status == GOT_FORK_1 || status == GOT_FORK_2)
+// 		print_status(philo, "has taken a fork");
+// 	pthread_mutex_unlock(&philo->table->write_lock);
+// }
+
+void	write_status(t_philo *philo, bool reaper_report, t_status status)
 {
 	pthread_mutex_lock(&philo->table->write_lock);
-	if (should_sim_end(philo->table) == true && reaper_report == false)
+	printf("%d", reaper_report);
+	if (should_sim_end(philo->table) == true)
 	{
 		pthread_mutex_unlock(&philo->table->write_lock);
 		return ;
 	}
-	if (DEBUG_FORMATTING == true)
-	{
-		write_status_debug(philo, status);
-		pthread_mutex_unlock(&philo->table->write_lock);
-		return ;
-	}
+	// // if (DEBUG_FORMATTING == true)
+	// // {
+	// // 	write_status_debug(philo, status);
+	// // 	pthread_mutex_unlock(&philo->table->write_lock);
+	// // 	return ;
+	// // }
 	if (status == DIED)
 		print_status(philo, "died");
 	else if (status == EATING)
@@ -107,6 +87,57 @@ void	write_status(t_philo *philo, bool reaper_report, t_status status)		//! not 
 		print_status(philo, "has taken a fork");
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
+
+
+//  '------------------'
+//!    not necesary
+//  ,------------------,
+
+
+// // /* print_status_debug:
+// // *	Prints the philosopher's status in an easier to read,
+// // *	colorful format to help with debugging. For fork-taking
+// // *	statuses, extra information is displayed to show which fork
+// // *	the philosopher has taken.
+// // */
+// // static void	print_status_debug(t_philo *philo, char *color,
+// // 								char *str, t_status status)					//! not necesary 
+// // {
+// // 	if (status == GOT_FORK_1)
+// // 		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
+// // 			get_time_in_ms() - philo->table->start_meeting_at,
+// // 			color, philo->id + 1, str, philo->fork[0]);
+// // 	else if (status == GOT_FORK_2)
+// // 		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
+// // 			get_time_in_ms() - philo->table->start_meeting_at,
+// // 			color, philo->id + 1, str, philo->fork[1]);
+// // 	else
+// // 		printf("[%10ld]\t%s%03d\t%s\e[0m\n",
+// // 			get_time_in_ms() - philo->table->start_meeting_at,
+// // 			color, philo->id + 1, str);
+// // }
+
+// // /* write_status_debug:
+// // *	Redirects the status writing for debug mode. For this option,
+// // *	the DEBUG_FORMATTING option must be set to 1 in philo.h.
+// // */
+// // static void	write_status_debug(t_philo *philo, t_status status)				//! not necesary 
+// // {
+// // 	if (status == DIED)
+// // 		print_status_debug(philo, RED, "died", status);
+// // 	else if (status == EATING)
+// // 		print_status_debug(philo, GREEN, "is eating", status);
+// // 	else if (status == SLEEPING)
+// // 		print_status_debug(philo, CYAN, "is sleeping", status);
+// // 	else if (status == THINKING)
+// // 		print_status_debug(philo, CYAN, "is thinking", status);
+// // 	else if (status == GOT_FORK_1)
+// // 		print_status_debug(philo, PURPLE, "has taken a fork", status);
+// // 	else if (status == GOT_FORK_2)
+// // 		print_status_debug(philo, PURPLE, "has taken a fork", status);
+// // }
+
+
 
 /* write_outcome:
 *	Prints the outcome of the simulation if a number of times to
