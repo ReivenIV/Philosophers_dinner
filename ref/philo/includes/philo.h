@@ -120,6 +120,8 @@ void	update_sim_should_stop(t_table *table, bool state);
 bool			should_sim_end(t_table *table);
 bool			are_all_conditions_reached(t_table *table);
 
+// tools_strs.c
+int				ft_strcmp(char *s1, char *s2);
 
 //	time.c
 time_t			get_time_in_ms(void);
@@ -127,7 +129,7 @@ void			set_philo_to(t_table *table, time_t activity_time);
 void			sim_start_delay(time_t start_meeting_at);
 
 //	output.c
-void			write_status(t_philo *philo, bool reaper, t_status status);
+void			write_status(t_philo *philo, char *status);
 void			write_outcome(t_table *table);
 void			*error_null(char *str, char *details, t_table *table);
 int				msg(char *str, char *detail, int exit_no);

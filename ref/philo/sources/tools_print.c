@@ -18,10 +18,10 @@
 *	subject:
 *		timestamp_in_ms X status
 */
-static void	print_status(t_philo *philo, char *str)
-{
-	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
-}
+// static void	print_status(t_philo *philo, char *str)
+// {
+// 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
+// }
 
 /* write_status:
 *	Prints the status of a philosopher as long as the simulation is
@@ -60,31 +60,33 @@ static void	print_status(t_philo *philo, char *str)
 // 	pthread_mutex_unlock(&philo->table->write_lock);
 // }
 
-void	write_status(t_philo *philo, bool reaper_report, t_status status)
+
+// // static void	print_status(t_philo *philo, char *str)
+// // {
+// // 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
+// // }
+
+void	write_status(t_philo *philo, char *status)
 {
+	time_t	now_at;
+
 	pthread_mutex_lock(&philo->table->write_lock);
-	printf("%d", reaper_report);
-	if (should_sim_end(philo->table) == true)
+	if (should_sim_end(philo->table) == true)					// if end of the process we cut the acces to write in the terminal
 	{
 		pthread_mutex_unlock(&philo->table->write_lock);
 		return ;
 	}
-	// // if (DEBUG_FORMATTING == true)
-	// // {
-	// // 	write_status_debug(philo, status);
-	// // 	pthread_mutex_unlock(&philo->table->write_lock);
-	// // 	return ;
-	// // }
-	if (status == DIED)
-		print_status(philo, "died");
-	else if (status == EATING)
-		print_status(philo, "is eating");
-	else if (status == SLEEPING)
-		print_status(philo, "is sleeping");
-	else if (status == THINKING)
-		print_status(philo, "is thinking");
-	else if (status == GOT_FORK_1 || status == GOT_FORK_2)
-		print_status(philo, "has taken a fork");
+	now_at = get_time_in_ms() - philo->table->start_meeting_at;
+	if (ft_strcmp(status, "DIED") == 0)
+		printf("%ld %d %s\n", now_at, philo->id + 1, "died");
+	else if (ft_strcmp(status, "EATING") == 0)
+		printf("%ld %d %s\n", now_at, philo->id + 1, "is eating");
+	else if (ft_strcmp(status, "SLEEPING") == 0)
+		printf("%ld %d %s\n", now_at, philo->id + 1, "is sleeping");
+	else if (ft_strcmp(status, "THINKING") == 0)
+		printf("%ld %d %s\n", now_at, philo->id + 1, "is thinking");
+	else if (ft_strcmp(status, "FORK_0") == 0 || ft_strcmp(status, "FORK_1") == 0)
+		printf("%ld %d %s\n", now_at, philo->id + 1, "has taken a fork");
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
 

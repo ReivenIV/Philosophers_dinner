@@ -20,12 +20,13 @@ SRC		=	main.c \
 			parsing.c \
 			t_stop_program.c \
 			philosopher.c \
-			output.c \
+			tools_print.c \
 			tools_time.c \
 			tools_init.c \
 			tools_free.c \
 			tools_setters.c \
 			tools_observers.c \
+			tools_strs.c \
 			0_1_process.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
