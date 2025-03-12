@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.c                                      :+:      :+:    :+:   */
+/*   tools_philo_actions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/02 15:12:00 by rita          #+#    #+#             */
-/*   Updated: 2022/08/10 00:17:37 by rita         ###   ########.fr       */
+/*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
+/*   Updated: 2025/03/12 15:26:52 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 *	amount of time. The time of the last meal is recorded at the beginning of
 *	the meal, not at the end, as per the subject's requirements.
 */
-static void	eat_sleep_routine(t_philo *philo)
+void	eat_sleep_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
@@ -53,7 +53,7 @@ static void	eat_sleep_routine(t_philo *philo)
 *	This helps stagger philosopher's eating routines to avoid forks being
 *	needlessly monopolized by one philosopher to the detriment of others.
 */
-static void	think_routine(t_philo *philo, bool silent)
+void	think_routine(t_philo *philo, bool silent)
 {
 	time_t	time_to_think;
 
@@ -78,7 +78,7 @@ static void	think_routine(t_philo *philo, bool silent)
 *	This is a separate routine to make sure that the thread does not get
 *	stuck waiting for the second fork in the eat routine.
 */
-static void	*lone_philo_routine(t_philo *philo)
+void	*lone_philo_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
@@ -88,39 +88,4 @@ static void	*lone_philo_routine(t_philo *philo)
 	return (NULL);
 }
 
-/* philosopher:
-*	The philosopher thread routine. The philosopher must eat, sleep
-*	and think. In order to avoid conflicts between philosopher threads,
-*	philosophers with an even id start by thinking, which delays their
-*	meal time by a small margin. This allows odd-id philosophers to
-*	grab their forks first, avoiding deadlocks.
-*/
-void	*philosopher(void *data)
-{
-	t_philo	*philo;
 
-	philo = (t_philo *)data;
-	if (philo->table->min_amount_meals == 0)
-		return (NULL);
-	// // pthread_mutex_lock(&philo->meal_time_lock);
-	// // philo->last_meal_at = philo->table->start_meeting_at;
-	// // pthread_mutex_unlock(&philo->meal_time_lock);
-
-
-	sim_start_delay(philo->table->start_meeting_at);
-	// // if (philo->table->time_to_die == 0)					//! These should be at the parser stage
-	// // 	return (NULL);										//! These should be at the parser stage
-
-	// no need part ------ we handle is in main.c
-	if (philo->table->amount_philos == 1)
-		return (lone_philo_routine(philo));
-	// -------------------
-	else if (philo->id % 2)
-		think_routine(philo, true);
-	while (should_sim_end(philo->table) == false)
-	{
-		eat_sleep_routine(philo);
-		think_routine(philo, false);
-	}
-	return (NULL);
-}
