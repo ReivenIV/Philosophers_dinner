@@ -113,10 +113,9 @@ t_table			*init_table(int ac, char **av);
 void			*philosopher(void *data);
 
 //	tools_actions.c
-void			eat_sleep_routine(t_philo *philo);
-void			think_routine(t_philo *philo, bool silent);
+void			eat_sleep_process(t_philo *philo);
+void			think_routine(t_philo *philo);
 void			*one_philo_process(t_philo *philo);
-
 
 // tools_setters.c
 void	set_forks(t_philo *philo);

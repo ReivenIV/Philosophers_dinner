@@ -6,19 +6,19 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/12 15:40:46 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:25:12 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* eat_sleep_routine:
+/* one_philo_process:
 *	When a philosopher is ready to eat, he will wait for his fork mutexes to
 *	be unlocked before locking them. Then the philosopher will eat for a certain
 *	amount of time. The time of the last meal is recorded at the beginning of
 *	the meal, not at the end, as per the subject's requirements.
 */
-void	eat_sleep_routine(t_philo *philo)
+void	eat_sleep_process(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
@@ -29,18 +29,20 @@ void	eat_sleep_routine(t_philo *philo)
 	
 	pthread_mutex_lock(&philo->meal_time_lock);
 	philo->last_meal_at = get_time_in_ms();
-
 	pthread_mutex_unlock(&philo->meal_time_lock);
+	
 	set_philo_to(philo->table, philo->table->time_to_eat);
+	
 	if (should_sim_end(philo->table) == false)
 	{
 		pthread_mutex_lock(&philo->meal_time_lock);
-		philo->times_ate += 1;
+		philo->times_ate += 1;		//! Problem here is not waiting all the time till the end of the eating process at the end.  
 		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
-	print_statement(philo, "SLEEPING");
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
+	
+	print_statement(philo, "SLEEPING");
 	set_philo_to(philo->table, philo->table->time_to_sleep);
 }
 
@@ -53,7 +55,7 @@ void	eat_sleep_routine(t_philo *philo)
 *	This helps stagger philosopher's eating routines to avoid forks being
 *	needlessly monopolized by one philosopher to the detriment of others.
 */
-void	think_routine(t_philo *philo, bool silent)
+void	think_routine(t_philo *philo)
 {
 	time_t	time_to_think;
 
@@ -63,12 +65,12 @@ void	think_routine(t_philo *philo, bool silent)
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
 		time_to_think = 0;
-	if (time_to_think == 0 && silent == true)
-		time_to_think = 1;
+	// // if (time_to_think == 0 && silent == true)
+	// // 	time_to_think = 1;
 	if (time_to_think > 600)
 		time_to_think = 200;
-	if (silent == false)
-		print_statement(philo, "THINKING");
+	// // if (silent == false)
+	print_statement(philo, "THINKING");
 	set_philo_to(philo->table, time_to_think);
 }
 
@@ -79,7 +81,7 @@ void	think_routine(t_philo *philo, bool silent)
 *	This is a separate routine to make sure that the thread does not get
 *	stuck waiting for the second fork in the eat routine.
 */
-void	*one_philo_process(t_philo *philo)
+void	*one_philo_process(t_philo *philo) // done 
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");

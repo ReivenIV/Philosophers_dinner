@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 15:10:42 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:49:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	set_forks(t_philo *philo)
 *	Periodically checks to see if the simulation has ended during the sleep
 *	time and cuts the sleep short if it has.
 */
+//TODO Maybe it should be a BOOL 
 void	set_philo_to(t_table *table, time_t activity_time)
 {
 	time_t	active_at;
