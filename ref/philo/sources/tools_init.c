@@ -103,6 +103,7 @@ t_table	*init_table(int ac, char **av)
 	table->time_to_die = nbs_atoi(av[2]);
 	table->time_to_eat = nbs_atoi(av[3]);
 	table->time_to_sleep = nbs_atoi(av[4]);
+	table->sim_should_stop = false;
 	table->min_amount_meals = -1;						// set by default to "NULL"
 	if (ac == 6)										// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
