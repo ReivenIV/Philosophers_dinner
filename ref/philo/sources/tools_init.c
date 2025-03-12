@@ -62,6 +62,7 @@ static t_philo	**init_philosophers(t_table *table)
 		arr_philos[i]->table = table;
 		arr_philos[i]->id = i;
 		arr_philos[i]->times_ate = 0;
+		arr_philos[i]->last_meal_at = table->start_meeting_at;
 		set_forks(arr_philos[i]);
 		i++;
 	}
@@ -105,6 +106,7 @@ t_table	*init_table(int ac, char **av)
 	table->time_to_sleep = nbs_atoi(av[4]);
 	table->sim_should_stop = false;
 	table->min_amount_meals = -1;						// set by default to "NULL"
+	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)										// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
 	table->philos = init_philosophers(table);
