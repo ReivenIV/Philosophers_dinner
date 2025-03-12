@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 12:45:23 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:07:59 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ bool	is_philo_dead(t_philo *philo)
 	current_time = get_current_time();
 	if ((current_time - philo->last_meal_at) >= philo->table->t_t_die)
 	{
-		update_sim_should_stop(philo->table, true);			// Will update table->sim_should_stop BOOL to TRUE
 		print_statement(philo, "DIED");
+		update_sim_should_stop(philo->table, true);			// Will update table->sim_should_stop BOOL to TRUE
 		pthread_mutex_unlock(&philo->meal_time_lock);
 		return (true);										// yep someone died
 	}
