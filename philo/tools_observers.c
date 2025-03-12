@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 14:09:14 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:56:33 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ bool	are_all_conditions_reached(t_table *table)
 	}
 	return (false);
 }
+
+// Main constant observer that will be checking constantly if the process should stop or not. 
 void	*t_stop_program(void *data)
 {
 	t_table	*table;

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 16:03:59 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:15:21 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int ac, char **av)
 	if (!are_inputs_valid(ac, av))
 		exit (1);
 
+	if (av[1][0] == '1')						// in case we have only 1 philo we wait till it die. we don't init anything.
+		return (usleep(nbs_atoi(av[2])), printf("%s 1 died\n", av[2]), 0); //TODO maybe.. 
 	// TODO if only 1philo it should die automatically
 		// inits: table g_mutexes, forks, array of philosophers
 	table = init_table(ac, av);
