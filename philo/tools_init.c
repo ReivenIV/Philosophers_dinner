@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 12:45:48 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:53:49 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static t_philo	**init_philos(t_table *table)
 	t_philo			**arr_philos;
 	unsigned int	i;
 
+	if (!table)
+		return (printf("IP: no table"), NULL);
 	arr_philos = malloc(sizeof(t_philo) * table->amount_philos);
 	if (!arr_philos)
 		return (printf("IP: error malloc"), NULL);
@@ -53,7 +55,8 @@ static t_philo	**init_philos(t_table *table)
 		arr_philos[i]->table = table;
 		arr_philos[i]->id = i;
 		arr_philos[i]->times_ate = 0;
-		assign_forks(arr_philos[i]);
+		arr_philos[i]->last_meal_at = table->start_meeting_at;
+		set_forks(arr_philos[i]);
 		i++;
 	}
 	return (arr_philos);
@@ -84,14 +87,15 @@ t_table	*init_table(int ac, char **av)
 	table->t_t_die =  nbs_atoi(av[2]);
 	table->t_t_eat =  nbs_atoi(av[3]);
 	table->t_t_sleep =  nbs_atoi(av[4]);
-	table->min_amount_meals = -1;
 	table->sim_should_stop = false;
-	if (ac == 6)
-		table->min_amount_meals = nbs_atoi(5);
-	table->philos = init_philos(table);
+	table->min_amount_meals = -1;						// set by default to "NULL"
+	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
+	if (ac == 6)										// if we have 6 we update it to the inputed number
+		table->min_amount_meals = nbs_atoi(av[5]);
+	table->philos = init_philosophers(table);
 	if (!table->philos)
 		return (NULL);
-	if (!init_g_mutexs(table))
+	if (!init_global_mutexes(table))
 		return (NULL);
 	table->sim_should_stop = false;
 	return (table);
