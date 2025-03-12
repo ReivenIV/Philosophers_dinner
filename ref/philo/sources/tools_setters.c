@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 16:07:14 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:10:42 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	update_sim_should_stop(t_table *table, bool state)
 *	take fork 0 and eat. When he is done, philo #2 can finally get fork 1 and eat.
 */
 
-// TODO in setters
 void	set_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)												// set forks to philo even
@@ -69,12 +68,12 @@ void	set_forks(t_philo *philo)
 */
 void	set_philo_to(t_table *table, time_t activity_time)
 {
-	time_t	wake_up;
+	time_t	active_at;
 
-	wake_up = get_time_in_ms() + activity_time;
-	while (get_time_in_ms() < wake_up)
+	active_at = get_time_in_ms() + activity_time;
+	while (get_time_in_ms() < active_at)
 	{
-		if (should_sim_end(table))
+		if (should_sim_end(table) == true)
 			break ;
 		usleep(100);
 	}
