@@ -21,11 +21,11 @@
 static void	eat_sleep_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
-	write_status(philo, "FORK_0");
+	print_statement(philo, "FORK_0");
 
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[1]]);
-	write_status(philo, "FORK_1");
-	write_status(philo, "EATING");
+	print_statement(philo, "FORK_1");
+	print_statement(philo, "EATING");
 	
 	pthread_mutex_lock(&philo->meal_time_lock);
 	philo->last_meal_at = get_time_in_ms();
@@ -38,7 +38,7 @@ static void	eat_sleep_routine(t_philo *philo)
 		philo->times_ate += 1;
 		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
-	write_status(philo, "SLEEPING");
+	print_statement(philo, "SLEEPING");
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	set_philo_to(philo->table, philo->table->time_to_sleep);
@@ -67,7 +67,7 @@ static void	think_routine(t_philo *philo, bool silent)
 	if (time_to_think > 600)
 		time_to_think = 200;
 	if (silent == false)
-		write_status(philo, "THINKING");
+		print_statement(philo, "THINKING");
 	set_philo_to(philo->table, time_to_think);
 }
 
@@ -81,9 +81,9 @@ static void	think_routine(t_philo *philo, bool silent)
 static void	*lone_philo_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
-	write_status(philo, "FORK_0");
+	print_statement(philo, "FORK_0");
 	set_philo_to(philo->table, philo->table->time_to_die);
-	write_status(philo, "DIED");
+	print_statement(philo, "DIED");
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	return (NULL);
 }

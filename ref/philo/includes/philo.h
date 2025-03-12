@@ -129,7 +129,7 @@ void			set_philo_to(t_table *table, time_t activity_time);
 void			sim_start_delay(time_t start_meeting_at);
 
 //	output.c
-void			write_status(t_philo *philo, char *status);
+void			print_statement(t_philo *philo, char *status);
 void			write_outcome(t_table *table);
 void			*error_null(char *str, char *details, t_table *table);
 int				msg(char *str, char *detail, int exit_no);

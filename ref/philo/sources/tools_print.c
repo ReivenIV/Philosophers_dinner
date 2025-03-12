@@ -23,7 +23,7 @@
 // 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
 // }
 
-/* write_status:
+/* print_statement:
 *	Prints the status of a philosopher as long as the simulation is
 *	still active. Locks the write mutex to avoid intertwined messages
 *	from different threads.
@@ -33,7 +33,7 @@
 *	Otherwise the output will be the regular format required by the project
 *	subject.
 */
-// void	write_status(t_philo *philo, bool reaper_report, t_status status)
+// void	print_statement(t_philo *philo, bool reaper_report, t_status status)
 // {
 // 	pthread_mutex_lock(&philo->table->write_lock);
 // 	if (should_sim_end(philo->table) == true && reaper_report == false)
@@ -43,7 +43,7 @@
 // 	}
 // 	// // if (DEBUG_FORMATTING == true)
 // 	// // {
-// 	// // 	write_status_debug(philo, status);
+// 	// // 	print_statement_debug(philo, status);
 // 	// // 	pthread_mutex_unlock(&philo->table->write_lock);
 // 	// // 	return ;
 // 	// // }
@@ -66,9 +66,10 @@
 // // 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
 // // }
 
-void	write_status(t_philo *philo, char *status)
+void	print_statement(t_philo *philo, char *status)
 {
 	time_t	now_at;
+	int		philo_id;
 
 	pthread_mutex_lock(&philo->table->write_lock);
 	if (should_sim_end(philo->table) == true)					// if end of the process we cut the acces to write in the terminal
@@ -77,16 +78,17 @@ void	write_status(t_philo *philo, char *status)
 		return ;
 	}
 	now_at = get_time_in_ms() - philo->table->start_meeting_at;
+	philo_id = philo->id + 1;
 	if (ft_strcmp(status, "DIED") == 0)
-		printf("%ld %d %s\n", now_at, philo->id + 1, "died");
+		printf("%ld %d %s\n", now_at, philo_id, "died");
 	else if (ft_strcmp(status, "EATING") == 0)
-		printf("%ld %d %s\n", now_at, philo->id + 1, "is eating");
+		printf("%ld %d %s\n", now_at, philo_id, "is eating");
 	else if (ft_strcmp(status, "SLEEPING") == 0)
-		printf("%ld %d %s\n", now_at, philo->id + 1, "is sleeping");
+		printf("%ld %d %s\n", now_at, philo_id, "is sleeping");
 	else if (ft_strcmp(status, "THINKING") == 0)
-		printf("%ld %d %s\n", now_at, philo->id + 1, "is thinking");
+		printf("%ld %d %s\n", now_at, philo_id, "is thinking");
 	else if (ft_strcmp(status, "FORK_0") == 0 || ft_strcmp(status, "FORK_1") == 0)
-		printf("%ld %d %s\n", now_at, philo->id + 1, "has taken a fork");
+		printf("%ld %d %s\n", now_at, philo_id, "has taken a fork");
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
 
@@ -119,11 +121,11 @@ void	write_status(t_philo *philo, char *status)
 // // 			color, philo->id + 1, str);
 // // }
 
-// // /* write_status_debug:
+// // /* print_statement_debug:
 // // *	Redirects the status writing for debug mode. For this option,
 // // *	the DEBUG_FORMATTING option must be set to 1 in philo.h.
 // // */
-// // static void	write_status_debug(t_philo *philo, t_status status)				//! not necesary 
+// // static void	print_statement_debug(t_philo *philo, t_status status)				//! not necesary 
 // // {
 // // 	if (status == DIED)
 // // 		print_status_debug(philo, RED, "died", status);
