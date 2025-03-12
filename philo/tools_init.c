@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 14:34:23 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:45:48 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_table	*init_table(int ac, char **av)
 	table->t_t_eat =  nbs_atoi(av[3]);
 	table->t_t_sleep =  nbs_atoi(av[4]);
 	table->min_amount_meals = -1;
+	table->sim_should_stop = false;
 	if (ac == 6)
 		table->min_amount_meals = nbs_atoi(5);
 	table->philos = init_philos(table);

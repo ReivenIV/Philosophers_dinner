@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 12:17:18 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:45:23 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ bool	is_philo_dead(t_philo *philo)
 	return (false);											// all good we can continue wiht the process.
 }
 
-// Will check if philos are alive & if everyone had eate the min amount of meals.
+// Will check if philos are alive & if everyone had ete the min amount of meals.
+// if conditions reached == TRUE else FALSE
 bool	are_all_conditions_reached(t_table *table)
 {
 	unsigned int	i;
@@ -68,4 +69,21 @@ bool	are_all_conditions_reached(t_table *table)
 		return (true);
 	}
 	return (false);
+}
+void	*t_stop_program(void *data)
+{
+	t_table	*table;
+
+	table = (t_table *)data;
+	if (table->min_amount_meals == 0)
+		return (NULL);
+	//update_sim_should_stop(table, false);
+	sim_start_delay(table->start_meeting_at);
+	while (true)
+	{
+		if (are_all_conditions_reached(table) == true)
+			return (NULL);
+		usleep(1000);
+	}
+	return (NULL);
 }
