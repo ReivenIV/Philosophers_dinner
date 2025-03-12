@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 10:53:46 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:17:40 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	update_sim_should_stop(t_table *table, bool state);
 
 // tools_obersevers
 bool	should_sim_end(t_table *table);
+bool	is_philo_dead(t_philo *philo);
+bool	are_all_conditions_reached(t_table *table);
 
 // tools_strs
 int	ft_strlen(char *str);
