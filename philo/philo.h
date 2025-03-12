@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 16:09:47 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:53:46 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ t_table	*init_table(int ac, char **av);
 
 // tools_time: 
 time_t	get_current_time(void);
+
+// tools_print:  
+void	print_statement(t_philo *philo, char *status);
 
 // tools_setters
 void	set_philo_to(t_table *table, time_t activity_time);
