@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/12 15:26:52 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:40:46 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	think_routine(t_philo *philo, bool silent)
 	time_t	time_to_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
+	// TODO t_t_think will need improvement. should be in init part not here
 	time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
@@ -71,14 +72,14 @@ void	think_routine(t_philo *philo, bool silent)
 	set_philo_to(philo->table, time_to_think);
 }
 
-/* lone_philo_routine:
+/* one_philo_process:
 *	This routine is invoked when there is only a single philosopher.
 *	A single philosopher only has one fork, and so cannot eat. The
 *	philosopher will pick up that fork, wait as long as time_to_die and die.
 *	This is a separate routine to make sure that the thread does not get
 *	stuck waiting for the second fork in the eat routine.
 */
-void	*lone_philo_routine(t_philo *philo)
+void	*one_philo_process(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");

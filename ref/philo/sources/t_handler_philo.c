@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:25:09 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 15:25:36 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:40:46 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	*philosopher(void *data)
 
 	// no need part ------ we handle is in main.c
 	if (philo->table->amount_philos == 1)
-		return (lone_philo_routine(philo));
+		return (one_philo_process(philo));
 	// -------------------
 	else if (philo->id % 2)
 		think_routine(philo, true);
