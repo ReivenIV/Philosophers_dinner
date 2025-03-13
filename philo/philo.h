@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 14:09:40 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:33:07 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 	pthread_t			thread_id;					// thread_id of each philo
 	unsigned int		times_ate;					// amount of meals per philo
 	unsigned int		fork[2];					// max amount of forks per philo
-	pthread_mutex_t		meal_time_lock;				// time to eat ?
+	pthread_mutex_t		meal_time_lock;				//? time to eat ?
 	time_t				last_meal_at;				// timestamp that record last meal eaten (usefull to know if any philo already died)
 	t_table				*table;
 } t_philo;
@@ -61,15 +61,15 @@ typedef struct s_philo
 //	-------------
 //	::  Enums  ::
 //	-------------
-typedef enum e_status
-{
-	DIED = 0,
-	EATING = 1,
-	SLEEPING = 2,
-	THINKING = 3,
-	GOT_FORK_1 = 4,
-	GOT_FORK_2 = 5
-}	t_status;
+// // typedef enum e_status
+// // {
+// // 	DIED = 0,
+// // 	EATING = 1,
+// // 	SLEEPING = 2,
+// // 	THINKING = 3,
+// // 	GOT_FORK_1 = 4,
+// // 	GOT_FORK_2 = 5
+// // }	t_status;
 
 //	----------------
 //	::  Handlers  ::
@@ -83,7 +83,7 @@ typedef enum e_status
 bool	are_inputs_valid(int ac, char **av);
 
 // tools_init
-t_table	*init_table(int ac, char **av);
+t_table	*init_table_philos(int ac, char **av);
 
 // tools_time: 
 time_t	get_current_time(void);
@@ -92,7 +92,7 @@ time_t	get_current_time(void);
 void	print_statement(t_philo *philo, char *status);
 
 // tools_setters
-void	set_philo_to(t_table *table, time_t activity_time);
+void	set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo);
 void	set_forks(t_philo *philo);
 void	update_sim_should_stop(t_table *table, bool state);
 

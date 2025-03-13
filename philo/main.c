@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 15:15:21 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:50:32 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		return (usleep(nbs_atoi(av[2])), printf("%s 1 died\n", av[2]), 0); //TODO maybe.. 
 	// TODO if only 1philo it should die automatically
 		// inits: table g_mutexes, forks, array of philosophers
-	table = init_table(ac, av);
+	table = init_table_philos(ac, av);
 	if (!table)
 		exit (1);
 	

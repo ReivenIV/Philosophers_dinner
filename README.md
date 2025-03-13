@@ -2,19 +2,19 @@
 
 exec projet ex:
 ```bash
-   # Normal launch
-   ./philo 4 410 200 200 5
+	# Normal launch
+	./philo 4 410 200 200 5
 
-   # Leaks
-   valgrind ./philo 2 800000 60 60 1
+	# Leaks
+	valgrind ./philo 2 800000 60 60 1
 
-   valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 60 60 1
+	valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 60 60 1
 
-   # Data races
-   valgrind --tool=helgrind ./philo 2 800000 60 60 1
-   valgrind --tool=helgrind --history-level=full -s ./philo 2 800000 60 60 1
-   # data races complet report :
-   valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 800000 60 60 1
+	# Data races
+	valgrind --tool=helgrind ./philo 2 800000 60 60 1
+	valgrind --tool=helgrind --history-level=full -s ./philo 2 800000 60 60 1
+	# data races complet report :
+	valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 800000 60 60 1
 ```
 
 ## Description
@@ -33,21 +33,21 @@ To run the Philosophers project, you need:
 
 1. Clone the repository:
 
-   ```bash
-   git clone <repository_url>
-   ```
+	```bash
+	git clone <repository_url>
+	```
 
 2. Navigate to the project directory:
 
-   ```bash
-   cd philosophers
-   ```
+	```bash
+	cd philosophers
+	```
 
 3. Compile the program:
 
-   ```bash
-   make
-   ```
+	```bash
+	make
+	```
 
 ## Usage
 
@@ -70,28 +70,28 @@ Replace the placeholders with appropriate values:
 Thinking time or "t_think" is the contention time waiting for the forks
 If
 #### Even amount of philosophers 
-   - t_die = t_eat + t_sleep + 10
-   - if (t_eat <= t_sleep) === 0 t_think
-      - No contention and the process is symetric philos will sleep and eat.
-      - exs: 
-         - ./philo 4 800 200 350
-         - ./philo 4 800 200 200
-   - if (t_eat > t_sleep) ===  t_think = t_eat - t_sleep
-         - ./philo 4 800 200 100
-         - ./philo 4 800 200 60
+	- t_die = t_eat + t_sleep + 10
+	- if (t_eat <= t_sleep) === 0 t_think
+		- No contention and the process is symetric philos will sleep and eat.
+		- exs: 
+			- ./philo 4 800 200 350
+			- ./philo 4 800 200 200
+	- if (t_eat > t_sleep) ===  t_think = t_eat - t_sleep
+			- ./philo 4 800 200 100
+			- ./philo 4 800 200 60
 
 #### Odd amount of philosophers :
-   - t_die = t_eat * 2 + t_sleep + 10
-   - if (t_eat = t_sleep) === t_think = t_eat 
-      - ./philo 3 800 200 200
-      - ./philo 3 800 100 100
-   - if (t_eat < t_sleep) === t_think = t_eat *2 - t_sleep
-      - ./philo 3 800 200 300
-      - ./philo 3 800 200 350
-      - ./philo 3 800 200 400
+	- t_die = t_eat * 2 + t_sleep + 10
+	- if (t_eat = t_sleep) === t_think = t_eat 
+		- ./philo 3 800 200 200
+		- ./philo 3 800 100 100
+	- if (t_eat < t_sleep) === t_think = t_eat *2 - t_sleep
+		- ./philo 3 800 200 300
+		- ./philo 3 800 200 350
+		- ./philo 3 800 200 400
 
 
-   
+
 
 
 

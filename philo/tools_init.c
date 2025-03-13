@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 14:53:49 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:50:32 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static bool	init_g_mutexs(t_table *table)
 }
 
 // Will init table, g_mutexes, philos array
-t_table	*init_table(int ac, char **av)
+t_table	*init_table_philos(int ac, char **av)
 {
 	t_table	*table;
 

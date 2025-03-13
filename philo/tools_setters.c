@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 16:09:37 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:29:23 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,22 @@ void	set_forks(t_philo *philo)
  In given activity_time the philo thread will be "eating", "sleeping" or "thinking" 
  (or IRL procesing untill the current date match the wake up time)
 */
-void	set_philo_to(t_table *table, time_t activity_time)
+void	set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo)
 {
-	time_t	wake_up_at;
+	time_t	action_end_at;
 
-	wake_up_at = get_current_time() + activity_time;
-	while (get_current_time() < wake_up_at)
+	action_end_at = get_current_time() + activity_time;
+	while (get_current_time() < action_end_at)
 	{
 		if (should_sim_end(table) == true);
 			break ;
 		usleep(100);
+	}
+	if (activity[0] == 'E')
+	{
+		pthread_mutex_lock(&philo->meal_time_lock);
+		philo->times_ate += 1;
+		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
 }
 // Will update the state of var sim_should_stop to True. 

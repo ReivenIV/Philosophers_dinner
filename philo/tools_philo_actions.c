@@ -6,64 +6,71 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 16:20:02 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:01:45 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	*one_philo_process(t_philo *philo)
-// {
-// 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
-// 	print_statement(philo, "Fork_0");
-// 	set_philo_to(philo->table, philo->table->t_t_die);
-// 	print_statement(philo, "Died");
-// 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
-// 	return (NULL);
-// }
+
 
 void	eat_sleep_process(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
-	print_statement(philo, "Fork_0");
+	print_statement(philo, "Fork_0");										// take fork
 	
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[1]]);
-	print_statement(philo, "Fork_1");
+	print_statement(philo, "Fork_1");										// take fork
 	print_statement(philo, "Eating");
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	philo->last_meal_at = get_current_time();
+	philo->last_meal_at = get_current_time();								// update last_meal_at
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	
-	set_philo_to(philo->table, philo->table->t_t_eat);
+	set_philo_to("Eat", philo->table, philo->table->t_t_eat, philo);		// start action Eating
 
-	if (should_sim_end(philo->table) == false)
-	{
-		pthread_mutex_lock(&philo->meal_time_lock);
-		philo->times_ate += 1;
-		pthread_mutex_unlock(&philo->meal_time_lock);
-	}
-	print_statement(philo, "Sleeping");
-	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
-	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
-	set_philo_to(philo->table, philo->table->t_t_sleep);
+	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);		// free fork
+	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);		// free fork
+	
+	print_statement(philo, "Sleeping");										// after eating and freeing forks start action "sleep"								
+	set_philo_to("Sleep", philo->table, philo->table->t_t_sleep, philo);
 }
 
-void	think_routine(t_philo *philo, bool silent)
+// At the begining of the process in case amount_philos the one not eating will start thinking from the begining
+void 	start_think_even(t_philo *philo)
 {
-	time_t	time_to_think;
+	print_statement(philo, "Thinking");
+	set_philo_to("Think", philo->table, philo->table->t_t_eat + 10, philo);
+}
+
+void	think_routine(t_philo *philo)
+{
+	time_t	t_t_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	time_to_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at) - philo->table->t_t_eat) / 2;
+	if (philo->table->amount_philos % 2 == 0)
+		t_t_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at) - philo->table->t_t_eat) * 0.98;	// t_t_think: for Even philos, we will max the possible amount of thinking
+	else
+		t_t_think = (philo->table->t_t_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->t_t_eat) / 2;			// t_t_think: for ODD amount philos You will have 1 philo waiting a lot and we don't want him to die. Is for that the t_t_think / 2.
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	if (time_to_think < 0)
-		time_to_think = 0;
-	if (time_to_think == 0 && silent == true)
-		time_to_think = 1;
-	if (time_to_think > 600)
-		time_to_think = 200;
-	if (silent == false)
-		print_statement(philo, "Thinking");
-	set_philo_to(philo, "Thinking");
+
+	if (t_t_think < 0)																										// In case t_t_think is negative we put it to 0.
+		t_t_think = 0;
+
+	print_statement(philo, "Thinking");
+	
+	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))			// in case not amount of philo == ODD, the last ODD will think 50 more. 
+		set_philo_to("Think", philo->table, t_t_think + 50, philo);
+	else 
+		set_philo_to("Think", philo->table, t_t_think, philo);
 }
 
+void	*wait_till_die(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
+	print_statement(philo, "Fork_0");
+	set_philo_to("Die", philo->table, philo->table->t_t_die, philo);
+	print_statement(philo, "Died");
+	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
+	return (NULL);
+}
