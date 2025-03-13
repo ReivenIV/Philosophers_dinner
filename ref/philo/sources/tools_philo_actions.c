@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:08:02 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	eat_sleep_process(t_phi *philo)
 
 // ? ---------------------------------------------------------------------------------
 // ? ---------------------------------------------------------------------------------
-/* think_routine:
+/* think_process:
 *	Once a philosopher is done sleeping, he will think for a certain
 *	amount of time before starting to eat again.
 *	The time_to_think is calculated depending on how long it has been
@@ -65,7 +65,7 @@ void	start_think_even(t_phi *philo)
 	set_phi_to("Think", philo->table, philo->table->time_to_eat + 10, philo);
 }
 
-void	think_routine(t_phi *philo)
+void	think_process(t_phi *philo)
 {
 	time_t	time_to_think;
 
