@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:10:19 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/11 14:07:42 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:18:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	are_inputs_valid(int ac, char **av)
 	int	i;
 	int	nb;
 
-
 	i = 1;												// We start i=1 to avoid the first arg (./philo)
 	while (i < ac)
 	{
@@ -45,6 +44,8 @@ bool	are_inputs_valid(int ac, char **av)
 			return(printf("wrong amount of philos my dear\n"), false);
 		if ((i > 1 && i < 5) && nb < 60)
 			return(printf("invalid inputs format my dear\n"), false);
+		if (i == 5 && nb <= 0)
+			return (printf("meals darlin ?\n"), false);	
 		i++;
 	}
 	return (true);
