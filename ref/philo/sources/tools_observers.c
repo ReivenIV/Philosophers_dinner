@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:44:34 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:14:42 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ bool	are_all_conditions_reached(t_table *table)
 *	be killed and if all philosophers ate enough. If one of those two
 *	end conditions are reached, it stops the simulation.
 */
+//TODO create a handler and a extra file.
 void	*t_stop_program(void *data)
 {
 	t_table			*table;

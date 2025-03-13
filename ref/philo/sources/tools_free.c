@@ -43,7 +43,7 @@ void	free_table(t_table *table)
 *	Destroys every mutex created by the program: fork locks, meal locks,
 *	the write and simulation stopper lock.
 */
-void	free_mutexes(t_table *table)
+static void	free_mutexes(t_table *table)
 {
 	unsigned int	i;
 
@@ -56,6 +56,12 @@ void	free_mutexes(t_table *table)
 	}
 	pthread_mutex_destroy(&table->write_lock);
 	pthread_mutex_destroy(&table->sim_stop_lock);
+}
+
+void	free_all(t_table *table)
+{
+	free_mutexes(table);
+	free_table(table);
 }
 
 /* msg:

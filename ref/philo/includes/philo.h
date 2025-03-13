@@ -148,6 +148,6 @@ bool			is_philo_dead(t_phi *philo);
 //	exit.c
 int				error_failure(char *str, char *details, t_table *table);
 void			free_table(t_table *table);
-void			free_mutexes(t_table *table);
+void			free_all(t_table *table);
 
 #endif
