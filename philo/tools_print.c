@@ -6,13 +6,13 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 10:44:32 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 15:01:26 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_statement(t_philo *philo, char *status)
+void	print_statement(t_phi *philo, char *status)
 {
 	time_t	now_at;
 	int		philo_id;

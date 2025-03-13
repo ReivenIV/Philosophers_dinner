@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 15:29:23 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@
 	check the meals intake you will see some miss a meal at the end of the
 	process. ;) )
 */
-void	set_forks(t_philo *philo)
+void	set_forks(t_phi *philo)
 {
 	if (philo->id % 2 == 0)												// Set forks to EVEN id philos
 	{
 		philo->fork[0] = philo->id;
-		philo->fork[1] = (philo->id + 1) % philo->table->amount_philos;
+		philo->fork[1] = (philo->id + 1) % philo->table->amount_phis;
 	}
 	else																// Set forks to ODD id philos 	
 	{
-		philo->fork[0] = (philo->id + 1) % philo->table->amount_philos;		
+		philo->fork[0] = (philo->id + 1) % philo->table->amount_phis;		
 		philo->fork[1] = philo->id;
 	}
 }
@@ -43,7 +43,7 @@ void	set_forks(t_philo *philo)
  In given activity_time the philo thread will be "eating", "sleeping" or "thinking" 
  (or IRL procesing untill the current date match the wake up time)
 */
-void	set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo)
+void	set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo)
 {
 	time_t	action_end_at;
 

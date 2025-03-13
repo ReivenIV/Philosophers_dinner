@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:44:34 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 12:43:22 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	should_sim_end(t_table *table)
 
 
 // will check if the meal surpasses the "t_t_die". If yes we announce the death of a philo. 
-bool	is_philo_dead(t_philo *philo)
+bool	is_philo_dead(t_phi *philo)
 {
 	time_t	current_time;
 
@@ -66,7 +66,7 @@ bool	are_all_conditions_reached(t_table *table)
 		return (false);
 	amount_min_meals_reached = true;
 	i = 0;
-	while (i < table->amount_philos)
+	while (i < table->amount_phis)
 	{
 		pthread_mutex_lock(&table->philos[i]->meal_time_lock);
 		if (is_philo_dead(table->philos[i]))

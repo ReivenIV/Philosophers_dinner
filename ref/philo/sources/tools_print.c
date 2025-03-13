@@ -18,7 +18,7 @@
 *	subject:
 *		timestamp_in_ms X status
 */
-// static void	print_status(t_philo *philo, char *str)
+// static void	print_status(t_phi *philo, char *str)
 // {
 // 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
 // }
@@ -33,7 +33,7 @@
 *	Otherwise the output will be the regular format required by the project
 *	subject.
 */
-// void	print_statement(t_philo *philo, bool reaper_report, t_status status)
+// void	print_statement(t_phi *philo, bool reaper_report, t_status status)
 // {
 // 	pthread_mutex_lock(&philo->table->write_lock);
 // 	if (should_sim_end(philo->table) == true && reaper_report == false)
@@ -61,12 +61,12 @@
 // }
 
 
-// // static void	print_status(t_philo *philo, char *str)
+// // static void	print_status(t_phi *philo, char *str)
 // // {
 // // 	printf("%ld %d %s\n", (get_time_in_ms() - philo->table->start_meeting_at), philo->id + 1, str);
 // // }
 
-void	print_statement(t_philo *philo, char *status)
+void	print_statement(t_phi *philo, char *status)
 {
 	time_t	now_at;
 	int		philo_id;
@@ -104,7 +104,7 @@ void	print_statement(t_philo *philo, char *status)
 // // *	statuses, extra information is displayed to show which fork
 // // *	the philosopher has taken.
 // // */
-// // static void	print_status_debug(t_philo *philo, char *color,
+// // static void	print_status_debug(t_phi *philo, char *color,
 // // 								char *str, t_status status)					//! not necesary 
 // // {
 // // 	if (status == GOT_FORK_1)
@@ -125,7 +125,7 @@ void	print_statement(t_philo *philo, char *status)
 // // *	Redirects the status writing for debug mode. For this option,
 // // *	the DEBUG_FORMATTING option must be set to 1 in philo.h.
 // // */
-// // static void	print_statement_debug(t_philo *philo, t_status status)				//! not necesary 
+// // static void	print_statement_debug(t_phi *philo, t_status status)				//! not necesary 
 // // {
 // // 	if (status == DIED)
 // // 		print_status_debug(philo, RED, "died", status);
@@ -154,7 +154,7 @@ void	write_outcome(t_table *table) 											//! not necesary
 
 	full_count = 0;
 	i = 0;
-	while (i < table->amount_philos)
+	while (i < table->amount_phis)
 	{
 		if (table->philos[i]->times_ate >= (unsigned int)table->min_amount_meals)
 			full_count++;
@@ -162,7 +162,7 @@ void	write_outcome(t_table *table) 											//! not necesary
 	}
 	pthread_mutex_lock(&table->write_lock);
 	printf("%d/%d philosophers had at least %d meals.\n",
-		full_count, table->amount_philos, table->min_amount_meals);
+		full_count, table->amount_phis, table->min_amount_meals);
 	pthread_mutex_unlock(&table->write_lock);
 	return ;
 }

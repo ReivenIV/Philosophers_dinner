@@ -28,7 +28,7 @@ void	free_table(t_table *table)
 	if (table->philos != NULL)
 	{
 		i = 0;
-		while (i < table->amount_philos)
+		while (i < table->amount_phis)
 		{
 			if (table->philos[i] != NULL)
 				free(table->philos[i]);
@@ -48,7 +48,7 @@ void	free_mutexes(t_table *table)
 	unsigned int	i;
 
 	i = 0;
-	while (i < table->amount_philos)
+	while (i < table->amount_phis)
 	{
 		pthread_mutex_destroy(&table->fork_locks[i]);
 		pthread_mutex_destroy(&table->philos[i]->meal_time_lock);

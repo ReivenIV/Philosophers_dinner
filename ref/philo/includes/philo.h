@@ -54,12 +54,12 @@ there must be between 1 and %s philosophers.\n"
 *                                 Structures                                  *
 ******************************************************************************/
 
-typedef struct s_philo	t_philo;
+typedef struct s_philo	t_phi;
 
 typedef struct s_table
 {
 	time_t			start_meeting_at;
-	unsigned int	amount_philos;
+	unsigned int	amount_phis;
 	pthread_t		t_stop_program;
 	time_t			time_to_die;
 	time_t			time_to_eat;
@@ -69,7 +69,7 @@ typedef struct s_table
 	pthread_mutex_t	sim_stop_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	*fork_locks;
-	t_philo			**philos;
+	t_phi			**philos;
 }	t_table;
 
 typedef struct s_philo
@@ -81,7 +81,7 @@ typedef struct s_philo
 	pthread_mutex_t		meal_time_lock;				//? Maybe these is a philo_lock
 	time_t				last_meal_at;
 	t_table				*table;
-}	t_philo;
+}	t_phi;
 
 // // typedef enum e_status
 // // {
@@ -113,15 +113,15 @@ t_table			*init_table_philos(int ac, char **av);
 void			*t_handler_philo(void *data);
 
 //	tools_actions.c
-void			eat_sleep_process(t_philo *philo);
-void			think_routine(t_philo *philo);
-void			*wait_till_die(t_philo *philo);
-void			start_think_even(t_philo *philo);
+void			eat_sleep_process(t_phi *philo);
+void			think_routine(t_phi *philo);
+void			*wait_till_die(t_phi *philo);
+void			start_think_even(t_phi *philo);
 
 // tools_setters.c
-void			set_forks(t_philo *philo);
+void			set_forks(t_phi *philo);
 void			update_sim_should_stop(t_table *table, bool state);
-void			set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo);
+void			set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo);
 
 
 // tools_observers
@@ -136,14 +136,14 @@ time_t			get_time_in_ms(void);
 void			sim_start_delay(time_t start_meeting_at);
 
 //	output.c
-void			print_statement(t_philo *philo, char *status);
+void			print_statement(t_phi *philo, char *status);
 void			write_outcome(t_table *table);
 void			*error_null(char *str, char *details, t_table *table);
 int				msg(char *str, char *detail, int exit_no);
 
 //	t_stop_program.c
 void			*t_stop_program(void *data);
-bool			is_philo_dead(t_philo *philo);
+bool			is_philo_dead(t_phi *philo);
 
 //	exit.c
 int				error_failure(char *str, char *details, t_table *table);

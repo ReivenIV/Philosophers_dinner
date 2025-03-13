@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/13 16:00:30 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 */
 
 
-void	eat_sleep_process(t_philo *philo)
+void	eat_sleep_process(t_phi *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
@@ -33,13 +33,13 @@ void	eat_sleep_process(t_philo *philo)
 	philo->last_meal_at = get_time_in_ms();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 
-	set_philo_to("Eat", philo->table, philo->table->time_to_eat, philo);
+	set_phi_to("Eat", philo->table, philo->table->time_to_eat, philo);
 	
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	
 	print_statement(philo, "SLEEPING");
-	set_philo_to("Sleep", philo->table, philo->table->time_to_sleep, philo);
+	set_phi_to("Sleep", philo->table, philo->table->time_to_sleep, philo);
 }
 
 // ? ---------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ void	eat_sleep_process(t_philo *philo)
 *	needlessly monopolized by one philosopher to the detriment of others.
 */
 
-void	start_think_even(t_philo *philo)
+void	start_think_even(t_phi *philo)
 {
 	//time_t	time_to_think;
 
@@ -62,15 +62,15 @@ void	start_think_even(t_philo *philo)
 
 	// printf("ttthink = %li\n", time_to_think);
 	print_statement(philo, "THINKING");
-	set_philo_to("Think", philo->table, philo->table->time_to_eat + 10, philo);
+	set_phi_to("Think", philo->table, philo->table->time_to_eat + 10, philo);
 }
 
-void	think_routine(t_philo *philo)
+void	think_routine(t_phi *philo)
 {
 	time_t	time_to_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	if (philo->table->amount_philos % 2 == 0)
+	if (philo->table->amount_phis % 2 == 0)
 	{
 		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at)) * 0.98;
 	}
@@ -80,10 +80,10 @@ void	think_routine(t_philo *philo)
 	if (time_to_think < 0)
 		time_to_think = 0;
 	print_statement(philo, "THINKING");
-	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))
-		set_philo_to("Think", philo->table, time_to_think + 50, philo);
+	if ((philo->table->amount_phis % 2 != 0 && philo->id == philo->table->amount_phis - 2))
+		set_phi_to("Think", philo->table, time_to_think + 50, philo);
 	else 
-		set_philo_to("Think", philo->table, time_to_think, philo);
+		set_phi_to("Think", philo->table, time_to_think, philo);
 }
 
 /* wait_till_die:
@@ -99,11 +99,11 @@ void	think_routine(t_philo *philo)
 	No need for lock/unlock beceause we have only 1 thread in the proces
 		is not possible to create a data race.
 */
-void	*wait_till_die(t_philo *philo) // done 
+void	*wait_till_die(t_phi *philo) // done 
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
-	set_philo_to("Die", philo->table, philo->table->time_to_die, philo);
+	set_phi_to("Die", philo->table, philo->table->time_to_die, philo);
 	print_statement(philo, "DIED");
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	return (NULL);

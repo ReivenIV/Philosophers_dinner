@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:46:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/10 11:06:39 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_table(t_table *table)
 	if (table->philos != NULL)
 	{
 		i = 0;
-		while (i < table->amount_philos)
+		while (i < table->amount_phis)
 		{
 			if (table->philos[i] != NULL)
 				free(table->philos[i]);
@@ -40,7 +40,7 @@ void	free_mutexes(t_table *table)
 	unsigned int	i;
 
 	i = 0;
-	while (i < table->amount_philos)
+	while (i < table->amount_phis)
 	{
 		pthread_mutex_destroy(&table->fork_locks[i]);
 		pthread_mutex_destroy(&table->philos[i]->meal_time_lock);

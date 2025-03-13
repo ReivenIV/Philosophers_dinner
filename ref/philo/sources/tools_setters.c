@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 15:24:09 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	update_sim_should_stop(t_table *table, bool state)
 *	take fork 0 and eat. When he is done, philo #2 can finally get fork 1 and eat.
 */
 
-void	set_forks(t_philo *philo)
+void	set_forks(t_phi *philo)
 {
 	if (philo->id % 2 == 0)												// set forks to philo even
 	{
 		philo->fork[0] = philo->id;
-		philo->fork[1] = (philo->id + 1) % philo->table->amount_philos;
+		philo->fork[1] = (philo->id + 1) % philo->table->amount_phis;
 	}
 	else
 	{
-		philo->fork[0] = (philo->id + 1) % philo->table->amount_philos;
+		philo->fork[0] = (philo->id + 1) % philo->table->amount_phis;
 		philo->fork[1] = philo->id;
 	}
 }
@@ -67,7 +67,7 @@ void	set_forks(t_philo *philo)
 *	time and cuts the sleep short if it has.
 */
 //TODO Maybe it should be a BOOL 
-void	set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo)
+void	set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo)
 {
 	time_t	action_end_at;
 

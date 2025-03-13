@@ -21,11 +21,11 @@ static pthread_mutex_t	*init_forks(t_table *table)
 	pthread_mutex_t	*forks;
 	unsigned int	i;
 
-	forks = malloc(sizeof(pthread_mutex_t) * table->amount_philos);
+	forks = malloc(sizeof(pthread_mutex_t) * table->amount_phis);
 	if (!forks)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));
 	i = 0;
-	while (i < table->amount_philos)
+	while (i < table->amount_phis)
 	{
 		if (pthread_mutex_init(&forks[i], 0) != 0)
 			return (error_null(STR_ERR_MUTEX, NULL, 0));
@@ -36,25 +36,25 @@ static pthread_mutex_t	*init_forks(t_table *table)
 
 
 
-/* init_philosophers:
+/* init_phisophers:
 *	Allocates memory for each philosopher and initializes their values.
 *	Returns a pointer to the array of philosophers or NULL if
 *	initialization failed.
 */
-static t_philo	**init_philos(t_table *table)
+static t_phi	**init_phis(t_table *table)
 {
-	t_philo			**arr_philos;
+	t_phi			**arr_philos;
 	unsigned int	i;
 
 	if (!table)
 		return (printf("IP: no table"), NULL);
-	arr_philos = malloc(sizeof(t_philo) * table->amount_philos);
+	arr_philos = malloc(sizeof(t_phi) * table->amount_phis);
 	if (!arr_philos)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));
 	i = 0;
-	while (i < table->amount_philos)
+	while (i < table->amount_phis)
 	{
-		arr_philos[i] = malloc(sizeof(t_philo) * 1);
+		arr_philos[i] = malloc(sizeof(t_phi) * 1);
 		if (!arr_philos[i])
 			return (error_null(STR_ERR_MALLOC, NULL, 0));
 		if (pthread_mutex_init(&arr_philos[i]->meal_time_lock, 0) != 0)
@@ -100,16 +100,16 @@ t_table	*init_table_philos(int ac, char **av)
 	table = malloc(sizeof(t_table));					// we need only 1 table (always)
 	if (!table)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));
-	table->amount_philos = nbs_atoi(av[1]);
+	table->amount_phis = nbs_atoi(av[1]);
 	table->time_to_die = nbs_atoi(av[2]);
 	table->time_to_eat = nbs_atoi(av[3]);
 	table->time_to_sleep = nbs_atoi(av[4]);
 	table->sim_should_stop = false;
 	table->min_amount_meals = -1;						// set by default to "NULL"
-	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
+	table->start_meeting_at = get_time_in_ms() + (table->amount_phis * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)										// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
-	table->philos = init_philos(table);
+	table->philos = init_phis(table);
 	if (!table->philos)
 		return (NULL);
 	if (!init_global_mutexes(table))
