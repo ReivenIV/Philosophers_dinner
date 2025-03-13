@@ -21,9 +21,9 @@ int	main(int ac, char **av)
 		return (msg(STR_USAGE, NULL, EXIT_FAILURE));
 	if (!are_valid_input(ac, av))
 		return (EXIT_FAILURE);
-	if (av[1][0] == '1')						// in case we have only 1 philo we wait till it die. we don't init anything.
-		return (usleep(nbs_atoi(av[2])), printf("%s 1 died\n", av[2]), 0); // TODO maybe.. need to take fork
-	table = init_table(ac, av);
+	// // if (av[1][0] == '1')						// in case we have only 1 philo we wait till it die. we don't init anything.
+	// // 	return (usleep(nbs_atoi(av[2])), printf("%s 1 died\n", av[2]), 0); // TODO maybe.. need to take fork
+	table = init_table_philos(ac, av);
 	if (!table)
 		return (EXIT_FAILURE);
 	if (!begin_process(table))

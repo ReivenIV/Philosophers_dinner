@@ -78,20 +78,20 @@ typedef struct s_philo
 	pthread_t			thread_id;
 	unsigned int		times_ate;
 	unsigned int		fork[2];
-	pthread_mutex_t		meal_time_lock;
+	pthread_mutex_t		meal_time_lock;				//? Maybe these is a philo_lock
 	time_t				last_meal_at;
 	t_table				*table;
 }	t_philo;
 
-typedef enum e_status
-{
-	DIED = 0,
-	EATING = 1,
-	SLEEPING = 2,
-	THINKING = 3,
-	GOT_FORK_1 = 4,
-	GOT_FORK_2 = 5
-}	t_status;
+// // typedef enum e_status
+// // {
+// // 	DIED = 0,
+// // 	EATING = 1,
+// // 	SLEEPING = 2,
+// // 	THINKING = 3,
+// // 	GOT_FORK_1 = 4,
+// // 	GOT_FORK_2 = 5
+// // }	t_status;
 
 /******************************************************************************
 *                           Function Prototypes                               *
@@ -107,7 +107,7 @@ bool			are_valid_input(int ac, char **av);
 int				nbs_atoi(char *str);
 
 //	init.c
-t_table			*init_table(int ac, char **av);
+t_table			*init_table_philos(int ac, char **av);
 
 // t_handler_philo.c
 void			*philosopher(void *data);
@@ -118,8 +118,8 @@ void			think_routine(t_philo *philo);
 void			*one_philo_process(t_philo *philo);
 
 // tools_setters.c
-void	set_forks(t_philo *philo);
-void	update_sim_should_stop(t_table *table, bool state);
+void			set_forks(t_philo *philo);
+void			update_sim_should_stop(t_table *table, bool state);
 
 // tools_observers
 bool			should_sim_end(t_table *table);

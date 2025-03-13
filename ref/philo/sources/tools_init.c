@@ -41,7 +41,7 @@ static pthread_mutex_t	*init_forks(t_table *table)
 *	Returns a pointer to the array of philosophers or NULL if
 *	initialization failed.
 */
-static t_philo	**init_philosophers(t_table *table)
+static t_philo	**init_philos(t_table *table)
 {
 	t_philo			**arr_philos;
 	unsigned int	i;
@@ -87,13 +87,13 @@ static bool	init_global_mutexes(t_table *table)
 	return (true);
 }
 
-/* init_table:
+/* init_table_philos:
 *	Initializes the "dining table", the data structure containing
 *	all of the program's parameters.
 *	Returns a pointer to the allocated table structure, or NULL if
 *	an error occured during initialization.
 */
-t_table	*init_table(int ac, char **av)
+t_table	*init_table_philos(int ac, char **av)
 {
 	t_table	*table;
 
@@ -109,7 +109,7 @@ t_table	*init_table(int ac, char **av)
 	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)										// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
-	table->philos = init_philosophers(table);
+	table->philos = init_philos(table);
 	if (!table->philos)
 		return (NULL);
 	if (!init_global_mutexes(table))
