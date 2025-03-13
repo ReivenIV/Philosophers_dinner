@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:41:19 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,14 @@ typedef struct s_philo
 // // }	t_status;
 
 //	----------------
-//	::  Handlers  ::
+//	::  handlers  ::
 //	----------------
+
+void	*t_handler_philo(void *data);		// Will handle the global process
+bool	begin_process(t_table *table);		// Will create all threads/mutexes
+void	end_process(t_table *table);		// at the end, Will free everything.
+
+
 
 //	-------------
 //	::  Tools  ::
@@ -89,12 +95,13 @@ t_table	*init_table_philos(int ac, char **av);
 time_t	get_current_time(void);
 
 // tools_print:  
-void	print_statement(t_phi *philo, char *status);
+void	print_statement(t_phi *philo, char *status);		// We will print everything with these function. Is like a "print handler";
 
 //  tools_philo_actions
-void	eat_sleep_process(t_phi *philo);
-void 	start_think_even(t_phi *philo);
-void	*wait_till_die(t_phi *philo);
+void	eat_sleep_process(t_phi *philo);					// Main action only eat _ sleep
+void	think_process(t_phi *philo);						// calculate t_t_think. REMINDER ODD vs EVEN not the same
+void 	start_think_even(t_phi *philo);						// only at the begining only for EVEN philos.
+void	*wait_till_die(t_phi *philo);						// Only for 1 philo.
 
 
 // tools_setters
@@ -106,21 +113,17 @@ void	update_sim_should_stop(t_table *table, bool state);
 bool	should_sim_end(t_table *table);
 bool	is_philo_dead(t_phi *philo);
 bool	are_all_conditions_reached(t_table *table);
-void	*t_stop_program(void *data);
+void	*t_stop_program(void *data);	//TODO global handler create a new file.
 
 // tools_strs
 int	ft_strlen(char *str);
 int	nbs_atoi(char *str);
 
 // tools_free
-void	free_table(t_table *table);
-void	free_mutexes(t_table *table);
+void	free_table(t_table *table);							// only free table.
+void	free_all(t_table *table);							// Free all global and single mutexes + free_table.
 
-//	---------------
-//	::  handler  ::
-//	---------------
 
-void	*t_handler_philo(void *data);
 
 
 

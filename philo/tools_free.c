@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:46:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:31:12 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	free_table(t_table *table)
 	}
 	free(table);
 }
-// Will free all mutexes in table and in philos
-void	free_mutexes(t_table *table)
+// Will free all global mutexes and philos in table
+static void	free_mutexes(t_table *table)
 {
 	unsigned int	i;
 
@@ -50,3 +50,8 @@ void	free_mutexes(t_table *table)
 	pthread_mutex_destroy(&table->sim_stop_lock);
 }
 
+void	free_all(t_table *table)
+{
+	free_mutexes(table);
+	free_table(table);
+}
