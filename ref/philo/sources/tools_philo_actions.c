@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/12 16:25:12 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:24:25 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,27 @@
 *	amount of time. The time of the last meal is recorded at the beginning of
 *	the meal, not at the end, as per the subject's requirements.
 */
+
+
 void	eat_sleep_process(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
-
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[1]]);
 	print_statement(philo, "FORK_1");
 	print_statement(philo, "EATING");
-	
 	pthread_mutex_lock(&philo->meal_time_lock);
 	philo->last_meal_at = get_time_in_ms();
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	
-	set_philo_to(philo->table, philo->table->time_to_eat);
-	
-	if (should_sim_end(philo->table) == false)
-	{
-		pthread_mutex_lock(&philo->meal_time_lock);
-		philo->times_ate += 1;		//! Problem here is not waiting all the time till the end of the eating process at the end.  
-		pthread_mutex_unlock(&philo->meal_time_lock);
-	}
+	set_philo_to("Eat", philo->table, philo->table->time_to_eat, philo);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
-	
 	print_statement(philo, "SLEEPING");
-	set_philo_to(philo->table, philo->table->time_to_sleep);
+	set_philo_to("Sleep", philo->table, philo->table->time_to_sleep, philo);
 }
 
+// ? ---------------------------------------------------------------------------------
+// ? ---------------------------------------------------------------------------------
 /* think_routine:
 *	Once a philosopher is done sleeping, he will think for a certain
 *	amount of time before starting to eat again.
@@ -55,23 +48,37 @@ void	eat_sleep_process(t_philo *philo)
 *	This helps stagger philosopher's eating routines to avoid forks being
 *	needlessly monopolized by one philosopher to the detriment of others.
 */
+
+void	start_think_even(t_philo *philo)
+{
+	//time_t	time_to_think;
+
+	// time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat);
+
+	// printf("ttthink = %li\n", time_to_think);
+	print_statement(philo, "THINKING");
+	set_philo_to("Think", philo->table, philo->table->time_to_eat + 10, philo);
+}
+
 void	think_routine(t_philo *philo)
 {
 	time_t	time_to_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	// TODO t_t_think will need improvement. should be in init part not here
-	time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
+	if (philo->table->amount_philos % 2 == 0)
+	{
+		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at)) * 0.98;
+	}
+	else 
+		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
 		time_to_think = 0;
-	// // if (time_to_think == 0 && silent == true)
-	// // 	time_to_think = 1;
-	if (time_to_think > 600)
-		time_to_think = 200;
-	// // if (silent == false)
 	print_statement(philo, "THINKING");
-	set_philo_to(philo->table, time_to_think);
+	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))
+		set_philo_to("Think", philo->table, time_to_think + 50, philo);
+	else 
+		set_philo_to("Think", philo->table, time_to_think, philo);
 }
 
 /* one_philo_process:
@@ -85,7 +92,7 @@ void	*one_philo_process(t_philo *philo) // done
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
-	set_philo_to(philo->table, philo->table->time_to_die);
+	set_philo_to("Die", philo->table, philo->table->time_to_die, philo);
 	print_statement(philo, "DIED");
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	return (NULL);

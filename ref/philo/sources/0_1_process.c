@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:22:32 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 14:18:06 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:21:14 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	begin_process(t_table *table)
 	i = 0;
 	while (i < table->amount_philos)
 	{
-		if (pthread_create(&table->philos[i]->thread_id, NULL,	&philosopher, table->philos[i]) != 0)
+		if (pthread_create(&table->philos[i]->thread_id, NULL,	&t_handler_philo, table->philos[i]) != 0)
 			return (printf("SS: error init threat"), free_table(table), false);	
 		i++;
 	}

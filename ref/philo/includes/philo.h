@@ -110,16 +110,19 @@ int				nbs_atoi(char *str);
 t_table			*init_table_philos(int ac, char **av);
 
 // t_handler_philo.c
-void			*philosopher(void *data);
+void			*t_handler_philo(void *data);
 
 //	tools_actions.c
 void			eat_sleep_process(t_philo *philo);
 void			think_routine(t_philo *philo);
 void			*one_philo_process(t_philo *philo);
+void			start_think_even(t_philo *philo);
 
 // tools_setters.c
 void			set_forks(t_philo *philo);
 void			update_sim_should_stop(t_table *table, bool state);
+void			set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo);
+
 
 // tools_observers
 bool			should_sim_end(t_table *table);
@@ -130,7 +133,6 @@ int				ft_strcmp(char *s1, char *s2);
 
 //	time.c
 time_t			get_time_in_ms(void);
-void			set_philo_to(t_table *table, time_t activity_time);
 void			sim_start_delay(time_t start_meeting_at);
 
 //	output.c

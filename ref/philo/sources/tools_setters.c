@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/12 15:49:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:24:09 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,23 @@ void	set_forks(t_philo *philo)
 *	time and cuts the sleep short if it has.
 */
 //TODO Maybe it should be a BOOL 
-void	set_philo_to(t_table *table, time_t activity_time)
+void	set_philo_to(char *activity, t_table *table, time_t activity_time, t_philo *philo)
 {
-	time_t	active_at;
+	time_t	action_end_at;
 
-	active_at = get_time_in_ms() + activity_time;
-	while (get_time_in_ms() < active_at)
+	action_end_at = get_time_in_ms() + activity_time;
+	while (get_time_in_ms() < action_end_at)
 	{
 		if (should_sim_end(table) == true)
 			break ;
 		usleep(100);
+	}
+	if (activity[0] == 'E')
+	{
+		pthread_mutex_lock(&philo->meal_time_lock);
+		philo->times_ate += 1;		//! Problem here is not waiting all the time till the end of the eating process at the end.  
+		////printf("times_ate: %i, P_ID: %i\n", philo->times_ate, philo->id);
+		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
 }
 
