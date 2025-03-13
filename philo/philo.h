@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:20:56 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ time_t	get_current_time(void);
 // tools_print:  
 void	print_statement(t_phi *philo, char *status);
 
+//  tools_philo_actions
+void	eat_sleep_process(t_phi *philo);
+void 	start_think_even(t_phi *philo);
+void	*wait_till_die(t_phi *philo);
+
+
 // tools_setters
 void	set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo);
 void	set_forks(t_phi *philo);
@@ -110,9 +116,11 @@ int	nbs_atoi(char *str);
 void	free_table(t_table *table);
 void	free_mutexes(t_table *table);
 
-//	------------
-//	::  Free  ::
-//	------------
+//	---------------
+//	::  handler  ::
+//	---------------
+
+void	*t_handler_philo(void *data);
 
 
 
