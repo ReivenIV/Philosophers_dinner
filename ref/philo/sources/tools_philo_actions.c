@@ -6,13 +6,13 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/13 15:24:25 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:00:30 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* one_philo_process:
+/* wait_till_die:
 *	When a philosopher is ready to eat, he will wait for his fork mutexes to
 *	be unlocked before locking them. Then the philosopher will eat for a certain
 *	amount of time. The time of the last meal is recorded at the beginning of
@@ -24,15 +24,20 @@ void	eat_sleep_process(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
+	
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[1]]);
 	print_statement(philo, "FORK_1");
 	print_statement(philo, "EATING");
+	
 	pthread_mutex_lock(&philo->meal_time_lock);
 	philo->last_meal_at = get_time_in_ms();
 	pthread_mutex_unlock(&philo->meal_time_lock);
+
 	set_philo_to("Eat", philo->table, philo->table->time_to_eat, philo);
+	
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
+	
 	print_statement(philo, "SLEEPING");
 	set_philo_to("Sleep", philo->table, philo->table->time_to_sleep, philo);
 }
@@ -81,14 +86,20 @@ void	think_routine(t_philo *philo)
 		set_philo_to("Think", philo->table, time_to_think, philo);
 }
 
-/* one_philo_process:
+/* wait_till_die:
 *	This routine is invoked when there is only a single philosopher.
 *	A single philosopher only has one fork, and so cannot eat. The
 *	philosopher will pick up that fork, wait as long as time_to_die and die.
 *	This is a separate routine to make sure that the thread does not get
 *	stuck waiting for the second fork in the eat routine.
 */
-void	*one_philo_process(t_philo *philo) // done 
+
+/*
+	1 philo = Will die 
+	No need for lock/unlock beceause we have only 1 thread in the proces
+		is not possible to create a data race.
+*/
+void	*wait_till_die(t_philo *philo) // done 
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
@@ -97,5 +108,3 @@ void	*one_philo_process(t_philo *philo) // done
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	return (NULL);
 }
-
-

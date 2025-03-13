@@ -115,7 +115,7 @@ void			*t_handler_philo(void *data);
 //	tools_actions.c
 void			eat_sleep_process(t_philo *philo);
 void			think_routine(t_philo *philo);
-void			*one_philo_process(t_philo *philo);
+void			*wait_till_die(t_philo *philo);
 void			start_think_even(t_philo *philo);
 
 // tools_setters.c

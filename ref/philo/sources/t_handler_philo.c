@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:25:09 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 15:20:54 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:56:58 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*t_handler_philo(void *data)
 		return (NULL);
 	sim_start_delay(philo->table->start_meeting_at);
 	if (philo->table->amount_philos == 1)
-		return (one_philo_process(philo));
+		return (wait_till_die(philo));
 	else if (philo->id % 2)
 	{
 		if (philo->table->amount_philos % 2 == 0)
