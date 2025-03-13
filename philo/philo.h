@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:20:56 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_philo	t_phi;
 typedef struct s_table
 {
 	time_t				start_meeting_at;				// meeting created_at
-	unsigned int		amount_phis;
+	unsigned int		amount_philos;
 	time_t				t_t_die;						// amount ms of time to die
 	time_t				t_t_eat;						// amount ms of time to eat
 	time_t				t_t_sleep;						// amount ms of time to sleep

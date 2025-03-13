@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/13 16:08:02 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	think_process(t_phi *philo)
 	time_t	time_to_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	if (philo->table->amount_phis % 2 == 0)
+	if (philo->table->amount_philos % 2 == 0)
 	{
 		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at)) * 0.98;
 	}
@@ -80,7 +80,7 @@ void	think_process(t_phi *philo)
 	if (time_to_think < 0)
 		time_to_think = 0;
 	print_statement(philo, "THINKING");
-	if ((philo->table->amount_phis % 2 != 0 && philo->id == philo->table->amount_phis - 2))
+	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))
 		set_phi_to("Think", philo->table, time_to_think + 50, philo);
 	else 
 		set_phi_to("Think", philo->table, time_to_think, philo);

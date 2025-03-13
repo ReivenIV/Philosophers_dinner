@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:44:34 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	are_all_conditions_reached(t_table *table)
 		return (false);
 	amount_min_meals_reached = true;
 	i = 0;
-	while (i < table->amount_phis)
+	while (i < table->amount_philos)
 	{
 		pthread_mutex_lock(&table->philos[i]->meal_time_lock);
 		if (is_philo_dead(table->philos[i]))

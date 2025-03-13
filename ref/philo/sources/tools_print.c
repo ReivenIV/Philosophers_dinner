@@ -154,7 +154,7 @@ void	write_outcome(t_table *table) 											//! not necesary
 
 	full_count = 0;
 	i = 0;
-	while (i < table->amount_phis)
+	while (i < table->amount_philos)
 	{
 		if (table->philos[i]->times_ate >= (unsigned int)table->min_amount_meals)
 			full_count++;
@@ -162,7 +162,7 @@ void	write_outcome(t_table *table) 											//! not necesary
 	}
 	pthread_mutex_lock(&table->write_lock);
 	printf("%d/%d philosophers had at least %d meals.\n",
-		full_count, table->amount_phis, table->min_amount_meals);
+		full_count, table->amount_philos, table->min_amount_meals);
 	pthread_mutex_unlock(&table->write_lock);
 	return ;
 }

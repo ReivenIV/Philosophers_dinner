@@ -59,7 +59,7 @@ typedef struct s_philo	t_phi;
 typedef struct s_table
 {
 	time_t			start_meeting_at;
-	unsigned int	amount_phis;
+	unsigned int	amount_philos;
 	pthread_t		t_stop_program;
 	time_t			time_to_die;
 	time_t			time_to_eat;

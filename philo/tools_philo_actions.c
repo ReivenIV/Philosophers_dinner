@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:10:40 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	eat_sleep_process(t_phi *philo)
 	set_phi_to("Sleep", philo->table, philo->table->t_t_sleep, philo);
 }
 
-// At the begining of the process in case amount_phis the one not eating will start thinking from the begining
+// At the begining of the process in case amount_philos the one not eating will start thinking from the begining
 void 	start_think_even(t_phi *philo)
 {
 	print_statement(philo, "Thinking");
@@ -48,7 +48,7 @@ void	think_process(t_phi *philo)
 	time_t	t_t_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
-	if (philo->table->amount_phis % 2 == 0)
+	if (philo->table->amount_philos % 2 == 0)
 		t_t_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at) - philo->table->t_t_eat) * 0.98;	// t_t_think: for Even philos, we will max the possible amount of thinking
 	else
 		t_t_think = (philo->table->t_t_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->t_t_eat) / 2;			// t_t_think: for ODD amount philos You will have 1 philo waiting a lot and we don't want him to die. Is for that the t_t_think / 2.
@@ -59,7 +59,7 @@ void	think_process(t_phi *philo)
 
 	print_statement(philo, "Thinking");
 	
-	if ((philo->table->amount_phis % 2 != 0 && philo->id == philo->table->amount_phis - 2))									// in case not amount of philo == ODD, the last ODD will think 50 more. 
+	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))									// in case not amount of philo == ODD, the last ODD will think 50 more. 
 		set_phi_to("Think", philo->table, t_t_think + 50, philo);
 	else 
 		set_phi_to("Think", philo->table, t_t_think, philo);

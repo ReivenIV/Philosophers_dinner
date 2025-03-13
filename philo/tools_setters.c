@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	set_forks(t_phi *philo)
 	if (philo->id % 2 == 0)												// Set forks to EVEN id philos
 	{
 		philo->fork[0] = philo->id;
-		philo->fork[1] = (philo->id + 1) % philo->table->amount_phis;
+		philo->fork[1] = (philo->id + 1) % philo->table->amount_philos;
 	}
 	else																// Set forks to ODD id philos 	
 	{
-		philo->fork[0] = (philo->id + 1) % philo->table->amount_phis;		
+		philo->fork[0] = (philo->id + 1) % philo->table->amount_philos;		
 		philo->fork[1] = philo->id;
 	}
 }
