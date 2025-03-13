@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:05:26 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ t_table	*init_table_philos(int ac, char **av)
 	table->t_t_eat =  nbs_atoi(av[3]);
 	table->t_t_sleep =  nbs_atoi(av[4]);
 	table->sim_should_stop = false;
-	table->min_amount_meals = -1;						// set by default to "NULL"
+	table->min_amount_meals = -1;													// set by default to "NULL"
 	table->start_meeting_at = get_time_in_ms() + (table->amount_phis * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
-	if (ac == 6)										// if we have 6 we update it to the inputed number
+	if (ac == 6)																	// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
 	table->philos = init_phisophers(table);
 	if (!table->philos)

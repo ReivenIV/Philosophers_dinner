@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 16:04:08 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:08:02 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	eat_sleep_process(t_phi *philo)
 	philo->last_meal_at = get_current_time();								// update last_meal_at
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	
-	set_phi_to("Eat", philo->table, philo->table->t_t_eat, philo);		// start action Eating
+	set_phi_to("Eat", philo->table, philo->table->t_t_eat, philo);			// start action Eating
 
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);		// free fork
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);		// free fork
@@ -43,7 +43,7 @@ void 	start_think_even(t_phi *philo)
 	set_phi_to("Think", philo->table, philo->table->t_t_eat + 10, philo);
 }
 
-void	think_routine(t_phi *philo)
+void	think_process(t_phi *philo)
 {
 	time_t	t_t_think;
 
@@ -59,7 +59,7 @@ void	think_routine(t_phi *philo)
 
 	print_statement(philo, "Thinking");
 	
-	if ((philo->table->amount_phis % 2 != 0 && philo->id == philo->table->amount_phis - 2))			// in case not amount of philo == ODD, the last ODD will think 50 more. 
+	if ((philo->table->amount_phis % 2 != 0 && philo->id == philo->table->amount_phis - 2))									// in case not amount of philo == ODD, the last ODD will think 50 more. 
 		set_phi_to("Think", philo->table, t_t_think + 50, philo);
 	else 
 		set_phi_to("Think", philo->table, t_t_think, philo);
