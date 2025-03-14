@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	is_philo_dead(t_phi *philo)
 	{
 		print_statement(philo, "DIED");
 		update_sim_should_stop(philo->table, true);			// Will update table->sim_should_stop BOOL to TRUE
-		pthread_mutex_unlock(&philo->meal_time_lock);
+		pthread_mutex_unlock(&philo->phi_action_lock);
 		return (true);										// yep someone died
 	}
 	return (false);											// all good we can continue wiht the process.
@@ -55,12 +55,12 @@ bool	are_all_conditions_reached(t_table *table)
 	amount_min_meals_reached = true;
 	while (i < table->amount_philos)
 	{
-		pthread_mutex_lock(&table->philos[i]->meal_time_lock);
+		pthread_mutex_lock(&table->philos[i]->phi_action_lock);
 		if (is_philo_dead(table->philos[i]))
 			return (true);
 		if (table->philos[i]->times_ate < (unsigned int)table->min_amount_meals)
 			amount_min_meals_reached = false;
-		pthread_mutex_unlock(&table->philos[i]->meal_time_lock);
+		pthread_mutex_unlock(&table->philos[i]->phi_action_lock);
 		i++;
 	}
 	if (amount_min_meals_reached == true)

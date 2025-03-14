@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:11:10 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 14:40:30 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:11:20 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	*t_handler_philo(void *data)
 	t_phi	*philo;
 
 	philo = (t_phi *)data;										// cast
-	sim_start_delay(philo->table->start_meeting_at);			// Sync threads
-	if (philo->table->amount_philos == 1)							// 1 philo process
+	sync_threads(philo->table->start_meeting_at);				// Sync threads others way you can have threads starting at -something_ms
+	if (philo->table->amount_philos == 1)						// 1 philo process
 		return (wait_till_die(philo), NULL);
 	else if (philo->id % 2)										// All "EVEN" phi_ids will think by default 
 	{

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:44:21 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	set_forks(t_phi *philo)
 // 	}
 // 	if (activity[0] == 'E')
 // 	{
-// 		pthread_mutex_lock(&philo->meal_time_lock);
+// 		pthread_mutex_lock(&philo->phi_action_lock);
 // 		philo->times_ate += 1;
-// 		pthread_mutex_unlock(&philo->meal_time_lock);
+// 		pthread_mutex_unlock(&philo->phi_action_lock);
 // 	}
 // }
 void	set_phi_to(char *activity, t_phi *philo)
@@ -98,8 +98,8 @@ void	set_phi_to(char *activity, t_phi *philo)
 	}
 	if (activity[0] == 'E')
 	{
-		pthread_mutex_lock(&philo->meal_time_lock);
+		pthread_mutex_lock(&philo->phi_action_lock);
 		philo->times_ate += 1;
-		pthread_mutex_unlock(&philo->meal_time_lock);
+		pthread_mutex_unlock(&philo->phi_action_lock);
 	}
 }

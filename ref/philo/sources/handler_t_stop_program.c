@@ -26,7 +26,7 @@ void	*t_handler_stop_program(void *data)
 	if (table->min_amount_meals == 0)
 		return (NULL);
 	//// update_sim_should_stop(table, false);
-	sim_start_delay(table->start_meeting_at);
+	sync_threads(table->start_meeting_at);
 	while (true)
 	{
 		if (are_all_conditions_reached(table) == true)

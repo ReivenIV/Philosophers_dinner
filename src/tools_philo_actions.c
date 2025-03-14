@@ -6,14 +6,16 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:44:41 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:54:34 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-
+/*
+	Reminder : &philo->table->fork_locks[philo->fork[0]]
+	is the adresse of the fork mutex related to a philo_id.
+*/
 void	eat_sleep_process(t_phi *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
@@ -23,9 +25,9 @@ void	eat_sleep_process(t_phi *philo)
 	print_statement(philo, "Fork_1");										// take fork
 	print_statement(philo, "Eating");
 
-	pthread_mutex_lock(&philo->meal_time_lock);
+	pthread_mutex_lock(&philo->phi_action_lock);
 	philo->last_meal_at = now_at();											// update last_meal_at
-	pthread_mutex_unlock(&philo->meal_time_lock);
+	pthread_mutex_unlock(&philo->phi_action_lock);
 	
 	set_phi_to("Eat", philo);												// start action Eating
 
@@ -47,7 +49,7 @@ void	think_process(t_table *t, t_phi *p)						// t = table || p = philosopher.  
 {
 	time_t	t_t;												// t_t = time_to_think			  (i needed spaces sorry for that one)
 
-	pthread_mutex_lock(&p->meal_time_lock);
+	pthread_mutex_lock(&p->phi_action_lock);
 	if (p->table->amount_philos % 2 == 0)
 	{
 		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)
@@ -60,7 +62,7 @@ void	think_process(t_table *t, t_phi *p)						// t = table || p = philosopher.  
 	if (t_t < 0)
 		t_t = 0;
 	t->t_t_think = t_t;
-	pthread_mutex_unlock(&p->meal_time_lock);
+	pthread_mutex_unlock(&p->phi_action_lock);
 	print_statement(p, "THINKING");
 
 	if ((t->amount_philos % 2 != 0 && p->id == t->amount_philos - 2))

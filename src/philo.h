@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 14:44:33 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:09:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # include <sys/time.h>	// To get current time
 # include <stdbool.h>	// because i love bools
 
-
-//	------------------
-//	::  parameters  ::
-//	------------------
 
 //	---------------
 //	::  Structs  ::
@@ -42,19 +38,19 @@ typedef struct s_table
 	int					min_amount_meals;				// min amount of meals that every philo must eat before end of process
 	pthread_t			t_handler_stop_program;			// a thread that will be checking is we need to stop the program
 	bool				sim_should_stop;				// t_handler_stop_program will be checking these var constantly.
-	pthread_mutex_t		sim_stop_lock;					// TODO check if necesary
+	pthread_mutex_t		sim_stop_lock;					// t_handler_stop_program will constantly check these var.. when TRUE == end of the process
 	pthread_mutex_t		write_lock;						// mutex to manage wich thread can write or not.
-	pthread_mutex_t		*fork_locks;					// mutex that manage the fork handling to every philo
+	pthread_mutex_t		*fork_locks;					// Array of mutexes Forks we will have/use during the process 
 	t_phi				**philos;						// array of philos
 } t_table; 
 
 typedef struct s_philo
 {
 	unsigned int		id;							// Id of each philosopher
-	pthread_t			thread_id;					// thread_id of each philo
+	pthread_t			thread_id;					// each philo/thread
 	unsigned int		times_ate;					// amount of meals per philo
-	unsigned int		fork[2];					// max amount of forks per philo
-	pthread_mutex_t		meal_time_lock;				//? time to eat ?
+	unsigned int		fork[2];					// max 2F per Philo, these will be related to the index of philo_id. But we will use then to locate the mutex fork id. (fork_locks)
+	pthread_mutex_t		phi_action_lock;			// mutex to handle interactions of each philosopher(thread)
 	time_t				last_meal_at;				// timestamp that record last meal eaten (usefull to know if any philo already died)
 	t_table				*table;
 } t_phi;
@@ -76,25 +72,23 @@ typedef struct s_philo
 //	::  handlers  ::
 //	----------------
 
-void	*t_handler_philo(void *data);		// Will handle the global process
-bool	begin_process(t_table *table);		// Will create all threads/mutexes
-void	end_process(t_table *table);		// at the end, Will free everything.
-
+bool	handler_parser(int ac, char **av);		// Check if all inputs are correct.
+bool	begin_process(t_table *table);			// Will create all threads/mutexes and call t_handler_philo & t_handler_stop_program.
+void	*t_handler_philo(void *data);			// Will handle the global process, eat, sleep, think & die.
+void	*t_handler_stop_program(void *data);	// WIll constantly check if the process reached all conditions to end.
+void	end_process(t_table *table);			// at the end, Will free everything.
 
 
 //	-------------
 //	::  Tools  ::
 //	-------------
 
-// parser
-bool	handler_parser(int ac, char **av);
-
 // tools_init
 t_table	*init_table_philos(int ac, char **av);
 
 // tools_time: 
 time_t	now_at(void);
-void	sim_start_delay(time_t start_meeting_at);
+void	sync_threads(time_t start_meeting_at);
 
 // tools_print:  
 void	print_statement(t_phi *philo, char *status);		// We will print everything with these function. Is like a "print handler";
@@ -107,31 +101,21 @@ void	*wait_till_die(t_phi *philo);						// Only for 1 philo.
 
 
 // tools_setters
-void	set_phi_to(char *activity, t_phi *philo);
-void	set_forks(t_phi *philo);
-void	update_sim_should_stop(t_table *table, bool state);
+void	set_phi_to(char *activity, t_phi *philo);			// Will put philos to eat, sleep, think, die
+void	set_forks(t_phi *philo);							// Will assign forks to every philosopher
+void	update_sim_should_stop(t_table *table, bool state);	// Will update the var : sim_should_stop checked by (handler)begin_process -> (handler)t_handler_stop_program
 
 // tools_obersevers
 bool	should_sim_end(t_table *table);
-bool	is_philo_dead(t_phi *philo);
+bool	is_philo_dead(t_phi *philo);						// WIll check if all philos are alive. If no, handle and call to stop the process.
 bool	are_all_conditions_reached(t_table *table);
-void	*t_handler_stop_program(void *data);	//TODO global handler create a new file.
 
 // tools_strs
 int		nbs_atoi(char *str);
 bool	has_only_digits(char *str);
 
-
 // tools_free
 void	free_table(t_table *table);							// only free table.
 void	free_all(t_table *table);							// Free all global and single mutexes + free_table.
-
-
-
-
-
-
-
-
 
 #endif

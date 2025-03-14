@@ -85,7 +85,7 @@ If
 	- if (t_eat = t_sleep) === t_think = t_eat 
 		- ./philo 3 800 200 200
 		- ./philo 3 800 100 100
-	- if (t_eat < t_sleep) === t_think = t_eat *2 - t_sleep
+	- if (t_eat < t_sleep) === t_think = t_eat * 2 - t_sleep
 		- ./philo 3 800 200 300
 		- ./philo 3 800 200 350
 		- ./philo 3 800 200 400

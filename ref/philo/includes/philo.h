@@ -136,7 +136,7 @@ bool			has_only_digits(char *str);
 
 //	time.c
 time_t			now_at(void);
-void			sim_start_delay(time_t start_meeting_at);
+void			sync_threads(time_t start_meeting_at);
 
 //	output.c
 void			print_statement(t_phi *philo, char *status);

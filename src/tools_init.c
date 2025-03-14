@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 14:43:36 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_phi	**init_philos(t_table *table)
 		arr_philos[i] = malloc(sizeof(t_phi));					// Will create 1 t_phi per loop
 		if (!arr_philos[i])
 			return (printf("IP: error malloc"), NULL);
-		if (pthread_mutex_init(&arr_philos[i]->meal_time_lock, 0) != 0)
+		if (pthread_mutex_init(&arr_philos[i]->phi_action_lock, 0) != 0)
 			return (printf("IP: error mutex"), NULL);
 		arr_philos[i]->table = table;
 		arr_philos[i]->id = i;

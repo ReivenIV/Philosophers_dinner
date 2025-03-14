@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:46:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:31:12 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	free_mutexes(t_table *table)
 	while (i < table->amount_philos)
 	{
 		pthread_mutex_destroy(&table->fork_locks[i]);
-		pthread_mutex_destroy(&table->philos[i]->meal_time_lock);
+		pthread_mutex_destroy(&table->philos[i]->phi_action_lock);
 		i++;		
 	}
 	pthread_mutex_destroy(&table->write_lock);
