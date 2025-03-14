@@ -64,6 +64,7 @@ typedef struct s_table
 	time_t			time_to_die;
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
+	time_t			time_to_think;
 	int				min_amount_meals;
 	bool			sim_should_stop;
 	pthread_mutex_t	sim_stop_lock;
@@ -122,7 +123,7 @@ void			start_think_even(t_phi *philo);
 // tools_setters.c
 void			set_forks(t_phi *philo);
 void			update_sim_should_stop(t_table *table, bool state);
-void			set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo);
+void			set_phi_to(char *activity, t_phi *philo);
 
 
 // tools_observers

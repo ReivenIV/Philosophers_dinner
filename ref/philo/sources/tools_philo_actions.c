@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/13 17:12:32 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 10:54:31 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	eat_sleep_process(t_phi *philo)
 	philo->last_meal_at = get_time_in_ms();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 
-	set_phi_to("Eat", philo->table, philo->table->time_to_eat, philo);
+	set_phi_to("Eat", philo);
 	
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	
 	print_statement(philo, "SLEEPING");
-	set_phi_to("Sleep", philo->table, philo->table->time_to_sleep, philo);
+	set_phi_to("Sleep",philo);
 }
 
 // ? ---------------------------------------------------------------------------------
@@ -56,13 +56,17 @@ void	eat_sleep_process(t_phi *philo)
 
 void	start_think_even(t_phi *philo)
 {
-	//time_t	time_to_think;
+	time_t	time_to_think;
 
-	// time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat);
+	pthread_mutex_lock(&philo->meal_time_lock);
 
-	// printf("ttthink = %li\n", time_to_think);
+	time_to_think = philo->table->time_to_eat + 10;
+
+	philo->table->time_to_think = time_to_think;
+	pthread_mutex_unlock(&philo->meal_time_lock);
+	
 	print_statement(philo, "THINKING");
-	set_phi_to("Think", philo->table, philo->table->time_to_eat + 10, philo);
+	set_phi_to("Think", philo);
 }
 
 void	think_process(t_phi *philo)
@@ -71,19 +75,25 @@ void	think_process(t_phi *philo)
 
 	pthread_mutex_lock(&philo->meal_time_lock);
 	if (philo->table->amount_philos % 2 == 0)
-	{
 		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at)) * 0.98;
-	}
 	else 
 		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
-	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
 		time_to_think = 0;
+
+	philo->table->time_to_think = time_to_think;
+	pthread_mutex_unlock(&philo->meal_time_lock);
+	
+
 	print_statement(philo, "THINKING");
+
 	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))
-		set_phi_to("Think", philo->table, time_to_think + 50, philo);
+	{
+		philo->table->time_to_think = time_to_think + 50;
+		set_phi_to("Think", philo);
+	}
 	else 
-		set_phi_to("Think", philo->table, time_to_think, philo);
+		set_phi_to("Think", philo);
 }
 
 /* wait_till_die:
@@ -103,7 +113,7 @@ void	*wait_till_die(t_phi *philo) // done
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	print_statement(philo, "FORK_0");
-	set_phi_to("Die", philo->table, philo->table->time_to_die, philo);
+	set_phi_to("Die", philo);
 	print_statement(philo, "DIED");
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 09:50:24 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 10:53:47 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,21 @@ void	set_forks(t_phi *philo)
 *	time and cuts the sleep short if it has.
 */
 //TODO Maybe it should be a BOOL 
-void	set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo)
+void	set_phi_to(char *activity, t_phi *philo)
 {
 	time_t	action_end_at;
 
-	action_end_at = get_time_in_ms() + activity_time;
+	if (activity[0] == 'E')
+		action_end_at = get_time_in_ms() + philo->table->time_to_eat;
+	else if (activity[0] == 'S')
+		action_end_at = get_time_in_ms() + philo->table->time_to_sleep;
+	else if (activity[0] == 'T')
+		action_end_at = get_time_in_ms() + philo->table->time_to_think;
+	else if (activity[0] == 'D')
+		action_end_at = get_time_in_ms() + philo->table->time_to_die;
 	while (get_time_in_ms() < action_end_at)
 	{
-		if (should_sim_end(table) == true)
+		if (should_sim_end(philo->table) == true)
 			break ;
 		usleep(100);
 	}
