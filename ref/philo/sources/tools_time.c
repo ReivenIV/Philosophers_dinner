@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-/* get_time_in_ms:
+/* get_current_time:
 *	Gets the current time in miliseconds since the Epoch (1970-01-01 00:00:00).
 *	Returns the time value.
 */
-time_t	get_time_in_ms(void)
+time_t	get_current_time(void)
 {
 	struct timeval		t_v;
 
@@ -34,6 +34,6 @@ time_t	get_time_in_ms(void)
 */
 void	sim_start_delay(time_t start_meeting_at)
 {
-	while (get_time_in_ms() < start_meeting_at)
+	while (get_current_time() < start_meeting_at)
 		continue ;
 }

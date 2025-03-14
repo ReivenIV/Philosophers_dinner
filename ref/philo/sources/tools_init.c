@@ -69,13 +69,13 @@ static t_phi	**init_phis(t_table *table)
 	return (arr_philos);
 }
 
-/* init_global_mutexes:
+/* init_g_mutexes:
 *	Initializes mutex locks for forks, writing and the stop simulation
 *	flag.
 *	Returns true if the initalizations were successful, false if
 *	initilization failed.
 */
-static bool	init_global_mutexes(t_table *table)
+static bool	init_g_mutexes(t_table *table)
 {
 	table->fork_locks = init_forks(table);
 	if (!table->fork_locks)
@@ -104,15 +104,16 @@ t_table	*init_table_philos(int ac, char **av)
 	table->time_to_die = nbs_atoi(av[2]);
 	table->time_to_eat = nbs_atoi(av[3]);
 	table->time_to_sleep = nbs_atoi(av[4]);
+	table->time_to_think = 0;
 	table->sim_should_stop = false;
 	table->min_amount_meals = -1;						// set by default to "NULL"
-	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
+	table->start_meeting_at = get_current_time() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)										// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
 	table->philos = init_phis(table);
 	if (!table->philos)
 		return (NULL);
-	if (!init_global_mutexes(table))
+	if (!init_g_mutexes(table))
 		return (NULL);
 	table->sim_should_stop = false;
 	return (table);

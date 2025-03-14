@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/14 10:54:31 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:02:09 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	eat_sleep_process(t_phi *philo)
 	print_statement(philo, "EATING");
 	
 	pthread_mutex_lock(&philo->meal_time_lock);
-	philo->last_meal_at = get_time_in_ms();
+	philo->last_meal_at = get_current_time();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 
 	set_phi_to("Eat", philo);
@@ -75,9 +75,9 @@ void	think_process(t_phi *philo)
 
 	pthread_mutex_lock(&philo->meal_time_lock);
 	if (philo->table->amount_philos % 2 == 0)
-		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at)) * 0.98;
+		time_to_think = (philo->table->time_to_die - (get_current_time() - philo->last_meal_at)) * 0.98;
 	else 
-		time_to_think = (philo->table->time_to_die - (get_time_in_ms() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
+		time_to_think = (philo->table->time_to_die - (get_current_time() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
 	if (time_to_think < 0)
 		time_to_think = 0;
 
