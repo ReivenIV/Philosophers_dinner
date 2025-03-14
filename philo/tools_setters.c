@@ -6,11 +6,19 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:27:17 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// Will update the state of var sim_should_stop to True. 
+void	update_sim_should_stop(t_table *table, bool state)
+{
+	pthread_mutex_lock(&table->sim_stop_lock);
+		table->sim_should_stop = state;
+	pthread_mutex_unlock(&table->sim_stop_lock);
+}
 
 /*
 	to avoid Dead-lock and to avoid min meal amount
@@ -43,28 +51,56 @@ void	set_forks(t_phi *philo)
  In given activity_time the philo thread will be "eating", "sleeping" or "thinking" 
  (or IRL procesing untill the current date match the wake up time)
 */
-void	set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *philo)
+// void	set_phi_to(char *activity, t_phi *philo)
+// {
+// 	time_t	action_end_at;
+// 	time_t	curent_time;
+
+// 	curent_time = get_current_time();
+// 	if (activity[0] == 'E')
+// 		action_end_at = curent_time + philo->table->t_t_eat;
+// 	else if (activity[0] == 'S')
+// 		action_end_at = curent_time + philo->table->t_t_sleep;
+// 	else if (activity[0] == 'T')
+// 		action_end_at = curent_time + philo->table->t_t_think;
+// 	else if (activity[0] == 'D')
+// 		action_end_at = curent_time + philo->table->t_t_die;
+// 	while (get_current_time() < action_end_at)
+// 	{
+// 		if (should_sim_end(philo->table) == true)
+// 			break ;
+// 		usleep(100);
+// 	}
+// 	if (activity[0] == 'E')
+// 	{
+// 		pthread_mutex_lock(&philo->meal_time_lock);
+// 		philo->times_ate += 1;
+// 		pthread_mutex_unlock(&philo->meal_time_lock);
+// 	}
+// }
+void	set_phi_to(char *activity, t_phi *philo)
 {
 	time_t	action_end_at;
 
-	action_end_at = get_current_time() + activity_time;
+	if (activity[0] == 'E')
+		action_end_at = get_current_time() + philo->table->t_t_eat;
+	else if (activity[0] == 'S')
+		action_end_at = get_current_time() + philo->table->t_t_sleep;
+	else if (activity[0] == 'T')
+		action_end_at = get_current_time() + philo->table->t_t_think;
+	else if (activity[0] == 'D')
+		action_end_at = get_current_time() + philo->table->t_t_die;
 	while (get_current_time() < action_end_at)
 	{
-		if (should_sim_end(table) == true);
+		if (should_sim_end(philo->table) == true)
 			break ;
 		usleep(100);
 	}
 	if (activity[0] == 'E')
 	{
 		pthread_mutex_lock(&philo->meal_time_lock);
-		philo->times_ate += 1;
+		philo->times_ate += 1;		//! Problem here is not waiting all the time till the end of the eating process at the end.  
+		////printf("times_ate: %i, P_ID: %i\n", philo->times_ate, philo->id);
 		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
-}
-// Will update the state of var sim_should_stop to True. 
-void	update_sim_should_stop(t_table *table, bool state)
-{
-	pthread_mutex_lock(&table->sim_stop_lock);
-		table->sim_should_stop = state;
-	pthread_mutex_unlock(&table->sim_stop_lock);
 }

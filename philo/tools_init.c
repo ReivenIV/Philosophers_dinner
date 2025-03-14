@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 10:32:32 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ t_table	*init_table_philos(int ac, char **av)
 {
 	t_table	*table;
 
-	table = malloc(sizeof(t_table));
+	table = malloc(sizeof(t_table));												// REMINDER : we need only 1 table (an "X" nb of philos)
 	if (!table)
-		return (printf("IT: error malloc"), NULL);
+		return (printf("ITP: error malloc"), NULL);
 	table->amount_philos = nbs_atoi(av[1]);
 	table->t_t_die =  nbs_atoi(av[2]);
 	table->t_t_eat =  nbs_atoi(av[3]);
 	table->t_t_sleep =  nbs_atoi(av[4]);
-	table->sim_should_stop = false;
+	table->sim_should_stop = false;													// We start the process so sim_should_stop = false (otherwise will stop inmediatly)
 	table->min_amount_meals = -1;													// set by default to "NULL"
 	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)																	// if we have 6 we update it to the inputed number
