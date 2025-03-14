@@ -3,7 +3,11 @@
 exec projet ex:
 ```bash
 	# Normal launch
-	./philo 4 410 200 200 5
+	./philo 1 800 200 200 			#(will die)
+	./philo 5 800 200 200
+	./philo 5 800 200 200 7
+	./philo 4 410 200 200 
+	./philo 4 310 200 100			#(one philo will die)
 
 	# Leaks
 	valgrind ./philo 2 800000 60 60 1
