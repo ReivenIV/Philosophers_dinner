@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/14 12:09:19 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:22:55 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,29 @@ void	start_think_even(t_phi *philo)
 	set_phi_to("Think", philo);
 }
 
-void	think_process(t_table *t, t_phi *p)
+void	think_process(t_table *t, t_phi *p)						// t = table || p = philosopher.  (i needed spaces sorry for that one)
 {
-	time_t	t_t_think;
+	time_t	t_t;												// t_t = time_to_think			  (i needed spaces sorry for that one)
 
 	pthread_mutex_lock(&p->meal_time_lock);
 	if (p->table->amount_philos % 2 == 0)
 	{
 		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)
-			t_t_think = 0;
+			t_t = 0;
 		else
-			t_t_think = (t->t_t_die - (get_current_time() - p->last_meal_at)) * 0.9;
+			t_t = (t->t_t_die - (get_current_time() - p->last_meal_at)) * 0.9;
 	}
 	else 
-		t_t_think = (t->t_t_die - (get_current_time() - p->last_meal_at) - t->t_t_eat) / 2;
-	if (t_t_think < 0)
-		t_t_think = 0;
-	t->t_t_think = t_t_think;
+		t_t = (t->t_t_die - (get_current_time() - p->last_meal_at) - t->t_t_eat) / 2;
+	if (t_t < 0)
+		t_t = 0;
+	t->t_t_think = t_t;
 	pthread_mutex_unlock(&p->meal_time_lock);
 	print_statement(p, "THINKING");
 
 	if ((t->amount_philos % 2 != 0 && p->id == t->amount_philos - 2))
 	{
-		t->t_t_think = t_t_think + 50;
+		t->t_t_think = t_t + 50;
 		set_phi_to("Think", p);
 	}
 	else 
