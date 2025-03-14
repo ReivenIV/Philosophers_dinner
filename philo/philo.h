@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:41:19 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:56:56 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	end_process(t_table *table);		// at the end, Will free everything.
 //	-------------
 
 // parser
-bool	are_inputs_valid(int ac, char **av);
+bool	handler_parser(int ac, char **av);
 
 // tools_init
 t_table	*init_table_philos(int ac, char **av);
@@ -116,8 +116,10 @@ bool	are_all_conditions_reached(t_table *table);
 void	*t_handler_stop_program(void *data);	//TODO global handler create a new file.
 
 // tools_strs
-int	ft_strlen(char *str);
-int	nbs_atoi(char *str);
+int		ft_strlen(char *str);
+int		nbs_atoi(char *str);
+bool	has_only_digits(char *str);
+
 
 // tools_free
 void	free_table(t_table *table);							// only free table.

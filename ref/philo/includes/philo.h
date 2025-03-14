@@ -105,7 +105,7 @@ void			*t_handler_philo(void *data);
 
 
 //	parsing.c
-bool			are_valid_input(int ac, char **av);
+bool			handler_parser(int ac, char **av);
 int				nbs_atoi(char *str);
 
 //	init.c
@@ -128,9 +128,10 @@ void			set_phi_to(char *activity, t_table *table, time_t activity_time, t_phi *p
 // tools_observers
 bool			should_sim_end(t_table *table);
 bool			are_all_conditions_reached(t_table *table);
+int				nbs_atoi(char *str);
 
 // tools_strs.c
-int				ft_strcmp(char *s1, char *s2);
+bool			has_only_digits(char *str);
 
 //	time.c
 time_t			get_time_in_ms(void);

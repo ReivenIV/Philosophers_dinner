@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 11:50:32 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:56:56 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	if (ac < 5 || ac > 6)
 		return (printf("wrong amount ac"));
 	// parser
-	if (!are_inputs_valid(ac, av))
+	if (!handler_parser(ac, av))
 		exit (1);
 
 	if (av[1][0] == '1')						// in case we have only 1 philo we wait till it die. we don't init anything.
