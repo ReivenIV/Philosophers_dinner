@@ -5,45 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 18:31:10 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 09:55:45 by urlooved         ###   ########.fr       */
+/*   Created: 2025/03/08 15:27:42 by urlooved          #+#    #+#             */
+/*   Updated: 2025/03/14 13:17:48 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* has_only_digits:
-*	Checks if a string contains only digits 0 - 9.
-*	Returns true if the string only contains digits.
-*	Returns false if the string contains a character that is not a digit.
-*/
-bool	has_only_digits(char *str)
+// Will count amount of chars in a string
+static int	ft_strlen(char *str)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (false);
-		i++;
-	}
-	return (true);
+	count = 0;
+	while (str[count] != '\0')
+		count++;
+	return (count);
 }
 
-/* nbs_atoi:
-*	Converts a digit-only string into a positive integer.
-*	Returns the converted number between 0 and INT MAX.
-*	Returns -1 if the converted number exceeds INT MAX.
-*/
+// Will transform only (char)nb to (nb)nb
+// if there is a problem will output -1
 int	nbs_atoi(char *str)
 {
-	unsigned long long int	nb;
-	int						i;
+	unsigned int	nb;
+	int				i;
 
+	if (ft_strlen(str) > 10)
+		return (-1);
 	i = 0;
 	nb = 0;
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
 	{
 		nb = nb * 10 + (str[i] - '0');
 		i++;
@@ -51,4 +42,19 @@ int	nbs_atoi(char *str)
 	if (nb > INT_MAX)
 		return (-1);
 	return ((int)nb);
+}
+
+// Will check if the string is only made out of (char)numbers 
+bool has_only_digits(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (false);
+		i++;
+	}
+	return (true);
 }

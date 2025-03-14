@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   tools_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/03 11:35:04 by rita          #+#    #+#             */
-/*   Updated: 2022/11/15 15:49:54 by rita         ###   ########.fr       */
+/*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
+/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* intit_forks:
-*	Allocates memory and initializes fork mutexes.
-*	Returns a pointer to the fork mutex array, or NULL if an error occured. 
-*/
+
+// Will init amount of forks mutexes. (amount philos == amount forks)
+// return array of forks or NULL. 
 static pthread_mutex_t	*init_forks(t_table *table)
 {
 	pthread_mutex_t	*forks;
@@ -23,25 +22,19 @@ static pthread_mutex_t	*init_forks(t_table *table)
 
 	forks = malloc(sizeof(pthread_mutex_t) * table->amount_philos);
 	if (!forks)
-		return (error_null(STR_ERR_MALLOC, NULL, 0));
+		return (printf("IF: error malloc"), NULL);
 	i = 0;
 	while (i < table->amount_philos)
 	{
 		if (pthread_mutex_init(&forks[i], 0) != 0)
-			return (error_null(STR_ERR_MUTEX, NULL, 0));
+			return (printf("IF: error mutexing"), NULL);
 		i++;
 	}
 	return (forks);
 }
+// Will fill the array philosopher and init their values (table, id, time_ate)
 
-
-
-/* init_philos:
-*	Allocates memory for each philosopher and initializes their values.
-*	Returns a pointer to the array of philosophers or NULL if
-*	initialization failed.
-*/
-static t_phi	**init_phis(t_table *table)
+static t_phi	**init_philos(t_table *table)
 {
 	t_phi			**arr_philos;
 	unsigned int	i;
@@ -50,15 +43,15 @@ static t_phi	**init_phis(t_table *table)
 		return (printf("IP: no table"), NULL);
 	arr_philos = malloc(sizeof(t_phi) * table->amount_philos);
 	if (!arr_philos)
-		return (error_null(STR_ERR_MALLOC, NULL, 0));
+		return (printf("IP: error malloc"), NULL);
 	i = 0;
 	while (i < table->amount_philos)
 	{
-		arr_philos[i] = malloc(sizeof(t_phi) * 1);
+		arr_philos[i] = malloc(sizeof(t_phi));					// Will create 1 t_phi per loop
 		if (!arr_philos[i])
-			return (error_null(STR_ERR_MALLOC, NULL, 0));
-		if (pthread_mutex_init(&arr_philos[i]->meal_time_lock, 0) != 0)
-			return (error_null(STR_ERR_MUTEX, NULL, 0));
+			return (printf("IP: error malloc"), NULL);
+		if (pthread_mutex_init(&arr_philos[i]->phi_action_lock, 0) != 0)
+			return (printf("IP: error mutex"), NULL);
 		arr_philos[i]->table = table;
 		arr_philos[i]->id = i;
 		arr_philos[i]->times_ate = 0;
@@ -69,48 +62,37 @@ static t_phi	**init_phis(t_table *table)
 	return (arr_philos);
 }
 
-/* init_g_mutexes:
-*	Initializes mutex locks for forks, writing and the stop simulation
-*	flag.
-*	Returns true if the initalizations were successful, false if
-*	initilization failed.
-*/
+// Will init global muetexes (mutexes in struct table)
 static bool	init_g_mutexes(t_table *table)
 {
 	table->fork_locks = init_forks(table);
 	if (!table->fork_locks)
 		return (false);
 	if (pthread_mutex_init(&table->sim_stop_lock, 0) != 0)
-		return (printf("IGM: error while init"), free_table(table), false);
+		return (printf("IMG: error mutex"), free_table(table), false);
 	if (pthread_mutex_init(&table->write_lock, 0) != 0)
-		return (printf("IGM: error while init"), free_table(table), false);
+		return (printf("IMG: error mutex"), free_table(table), false);
 	return (true);
 }
 
-/* init_table_philos:
-*	Initializes the "dining table", the data structure containing
-*	all of the program's parameters.
-*	Returns a pointer to the allocated table structure, or NULL if
-*	an error occured during initialization.
-*/
+// Will init table, g_mutexes, philos array
 t_table	*init_table_philos(int ac, char **av)
 {
 	t_table	*table;
 
-	table = malloc(sizeof(t_table));					// we need only 1 table (always)
+	table = malloc(sizeof(t_table));												// REMINDER : we need only 1 table (an "X" nb of philos)
 	if (!table)
-		return (error_null(STR_ERR_MALLOC, NULL, 0));
+		return (printf("ITP: error malloc"), NULL);
 	table->amount_philos = nbs_atoi(av[1]);
-	table->t_t_die = nbs_atoi(av[2]);
-	table->t_t_eat = nbs_atoi(av[3]);
-	table->t_t_sleep = nbs_atoi(av[4]);
-	table->t_t_think = 0;
-	table->sim_should_stop = false;
-	table->min_amount_meals = -1;						// set by default to "NULL"
+	table->t_t_die =  nbs_atoi(av[2]);
+	table->t_t_eat =  nbs_atoi(av[3]);
+	table->t_t_sleep =  nbs_atoi(av[4]);
+	table->sim_should_stop = false;													// We start the process so sim_should_stop = false (otherwise will stop inmediatly)
+	table->min_amount_meals = -1;													// set by default to "NULL"
 	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
-	if (ac == 6)										// if we have 6 we update it to the inputed number
+	if (ac == 6)																	// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
-	table->philos = init_phis(table);
+	table->philos = init_philos(table);
 	if (!table->philos)
 		return (NULL);
 	if (!init_g_mutexes(table))

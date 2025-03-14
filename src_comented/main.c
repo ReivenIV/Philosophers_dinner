@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 11:46:06 by rita          #+#    #+#             */
-/*   Updated: 2022/09/10 16:13:10 by rita         ###   ########.fr       */
+/*   Created: 2025/03/07 16:02:28 by urlooved          #+#    #+#             */
+/*   Updated: 2025/03/14 15:00:40 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	main(int ac, char **av)
 	t_table	*table;
 
 	table = NULL;
-	if (ac - 1 < 4 || ac - 1 > 5)
-		return (msg(STR_USAGE, NULL, EXIT_FAILURE));
+	if (ac < 5 || ac > 6)
+		return (printf("wrong amount ac"));
 	if (!handler_parser(ac, av))
-		return (EXIT_FAILURE);
+		exit (1);
 	table = init_table_philos(ac, av);
 	if (!table)
-		return (EXIT_FAILURE);
+		exit (1);
 	if (!begin_process(table))
-		return (EXIT_FAILURE);
+		exit (1);
 	end_process(table);
-	return (EXIT_SUCCESS);
+	return (0);
 }

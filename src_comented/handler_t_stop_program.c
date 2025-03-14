@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_handler_stop_program.c                                   :+:      :+:    :+:   */
+/*   handler_t_stop_program.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 17:54:52 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:55:07 by urlooved         ###   ########.fr       */
+/*   Created: 2025/03/14 09:43:49 by urlooved          #+#    #+#             */
+/*   Updated: 2025/03/14 16:09:38 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* t_handler_stop_program:
-*	The t_handler_stop_program thread's routine. Checks if a philosopher must
-*	be killed and if all philosophers ate enough. If one of those two
-*	end conditions are reached, it stops the simulation.
-*/
-//TODO create a handler and a extra file.
+// Main constant observer that will be checking constantly if the process should stop or not. 
 void	*t_handler_stop_program(void *data)
 {
-	t_table			*table;
+	t_table	*table;
 
 	table = (t_table *)data;
 	if (table->min_amount_meals == 0)
