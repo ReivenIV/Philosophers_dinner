@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:25:09 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:08:56 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:36:55 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	*t_handler_philo(void *data)
 	}
 	else if (philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 1)
 		think_process(philo->table, philo);
-	printf("%li\n", philo->table->t_t_sleep);
 	while (should_sim_end(philo->table) == false)
 	{
 		eat_sleep_process(philo);

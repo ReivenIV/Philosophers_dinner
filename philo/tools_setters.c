@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:02:02 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:44:21 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ void	set_phi_to(char *activity, t_phi *philo)
 	if (activity[0] == 'E')
 	{
 		pthread_mutex_lock(&philo->meal_time_lock);
-		philo->times_ate += 1;		//! Problem here is not waiting all the time till the end of the eating process at the end.  
-		////printf("times_ate: %i, P_ID: %i\n", philo->times_ate, philo->id);
+		philo->times_ate += 1;
 		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
 }
