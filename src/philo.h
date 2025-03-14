@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:41:23 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:44:33 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_table
 	time_t				t_t_eat;						// amount ms of time to eat present in AV
 	time_t				t_t_sleep;						// amount ms of time to sleep present in AV
 	time_t				t_t_think;						// amount ms of time to sleep need to calculate. (check think_process)
-	unsigned int		min_amount_meals;				// min amount of meals that every philo must eat before end of process
+	int					min_amount_meals;				// min amount of meals that every philo must eat before end of process
 	pthread_t			t_handler_stop_program;			// a thread that will be checking is we need to stop the program
 	bool				sim_should_stop;				// t_handler_stop_program will be checking these var constantly.
 	pthread_mutex_t		sim_stop_lock;					// TODO check if necesary
@@ -94,6 +94,7 @@ t_table	*init_table_philos(int ac, char **av);
 
 // tools_time: 
 time_t	now_at(void);
+void	sim_start_delay(time_t start_meeting_at);
 
 // tools_print:  
 void	print_statement(t_phi *philo, char *status);		// We will print everything with these function. Is like a "print handler";
@@ -117,7 +118,6 @@ bool	are_all_conditions_reached(t_table *table);
 void	*t_handler_stop_program(void *data);	//TODO global handler create a new file.
 
 // tools_strs
-int		ft_strlen(char *str);
 int		nbs_atoi(char *str);
 bool	has_only_digits(char *str);
 

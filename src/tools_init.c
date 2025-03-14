@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 10:32:32 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:43:36 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static pthread_mutex_t	*init_forks(t_table *table)
 }
 // Will fill the array philosopher and init their values (table, id, time_ate)
 
-static t_phi	**init_phis(t_table *table)
+static t_phi	**init_philos(t_table *table)
 {
 	t_phi			**arr_philos;
 	unsigned int	i;
@@ -63,7 +63,7 @@ static t_phi	**init_phis(t_table *table)
 }
 
 // Will init global muetexes (mutexes in struct table)
-static bool	init_g_mutexs(t_table *table)
+static bool	init_g_mutexes(t_table *table)
 {
 	table->fork_locks = init_forks(table);
 	if (!table->fork_locks)
@@ -89,13 +89,13 @@ t_table	*init_table_philos(int ac, char **av)
 	table->t_t_sleep =  nbs_atoi(av[4]);
 	table->sim_should_stop = false;													// We start the process so sim_should_stop = false (otherwise will stop inmediatly)
 	table->min_amount_meals = -1;													// set by default to "NULL"
-	table->start_meeting_at = get_time_in_ms() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
+	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)																	// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
-	table->philos = init_phisophers(table);
+	table->philos = init_philos(table);
 	if (!table->philos)
 		return (NULL);
-	if (!init_global_mutexes(table))
+	if (!init_g_mutexes(table))
 		return (NULL);
 	table->sim_should_stop = false;
 	return (table);

@@ -36,7 +36,7 @@ static pthread_mutex_t	*init_forks(t_table *table)
 
 
 
-/* init_phisophers:
+/* init_philos:
 *	Allocates memory for each philosopher and initializes their values.
 *	Returns a pointer to the array of philosophers or NULL if
 *	initialization failed.

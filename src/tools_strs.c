@@ -6,14 +6,14 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:27:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 09:53:37 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:17:48 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // Will count amount of chars in a string
-int	ft_strlen(char *str)
+static int	ft_strlen(char *str)
 {
 	int	count;
 

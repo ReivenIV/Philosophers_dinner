@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:58:30 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:48:32 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:35:29 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	begin_process(t_table *table)
 	i = 0;
 	while (i < table->amount_philos)	// We create each thread for each philo and we put them into work.
 	{
-		if (pthread_create(&table->philos[i]->thread_id, NULL, &t_handler_philo, table->philos[i] != 0))
+		if (pthread_create(&table->philos[i]->thread_id, NULL, &t_handler_philo, table->philos[i]) != 0)
 			return (printf("bp: error init thread"), free_table(table), false);
 		i++;
 	}

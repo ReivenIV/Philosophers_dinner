@@ -3,7 +3,8 @@ comands.txt
 *.gch
 
 # Philo 
-
+philo
+.txt
 # System files
 .DS_Store
 
