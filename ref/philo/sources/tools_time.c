@@ -29,7 +29,7 @@ time_t	get_time_in_ms(void)
 /* sim_start_delay:
 *	Waits for a small delay at the beginning of each threads execution
 *	so that all threads start at the same time with the same start time
-*	reference. This ensures t_stop_program thread is synchronized with
+*	reference. This ensures t_handler_stop_program thread is synchronized with
 *	the philosopher threads.
 */
 void	sim_start_delay(time_t start_meeting_at)

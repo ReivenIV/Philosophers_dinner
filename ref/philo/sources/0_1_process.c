@@ -6,14 +6,14 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:22:32 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:27:24 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:49:48 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /* begin_process:
-*	Launches the simulation by creating a grim reaper thread as well as
+*	Launches the simulation by creating t_handler_stop_program thread as well as
 *	one thread for each philosopher.
 *	Returns true if the simulation was successfully started, false if there
 *	was an error. 
@@ -33,7 +33,7 @@ bool	begin_process(t_table *table)
 
 	if (table->amount_philos > 1)
 	{
-		if (pthread_create(&table->t_stop_program, NULL, &t_stop_program, table) != 0)
+		if (pthread_create(&table->t_handler_stop_program, NULL, &t_handler_stop_program, table) != 0)
 			return (printf("bp: error init threat"), free_table(table), false);
 	}
 	return (true);
@@ -54,7 +54,7 @@ void	end_process(t_table	*table)
 		i++;
 	}
 	if (table->amount_philos > 1)
-		pthread_join(table->t_stop_program, NULL);
+		pthread_join(table->t_handler_stop_program, NULL);
 	if (DEBUG_FORMATTING == true && table->min_amount_meals != -1)
 		write_outcome(table);
 	// // free_mutexes(table);

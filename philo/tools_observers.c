@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:43:34 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,3 @@ bool	are_all_conditions_reached(t_table *table)
 	return (false);
 }
 
-// Main constant observer that will be checking constantly if the process should stop or not. 
-void	*t_stop_program(void *data)
-{
-	t_table	*table;
-
-	table = (t_table *)data;
-	if (table->min_amount_meals == 0)
-		return (NULL);
-	//// update_sim_should_stop(table, false);
-	sim_start_delay(table->start_meeting_at);
-	while (true)
-	{
-		if (are_all_conditions_reached(table) == true)
-			return (NULL);
-		usleep(1000);
-	}
-	return (NULL);
-}

@@ -28,7 +28,7 @@ bool	begin_process(t_table *table)
 
 	if (table->amount_philos > 1)		// We need these condition because for only 1 philo will not do the same process.
 	{
-		if (pthread_create(&table->t_stop_program, NULL, &t_stop_program, table) != 0)	// we create the thread t_stop_program that will be constantly checking if the the conditions are reached (DIED or min_amount_meals reached.)
+		if (pthread_create(&table->t_handler_stop_program, NULL, &t_handler_stop_program, table) != 0)	// we create the thread t_handler_stop_program that will be constantly checking if the the conditions are reached (DIED or min_amount_meals reached.)
 			return (printf("bp: error init threat"), free_table(table), false);
 	}
 	return (true);
@@ -44,7 +44,7 @@ void	end_process(t_table *table)
 		pthread_join(table->philos[i]->thread_id, NULL);
 		i++;
 	}
-	if (table->amount_philos > 1)				// REMINDER: with philo 1 we don't have t_stop_program.
-		pthread_join(table->t_stop_program, NULL);
+	if (table->amount_philos > 1)				// REMINDER: with philo 1 we don't have t_handler_stop_program.
+		pthread_join(table->t_handler_stop_program, NULL);
 	free_all(table); 							// Will free mutexes(philos, globals), table
 }

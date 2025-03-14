@@ -19,7 +19,7 @@ OBJ_PATH = objects/
 SRC		=	main.c \
 			parsing.c \
 			t_handler_philo.c \
-			t_stop_program.c \
+			t_handler_stop_program.c \
 			tools_philo_actions.c \
 			tools_print.c \
 			tools_time.c \

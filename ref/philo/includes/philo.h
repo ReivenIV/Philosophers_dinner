@@ -60,7 +60,7 @@ typedef struct s_table
 {
 	time_t			start_meeting_at;
 	unsigned int	amount_philos;
-	pthread_t		t_stop_program;
+	pthread_t		t_handler_stop_program;
 	time_t			time_to_die;
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
@@ -100,7 +100,7 @@ typedef struct s_philo
 // 0_1_process.c
 bool			begin_process(t_table *table);
 void			end_process(t_table	*table);
-void			*t_stop_program(void *data);
+void			*t_handler_stop_program(void *data);
 void			*t_handler_philo(void *data);
 
 
@@ -142,7 +142,7 @@ void			write_outcome(t_table *table);
 void			*error_null(char *str, char *details, t_table *table);
 int				msg(char *str, char *detail, int exit_no);
 
-//	t_stop_program.c
+//	t_handler_stop_program.c
 bool			is_philo_dead(t_phi *philo);
 
 //	exit.c

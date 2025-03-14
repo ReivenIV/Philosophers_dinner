@@ -2,7 +2,7 @@
 
 - [ ] main.c
 - [ ] outputs.c
-- [ ] t_stop_program.c
+- [ ] t_handler_stop_program.c
 - [ ] philosopher.c
 	- routines
 - [ ] tools:

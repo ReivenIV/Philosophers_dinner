@@ -29,7 +29,7 @@ time_t	get_current_time(void)
 
 /*
 - Will delay the simulation like that all thread are synchronized 
-- This ensures t_stop_program thread is synchronized with 
+- This ensures t_handler_stop_program thread is synchronized with 
 	the philosopher threads.
 */
 void	sim_start_delay(time_t start_meeting_at)

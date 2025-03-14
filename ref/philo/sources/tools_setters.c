@@ -6,16 +6,17 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/13 17:00:13 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:50:24 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /* update_sim_should_stop:
-*	Sets the simulation stop flag to true or false. Only the grim
-*	reaper thread can set this flag. If the simulation stop flag is
-*	set to true, that means the simulation has met an end condition.
+*	Sets the simulation stop flag to true or false. Only the
+*	t_handler_stop_program thread can set this flag. If the simulation 
+*   stop flag is set to true, that means the simulation has met an end
+*	condition.
 */
 void	update_sim_should_stop(t_table *table, bool state)
 {

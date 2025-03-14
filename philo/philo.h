@@ -39,7 +39,7 @@ typedef struct s_table
 	time_t				t_t_eat;						// amount ms of time to eat
 	time_t				t_t_sleep;						// amount ms of time to sleep
 	unsigned int		min_amount_meals;				// min amount of meals that every philo must eat before end of process
-	pthread_t			t_stop_program;					// a thread that will be checking is we need to stop the program
+	pthread_t			t_handler_stop_program;					// a thread that will be checking is we need to stop the program
 	bool				sim_should_stop;				// BOOL true/false 
 	pthread_mutex_t		sim_stop_lock;					// TODO check if necesary
 	pthread_mutex_t		write_lock;						// mutex to manage wich thread can write or not.
@@ -113,7 +113,7 @@ void	update_sim_should_stop(t_table *table, bool state);
 bool	should_sim_end(t_table *table);
 bool	is_philo_dead(t_phi *philo);
 bool	are_all_conditions_reached(t_table *table);
-void	*t_stop_program(void *data);	//TODO global handler create a new file.
+void	*t_handler_stop_program(void *data);	//TODO global handler create a new file.
 
 // tools_strs
 int	ft_strlen(char *str);
