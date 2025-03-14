@@ -100,6 +100,8 @@ typedef struct s_philo
 // 0_1_process.c
 bool			begin_process(t_table *table);
 void			end_process(t_table	*table);
+void			*t_stop_program(void *data);
+void			*t_handler_philo(void *data);
 
 
 //	parsing.c
@@ -109,8 +111,7 @@ int				nbs_atoi(char *str);
 //	init.c
 t_table			*init_table_philos(int ac, char **av);
 
-// t_handler_philo.c
-void			*t_handler_philo(void *data);
+
 
 //	tools_actions.c
 void			eat_sleep_process(t_phi *philo);
@@ -142,7 +143,6 @@ void			*error_null(char *str, char *details, t_table *table);
 int				msg(char *str, char *detail, int exit_no);
 
 //	t_stop_program.c
-void			*t_stop_program(void *data);
 bool			is_philo_dead(t_phi *philo);
 
 //	exit.c
