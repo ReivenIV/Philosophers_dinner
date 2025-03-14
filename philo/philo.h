@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 11:05:52 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ bool	handler_parser(int ac, char **av);
 t_table	*init_table_philos(int ac, char **av);
 
 // tools_time: 
-time_t	get_current_time(void);
+time_t	now_at(void);
 
 // tools_print:  
 void	print_statement(t_phi *philo, char *status);		// We will print everything with these function. Is like a "print handler";

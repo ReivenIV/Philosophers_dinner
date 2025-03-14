@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:57:37 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 12:15:51 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ void	set_phi_to(char *activity, t_phi *philo)
 	time_t	action_end_at;
 
 	if (activity[0] == 'E')
-		action_end_at = get_current_time() + philo->table->t_t_eat;
+		action_end_at = now_at() + philo->table->t_t_eat;
 	else if (activity[0] == 'S')
-		action_end_at = get_current_time() + philo->table->t_t_sleep;
+		action_end_at = now_at() + philo->table->t_t_sleep;
 	else if (activity[0] == 'T')
-		action_end_at = get_current_time() + philo->table->t_t_think;
+		action_end_at = now_at() + philo->table->t_t_think;
 	else if (activity[0] == 'D')
-		action_end_at = get_current_time() + philo->table->t_t_die;
-	while (get_current_time() < action_end_at)
+		action_end_at = now_at() + philo->table->t_t_die;
+	while (now_at() < action_end_at)
 	{
 		if (should_sim_end(philo->table) == true)
 			break ;

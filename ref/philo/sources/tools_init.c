@@ -107,7 +107,7 @@ t_table	*init_table_philos(int ac, char **av)
 	table->t_t_think = 0;
 	table->sim_should_stop = false;
 	table->min_amount_meals = -1;						// set by default to "NULL"
-	table->start_meeting_at = get_current_time() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
+	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
 	if (ac == 6)										// if we have 6 we update it to the inputed number
 		table->min_amount_meals = nbs_atoi(av[5]);
 	table->philos = init_phis(table);

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:22:32 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 11:02:09 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	begin_process(t_table *table)
 {
 	unsigned int	i;
 
-	// // table->start_meeting_at = get_current_time() + (table->amount_philos * 2 * 10);
+	// // table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);
 	i = 0;
 	while (i < table->amount_philos)
 	{

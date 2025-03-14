@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/14 12:22:55 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	eat_sleep_process(t_phi *philo)
 	print_statement(philo, "EATING");
 	
 	pthread_mutex_lock(&philo->meal_time_lock);
-	philo->last_meal_at = get_current_time();
+	philo->last_meal_at = now_at();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 
 	set_phi_to("Eat", philo);
@@ -79,10 +79,10 @@ void	think_process(t_table *t, t_phi *p)						// t = table || p = philosopher.  
 		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)
 			t_t = 0;
 		else
-			t_t = (t->t_t_die - (get_current_time() - p->last_meal_at)) * 0.9;
+			t_t = (t->t_t_die - (now_at() - p->last_meal_at)) * 0.9;
 	}
 	else 
-		t_t = (t->t_t_die - (get_current_time() - p->last_meal_at) - t->t_t_eat) / 2;
+		t_t = (t->t_t_die - (now_at() - p->last_meal_at) - t->t_t_eat) / 2;
 	if (t_t < 0)
 		t_t = 0;
 	t->t_t_think = t_t;
@@ -104,9 +104,9 @@ void	think_process(t_table *t, t_phi *p)						// t = table || p = philosopher.  
 
 // // 	pthread_mutex_lock(&philo->meal_time_lock);
 // // 	if (philo->table->amount_philos % 2 == 0)
-// // 		t_t_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at)) * 0.98;
+// // 		t_t_think = (philo->table->t_t_die - (now_at() - philo->last_meal_at)) * 0.98;
 // // 	else 
-// // 		t_t_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at) - philo->table->t_t_eat) / 2;
+// // 		t_t_think = (philo->table->t_t_die - (now_at() - philo->last_meal_at) - philo->table->t_t_eat) / 2;
 // // 	if (t_t_think < 0)
 // // 		t_t_think = 0;
 

@@ -20,7 +20,7 @@
 */
 // static void	print_status(t_phi *philo, char *str)
 // {
-// 	printf("%ld %d %s\n", (get_current_time() - philo->table->start_meeting_at), philo->id + 1, str);
+// 	printf("%ld %d %s\n", (now_at() - philo->table->start_meeting_at), philo->id + 1, str);
 // }
 
 /* print_statement:
@@ -63,12 +63,12 @@
 
 // // static void	print_status(t_phi *philo, char *str)
 // // {
-// // 	printf("%ld %d %s\n", (get_current_time() - philo->table->start_meeting_at), philo->id + 1, str);
+// // 	printf("%ld %d %s\n", (now_at() - philo->table->start_meeting_at), philo->id + 1, str);
 // // }
 
 void	print_statement(t_phi *philo, char *status)
 {
-	time_t	now_at;
+	time_t	process_at;
 	int		philo_id;
 
 	pthread_mutex_lock(&philo->table->write_lock);
@@ -77,18 +77,18 @@ void	print_statement(t_phi *philo, char *status)
 		pthread_mutex_unlock(&philo->table->write_lock);
 		return ;
 	}
-	now_at = get_current_time() - philo->table->start_meeting_at;
+	process_at = now_at() - philo->table->start_meeting_at;
 	philo_id = philo->id + 1;
 	if (status[0] == 'D')
-		printf("%ld %d %s\n", now_at, philo_id, "died");
+		printf("%ld %d %s\n", process_at, philo_id, "died");
 	else if (status[0] == 'E')
-		printf("%ld %d %s\n", now_at, philo_id, "is eating");
+		printf("%ld %d %s\n", process_at, philo_id, "is eating");
 	else if (status[0] == 'S')
-		printf("%ld %d %s\n", now_at, philo_id, "is sleeping");
+		printf("%ld %d %s\n", process_at, philo_id, "is sleeping");
 	else if (status[0] == 'T')
-		printf("%ld %d %s\n", now_at, philo_id, "is thinking");
+		printf("%ld %d %s\n", process_at, philo_id, "is thinking");
 	else if (status[0] == 'F')
-		printf("%ld %d %s\n", now_at, philo_id, "has taken a fork");
+		printf("%ld %d %s\n", process_at, philo_id, "has taken a fork");
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
 
@@ -109,15 +109,15 @@ void	print_statement(t_phi *philo, char *status)
 // // {
 // // 	if (status == GOT_FORK_1)
 // // 		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
-// // 			get_current_time() - philo->table->start_meeting_at,
+// // 			now_at() - philo->table->start_meeting_at,
 // // 			color, philo->id + 1, str, philo->fork[0]);
 // // 	else if (status == GOT_FORK_2)
 // // 		printf("[%10ld]\t%s%03d\t%s\e[0m: fork [%d]\n",
-// // 			get_current_time() - philo->table->start_meeting_at,
+// // 			now_at() - philo->table->start_meeting_at,
 // // 			color, philo->id + 1, str, philo->fork[1]);
 // // 	else
 // // 		printf("[%10ld]\t%s%03d\t%s\e[0m\n",
-// // 			get_current_time() - philo->table->start_meeting_at,
+// // 			now_at() - philo->table->start_meeting_at,
 // // 			color, philo->id + 1, str);
 // // }
 

@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 09:43:34 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:28:20 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	is_philo_dead(t_phi *philo)
 {
 	time_t	current_time;
 
-	current_time = get_current_time();
+	current_time = now_at();
 	if ((current_time - philo->last_meal_at) >= philo->table->t_t_die)
 	{
 		print_statement(philo, "DIED");
