@@ -6,7 +6,7 @@
 /*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by rita              #+#    #+#             */
-/*   Updated: 2025/03/14 11:02:09 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:09:19 by urlooved         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	eat_sleep_process(t_phi *philo)
 /* think_process:
 *	Once a philosopher is done sleeping, he will think for a certain
 *	amount of time before starting to eat again.
-*	The time_to_think is calculated depending on how long it has been
-*	since the philosopher's last meal, the time_to_eat and the time_to_die
+*	The t_t_think is calculated depending on how long it has been
+*	since the philosopher's last meal, the t_t_eat and the t_t_die
 *	to determine when the philosopher will be hungry again.
 *	This helps stagger philosopher's eating routines to avoid forks being
 *	needlessly monopolized by one philosopher to the detriment of others.
@@ -56,50 +56,79 @@ void	eat_sleep_process(t_phi *philo)
 
 void	start_think_even(t_phi *philo)
 {
-	time_t	time_to_think;
+	time_t	t_t_think;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
 
-	time_to_think = philo->table->time_to_eat + 10;
+	t_t_think = philo->table->t_t_eat + 10;
 
-	philo->table->time_to_think = time_to_think;
+	philo->table->t_t_think = t_t_think;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	
 	print_statement(philo, "THINKING");
 	set_phi_to("Think", philo);
 }
 
-void	think_process(t_phi *philo)
+void	think_process(t_table *t, t_phi *p)
 {
-	time_t	time_to_think;
+	time_t	t_t_think;
 
-	pthread_mutex_lock(&philo->meal_time_lock);
-	if (philo->table->amount_philos % 2 == 0)
-		time_to_think = (philo->table->time_to_die - (get_current_time() - philo->last_meal_at)) * 0.98;
-	else 
-		time_to_think = (philo->table->time_to_die - (get_current_time() - philo->last_meal_at) - philo->table->time_to_eat) / 2;
-	if (time_to_think < 0)
-		time_to_think = 0;
-
-	philo->table->time_to_think = time_to_think;
-	pthread_mutex_unlock(&philo->meal_time_lock);
-	
-
-	print_statement(philo, "THINKING");
-
-	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))
+	pthread_mutex_lock(&p->meal_time_lock);
+	if (p->table->amount_philos % 2 == 0)
 	{
-		philo->table->time_to_think = time_to_think + 50;
-		set_phi_to("Think", philo);
+		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)
+			t_t_think = 0;
+		else
+			t_t_think = (t->t_t_die - (get_current_time() - p->last_meal_at)) * 0.9;
 	}
 	else 
-		set_phi_to("Think", philo);
+		t_t_think = (t->t_t_die - (get_current_time() - p->last_meal_at) - t->t_t_eat) / 2;
+	if (t_t_think < 0)
+		t_t_think = 0;
+	t->t_t_think = t_t_think;
+	pthread_mutex_unlock(&p->meal_time_lock);
+	print_statement(p, "THINKING");
+
+	if ((t->amount_philos % 2 != 0 && p->id == t->amount_philos - 2))
+	{
+		t->t_t_think = t_t_think + 50;
+		set_phi_to("Think", p);
+	}
+	else 
+		set_phi_to("Think", p);
 }
+
+// // void	think_process(t_phi *philo)
+// // {
+// // 	time_t	t_t_think;
+
+// // 	pthread_mutex_lock(&philo->meal_time_lock);
+// // 	if (philo->table->amount_philos % 2 == 0)
+// // 		t_t_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at)) * 0.98;
+// // 	else 
+// // 		t_t_think = (philo->table->t_t_die - (get_current_time() - philo->last_meal_at) - philo->table->t_t_eat) / 2;
+// // 	if (t_t_think < 0)
+// // 		t_t_think = 0;
+
+// // 	philo->table->t_t_think = t_t_think;
+// // 	pthread_mutex_unlock(&philo->meal_time_lock);
+	
+
+// // 	print_statement(philo, "THINKING");
+
+// // 	if ((philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 2))
+// // 	{
+// // 		philo->table->t_t_think = t_t_think + 50;
+// // 		set_phi_to("Think", philo);
+// // 	}
+// // 	else 
+// // 		set_phi_to("Think", philo);
+// // }
 
 /* wait_till_die:
 *	This routine is invoked when there is only a single philosopher.
 *	A single philosopher only has one fork, and so cannot eat. The
-*	philosopher will pick up that fork, wait as long as time_to_die and die.
+*	philosopher will pick up that fork, wait as long as t_t_die and die.
 *	This is a separate routine to make sure that the thread does not get
 *	stuck waiting for the second fork in the eat routine.
 */

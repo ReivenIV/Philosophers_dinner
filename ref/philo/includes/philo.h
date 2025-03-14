@@ -40,7 +40,7 @@
 
 # define STR_PROG_NAME	"philo:"
 # define STR_USAGE	"%s usage: ./philo <number_of_philosophers> \
-<time_to_die> <time_to_eat> <time_to_sleep> \
+<t_t_die> <t_t_eat> <t_t_sleep> \
 [number_of_times_each_philosopher_must_eat]\n"
 # define STR_ERR_INPUT_DIGIT	"%s invalid input: %s: \
 not a valid unsigned integer between 0 and 2147483647.\n"
@@ -61,10 +61,10 @@ typedef struct s_table
 	time_t			start_meeting_at;
 	unsigned int	amount_philos;
 	pthread_t		t_handler_stop_program;
-	time_t			time_to_die;
-	time_t			time_to_eat;
-	time_t			time_to_sleep;
-	time_t			time_to_think;
+	time_t			t_t_die;
+	time_t			t_t_eat;
+	time_t			t_t_sleep;
+	time_t			t_t_think;
 	int				min_amount_meals;
 	bool			sim_should_stop;
 	pthread_mutex_t	sim_stop_lock;
@@ -116,7 +116,7 @@ t_table			*init_table_philos(int ac, char **av);
 
 //	tools_actions.c
 void			eat_sleep_process(t_phi *philo);
-void			think_process(t_phi *philo);
+void			think_process(t_table *tab, t_phi *philo);
 void			*wait_till_die(t_phi *philo);
 void			start_think_even(t_phi *philo);
 

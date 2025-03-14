@@ -37,9 +37,9 @@ The subject describes the problem as follows:
 In both the mandatory and bonus parts, we must create an algorithm that keeps the philosophers alive as far as possible. The programs must take several parameters:
 
 * **```number_of_philosophers```**: the number of philosophers around the table,
-* **```time_to_die```**: a number representing the time in milliseconds a philosopher has to live after a meal. If a philosopher hasn’t started eating time_to_die milliseconds after the beginning of his last meal or the beginning of the simulation, he will die.
-* **```time_to_eat```**: a number representing the time in milliseconds a philosopher takes to finish his meal. During that time, the philosopher keeps his two forks in hand.
-* **```time_to_sleep```**: the time in milliseconds that a philosopher spends sleeping.
+* **```t_t_die```**: a number representing the time in milliseconds a philosopher has to live after a meal. If a philosopher hasn’t started eating t_t_die milliseconds after the beginning of his last meal or the beginning of the simulation, he will die.
+* **```t_t_eat```**: a number representing the time in milliseconds a philosopher takes to finish his meal. During that time, the philosopher keeps his two forks in hand.
+* **```t_t_sleep```**: the time in milliseconds that a philosopher spends sleeping.
 * **```number_of_times_each_philosopher_must_eat```**: an optional argument that allows the program to stop if all the philosophers have eaten at least that many times. If this argument is not specified, the simulation carries on unless a philosopher dies.
 
 The programs outputs a message each time a philosopher takes an action, which is formatted this way:
@@ -71,7 +71,7 @@ make BUILD=pretty
 Run the program with the following arguments:
 
 ```shell
-./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [number_of_times_each_philo_must_eat]
+./philo <number_of_philosophers> <t_t_die> <t_t_eat> <t_t_sleep> [number_of_times_each_philo_must_eat]
 ```
 
 The arguments must be integers between 0 and INT_MAX representing a time in milliseconds. For example:
@@ -101,7 +101,7 @@ make BUILD=pretty
 Run the program with the following arguments:
 
 ```shell
-./philo_bonus <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [number_of_times_each_philo_must_eat]
+./philo_bonus <number_of_philosophers> <t_t_die> <t_t_eat> <t_t_sleep> [number_of_times_each_philo_must_eat]
 ```
 
 Like the mandatory part, the arguments must be integers between 0 and INT_MAX representing a time in milliseconds. For example:

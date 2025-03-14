@@ -101,10 +101,10 @@ t_table	*init_table_philos(int ac, char **av)
 	if (!table)
 		return (error_null(STR_ERR_MALLOC, NULL, 0));
 	table->amount_philos = nbs_atoi(av[1]);
-	table->time_to_die = nbs_atoi(av[2]);
-	table->time_to_eat = nbs_atoi(av[3]);
-	table->time_to_sleep = nbs_atoi(av[4]);
-	table->time_to_think = 0;
+	table->t_t_die = nbs_atoi(av[2]);
+	table->t_t_eat = nbs_atoi(av[3]);
+	table->t_t_sleep = nbs_atoi(av[4]);
+	table->t_t_think = 0;
 	table->sim_should_stop = false;
 	table->min_amount_meals = -1;						// set by default to "NULL"
 	table->start_meeting_at = get_current_time() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
