@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tools_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:56:07 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 // Will init amount of forks mutexes. (amount philos == amount forks)
 // return array of forks or NULL. 
@@ -32,8 +31,8 @@ static pthread_mutex_t	*init_forks(t_table *table)
 	}
 	return (forks);
 }
-// Will fill the array philosopher and init their values (table, id, time_ate)
 
+// Will fill the array philosopher and init their values (table, id, time_ate)
 static t_phi	**init_philos(t_table *table)
 {
 	t_phi			**arr_philos;
@@ -47,7 +46,7 @@ static t_phi	**init_philos(t_table *table)
 	i = 0;
 	while (i < table->amount_philos)
 	{
-		arr_philos[i] = malloc(sizeof(t_phi));					// Will create 1 t_phi per loop
+		arr_philos[i] = malloc(sizeof(t_phi));
 		if (!arr_philos[i])
 			return (printf("IP: error malloc"), NULL);
 		if (pthread_mutex_init(&arr_philos[i]->phi_action_lock, 0) != 0)
@@ -80,17 +79,17 @@ t_table	*init_table_philos(int ac, char **av)
 {
 	t_table	*table;
 
-	table = malloc(sizeof(t_table));												// REMINDER : we need only 1 table (an "X" nb of philos)
+	table = malloc(sizeof(t_table));
 	if (!table)
 		return (printf("ITP: error malloc"), NULL);
 	table->amount_philos = nbs_atoi(av[1]);
-	table->t_t_die =  nbs_atoi(av[2]);
-	table->t_t_eat =  nbs_atoi(av[3]);
-	table->t_t_sleep =  nbs_atoi(av[4]);
-	table->sim_should_stop = false;													// We start the process so sim_should_stop = false (otherwise will stop inmediatly)
-	table->min_amount_meals = -1;													// set by default to "NULL"
-	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
-	if (ac == 6)																	// if we have 6 we update it to the inputed number
+	table->t_t_die = nbs_atoi(av[2]);
+	table->t_t_eat = nbs_atoi(av[3]);
+	table->t_t_sleep = nbs_atoi(av[4]);
+	table->sim_should_stop = false;
+	table->min_amount_meals = -1;
+	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);
+	if (ac == 6)
 		table->min_amount_meals = nbs_atoi(av[5]);
 	table->philos = init_philos(table);
 	if (!table->philos)

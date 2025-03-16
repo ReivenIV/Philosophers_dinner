@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 10:44:32 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 14:45:27 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:56:07 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_statement(t_phi *philo, char *status)
 	int		philo_id;
 
 	pthread_mutex_lock(&philo->table->write_lock);
-	if (should_sim_end(philo->table) == true)					// if end of the process we cut the acces to write in the terminal
+	if (should_sim_end(philo->table) == true)
 	{
 		pthread_mutex_unlock(&philo->table->write_lock);
 		return ;
