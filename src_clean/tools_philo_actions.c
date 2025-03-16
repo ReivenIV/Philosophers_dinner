@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_philo_actions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 17:32:46 by rita             ###   ########.fr       */
+/*   Updated: 2025/03/16 17:41:50 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	think_process(t_table *t, t_phi *p, time_t lma)
 		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 400)
 			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.40;
 		else
-			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.75;
+			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.65;
 	}
 	if (t_t < 0)
 		t_t = 0;
-	t->t_t_think = t_t;	
+	t->t_t_think = t_t;
 	pthread_mutex_unlock(&p->phi_action_lock);
 	print_statement(p, "THINKING");
 	set_phi_to("Think", p);

@@ -6,7 +6,7 @@
 /*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 12:56:07 by fwebe-ir         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:36:58 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_table	*init_table_philos(int ac, char **av)
 	table->t_t_die = nbs_atoi(av[2]);
 	table->t_t_eat = nbs_atoi(av[3]);
 	table->t_t_sleep = nbs_atoi(av[4]);
+	table->t_t_think = 0;
 	table->sim_should_stop = false;
 	table->min_amount_meals = -1;
 	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);

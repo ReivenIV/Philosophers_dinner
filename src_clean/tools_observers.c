@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_observers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 17:25:59 by rita             ###   ########.fr       */
+/*   Updated: 2025/03/16 17:42:59 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ bool	are_all_conditions_reached(t_table *table)
 	{
 		pthread_mutex_lock(&table->philos[i]->phi_action_lock);
 		if (is_philo_dead(table->philos[i]))
-			return (true);															// Will check if a philo died or not a philo if yes stop the procees (its announced at func "is_philo_dead")
+			return (true);
 		if (table->min_amount_meals != -1)
-			if (table->philos[i]->times_ate < (unsigned int)table->min_amount_meals)
-				amount_min_meals_reached = false;										// if min_amount_meals not reached then we continue the process. 
+			if (table->philos[i]->times_ate
+				< (unsigned int)table->min_amount_meals)
+				amount_min_meals_reached = false;
 		pthread_mutex_unlock(&table->philos[i]->phi_action_lock);
 		i++;
 	}
