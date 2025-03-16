@@ -48,11 +48,9 @@ bool	are_all_conditions_reached(t_table *table)
 {
 	unsigned int	i;
 	bool			amount_min_meals_reached;
-	bool			should_stop;
 
 	i = 0;
 	amount_min_meals_reached = true;
-	should_stop = false;
 	while (i < table->amount_philos)
 	{
 		pthread_mutex_lock(&table->philos[i]->phi_action_lock);
@@ -64,7 +62,7 @@ bool	are_all_conditions_reached(t_table *table)
 		pthread_mutex_unlock(&table->philos[i]->phi_action_lock);
 		i++;
 	}
-	if ((table->min_amount_meals != -1 && amount_min_meals_reached == true) || should_stop == true)
+	if (table->min_amount_meals != -1 && amount_min_meals_reached == true)
 	{
 		update_sim_should_stop(table, true);
 		return (true);

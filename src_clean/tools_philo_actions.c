@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_philo_actions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 12:56:07 by fwebe-ir         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:32:46 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	start_think_even(t_phi *philo)
 	set_phi_to("Think", philo);
 }
 
-void	think_process(t_table *t, t_phi *p)
+//	t = table || p = philosopher. || lma = last_meal_at
+void	think_process(t_table *t, t_phi *p, time_t lma)
 {
 	time_t	t_t;
 
@@ -51,22 +52,21 @@ void	think_process(t_table *t, t_phi *p)
 		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)
 			t_t = 0;
 		else
-			t_t = (t->t_t_die - (now_at() - p->last_meal_at)) * 0.9;
+			t_t = (t->t_t_die - (now_at() - lma)) * 0.9;
 	}
-	else
-		t_t = (t->t_t_die - (now_at() - p->last_meal_at) - t->t_t_eat) / 2;
+	if (p->table->amount_philos % 2 != 0)
+	{
+		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 400)
+			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.40;
+		else
+			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.75;
+	}
 	if (t_t < 0)
 		t_t = 0;
-	t->t_t_think = t_t;
+	t->t_t_think = t_t;	
 	pthread_mutex_unlock(&p->phi_action_lock);
 	print_statement(p, "THINKING");
-	if ((t->amount_philos % 2 != 0 && p->id == t->amount_philos - 2))
-	{
-		t->t_t_think = t_t + 50;
-		set_phi_to("Think", p);
-	}
-	else
-		set_phi_to("Think", p);
+	set_phi_to("Think", p);
 }
 
 void	*wait_till_die(t_phi *philo)

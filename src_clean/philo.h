@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 12:56:07 by fwebe-ir         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:21:46 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_statement(t_phi *philo, char *status);
 
 //  tools_philo_actions
 void	eat_sleep_process(t_phi *philo);
-void	think_process(t_table *t, t_phi *p);
+void	think_process(t_table *t, t_phi *p, time_t lma);
 void	start_think_even(t_phi *philo);
 void	*wait_till_die(t_phi *philo);
 

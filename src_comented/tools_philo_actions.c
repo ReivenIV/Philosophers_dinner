@@ -70,7 +70,6 @@ void	think_process(t_table *t, t_phi *p, time_t lma)
 	t->t_t_think = t_t;	
 	pthread_mutex_unlock(&p->phi_action_lock);
 	print_statement(p, "THINKING");
-
 	set_phi_to("Think", p);
 }
 

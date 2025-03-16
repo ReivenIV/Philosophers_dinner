@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_t_philo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:11:10 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 12:56:07 by fwebe-ir         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:23:38 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	*t_handler_philo(void *data)
 		if (philo->table->amount_philos % 2 == 0)
 			start_think_even(philo);
 		else
-			think_process(philo->table, philo);
+			think_process(philo->table, philo, philo->last_meal_at);
 	}
 	else if (philo->table->amount_philos % 2 != 0
 		&& philo->id == philo->table->amount_philos - 1)
-		think_process(philo->table, philo);
+		think_process(philo->table, philo, philo->last_meal_at);
 	while (should_sim_end(philo->table) == false)
 	{
 		eat_sleep_process(philo);
-		think_process(philo->table, philo);
+		think_process(philo->table, philo, philo->last_meal_at);
 	}
 	return (NULL);
 }
