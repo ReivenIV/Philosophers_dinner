@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:46:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:30:30 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	free_table(t_table *table)
 	}
 	free(table);
 }
+
 // Will free all global mutexes and philos in table
 static void	free_mutexes(t_table *table)
 {
@@ -44,7 +45,7 @@ static void	free_mutexes(t_table *table)
 	{
 		pthread_mutex_destroy(&table->fork_locks[i]);
 		pthread_mutex_destroy(&table->philos[i]->phi_action_lock);
-		i++;		
+		i++;
 	}
 	pthread_mutex_destroy(&table->write_lock);
 	pthread_mutex_destroy(&table->sim_stop_lock);

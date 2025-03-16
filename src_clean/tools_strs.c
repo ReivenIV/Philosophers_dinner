@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_strs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fwebe-ir <fwebe-ir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:27:42 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 13:17:48 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:29:59 by fwebe-ir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	nbs_atoi(char *str)
 }
 
 // Will check if the string is only made out of (char)numbers 
-bool has_only_digits(char *str)
+bool	has_only_digits(char *str)
 {
 	int	i;
 
