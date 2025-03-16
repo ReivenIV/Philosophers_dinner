@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_t_philo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:11:10 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 16:11:20 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:04:38 by urlooved             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	*t_handler_philo(void *data)
 		if (philo->table->amount_philos % 2 == 0)
 			start_think_even(philo);
 		else
-			think_process(philo->table, philo);
+			think_process(philo->table, philo, philo->last_meal_at);
 	}
 	else if (philo->table->amount_philos % 2 != 0 && philo->id == philo->table->amount_philos - 1)	// Only for ODD amount of philos. The last one will think by default 
-		think_process(philo->table, philo);
+		think_process(philo->table, philo, philo->last_meal_at);
 	while (should_sim_end(philo->table) == false)				// The not thinking philos will start eating. Then the proces will follow naturally. 
 	{
 		eat_sleep_process(philo);
-		think_process(philo->table, philo);
+		think_process(philo->table, philo, philo->last_meal_at);
 	}
 	return (NULL);												// Till should_sim_end == true we loop.
 }

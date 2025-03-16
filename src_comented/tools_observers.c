@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_observers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:49:13 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/16 15:38:15 by rita             ###   ########.fr       */
+/*   Updated: 2025/03/16 15:58:28 by urlooved             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	is_philo_dead(t_phi *philo)
 	if ((current_time - philo->last_meal_at) >= philo->table->t_t_die)
 	{
 		print_statement(philo, "DIED");
+		update_sim_should_stop(philo->table, true);
 		pthread_mutex_unlock(&philo->phi_action_lock);
 		return (true);										// yep someone died
 	}
@@ -56,7 +57,7 @@ bool	are_all_conditions_reached(t_table *table)
 	{
 		pthread_mutex_lock(&table->philos[i]->phi_action_lock);
 		if (is_philo_dead(table->philos[i]))
-			should_stop = true;															// Will check if a philo died or not a philo if yes stop the procees (its announced at func "is_philo_dead")
+			return (true);															// Will check if a philo died or not a philo if yes stop the procees (its announced at func "is_philo_dead")
 		if (table->min_amount_meals != -1)
 			if (table->philos[i]->times_ate < (unsigned int)table->min_amount_meals)
 				amount_min_meals_reached = false;										// if min_amount_meals not reached then we continue the process. 

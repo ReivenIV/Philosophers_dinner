@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:02:53 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 16:09:38 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:19:06 by urlooved             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	print_statement(t_phi *philo, char *status);		// We will print everything w
 
 //  tools_philo_actions
 void	eat_sleep_process(t_phi *philo);					// Main action only eat _ sleep
-void	think_process(t_table *t, t_phi *p);				// calculate t_t_think. REMINDER ODD vs EVEN not the same
+void	think_process(t_table *t, t_phi *p, time_t lma);	// calculate t_t_think. REMINDER ODD vs EVEN not the same
 void 	start_think_even(t_phi *philo);						// only at the begining only for EVEN philos.
 void	*wait_till_die(t_phi *philo);						// Only for 1 philo.
 

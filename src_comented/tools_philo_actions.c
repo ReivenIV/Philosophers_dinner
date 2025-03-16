@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_philo_actions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:37:39 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 15:54:34 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:15:14 by urlooved             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,34 @@ void 	start_think_even(t_phi *philo)
 	print_statement(philo, "Thinking");
 	set_phi_to("Think", philo);
 }
-
-void	think_process(t_table *t, t_phi *p)						// t = table || p = philosopher.  (i needed spaces sorry for that one)
+//	t = table || p = philosopher. || lma = last_meal_at  (i needed spaces sorry for that one)
+void	think_process(t_table *t, t_phi *p, time_t lma)
 {
-	time_t	t_t;												// t_t = time_to_think			  (i needed spaces sorry for that one)
+	time_t	t_t;
 
 	pthread_mutex_lock(&p->phi_action_lock);
 	if (p->table->amount_philos % 2 == 0)
 	{
-		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)
+		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 20)					// In case time to think is really small related to time to die (<=20 i choose to put it to 0 to avoid risk)
 			t_t = 0;
 		else
-			t_t = (t->t_t_die - (now_at() - p->last_meal_at)) * 0.9;
+			t_t = (t->t_t_die - (now_at() - lma)) * 0.9;					// in case the amount to think is big i choose to take only 90% of it. To avoid risk.
 	}
-	else 
-		t_t = (t->t_t_die - (now_at() - p->last_meal_at) - t->t_t_eat) / 2;
+	if (p->table->amount_philos % 2 != 0)
+	{
+		if (t->t_t_die - (t->t_t_eat + t->t_t_sleep) <= 400)
+			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.40;
+		else
+			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.75;
+		printf("t_t = %li - - %li\n", t_t, t->t_t_die - (now_at() - lma) - t->t_t_eat);
+	}
 	if (t_t < 0)
 		t_t = 0;
-	t->t_t_think = t_t;
+	t->t_t_think = t_t;	
 	pthread_mutex_unlock(&p->phi_action_lock);
 	print_statement(p, "THINKING");
 
-	if ((t->amount_philos % 2 != 0 && p->id == t->amount_philos - 2))
-	{
-		t->t_t_think = t_t + 50;
-		set_phi_to("Think", p);
-	}
-	else 
-		set_phi_to("Think", p);
+	set_phi_to("Think", p);
 }
 
 void	*wait_till_die(t_phi *philo)

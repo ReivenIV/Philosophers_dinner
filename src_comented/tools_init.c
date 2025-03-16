@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urlooved <urlooved@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urlooved <urlooved@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:38:28 by urlooved          #+#    #+#             */
-/*   Updated: 2025/03/14 15:27:38 by urlooved         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:19:48 by urlooved             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_table	*init_table_philos(int ac, char **av)
 	table->t_t_die =  nbs_atoi(av[2]);
 	table->t_t_eat =  nbs_atoi(av[3]);
 	table->t_t_sleep =  nbs_atoi(av[4]);
+	table->t_t_think =  0;
 	table->sim_should_stop = false;													// We start the process so sim_should_stop = false (otherwise will stop inmediatly)
 	table->min_amount_meals = -1;													// set by default to "NULL"
 	table->start_meeting_at = now_at() + (table->amount_philos * 2 * 10);		// the +... is to add some extra time to sync the threads and avoid data races
