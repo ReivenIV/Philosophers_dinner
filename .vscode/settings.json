@@ -1,0 +1,36 @@
+{
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "42header.username": "urlooved",
+    "42header.email": "urlooved@student.42.fr",
+    "peacock.color": "#9a564a",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#b46f63",
+        "activityBar.background": "#b46f63",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#93cb9c",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#b46f63",
+        "statusBar.background": "#9a564a",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#b46f63",
+        "statusBarItem.remoteBackground": "#9a564a",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#9a564a",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#9a564a99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "files.associations": {
+        "so_long.h": "c",
+        "unistd.h": "c",
+        "pthread.h": "c",
+        "stdio.h": "c",
+        "philo.h": "c",
+        "tools_setters.C": "cpp",
+        "cstdlib": "c"
+    },
+    "github.copilot.editor.enableAutoCompletions": false
+}
