@@ -1,25 +1,6 @@
 # Philosophers Project
 
-exec projet ex:
-```bash
-	# Normal launch
-	./philo 1 800 200 200 			#(will die)
-	./philo 5 800 200 200
-	./philo 5 800 200 200 7
-	./philo 4 410 200 200 
-	./philo 4 310 200 100			#(one philo will die)
 
-	# Leaks
-	valgrind ./philo 2 800000 60 60 1
-
-	valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 60 60 1
-
-	# Data races
-	valgrind --tool=helgrind ./philo 2 800000 60 60 1
-	valgrind --tool=helgrind --history-level=full -s ./philo 2 800000 60 60 1
-	# data races complet report :
-	valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 800000 60 60 1
-```
 
 ## Description
 
@@ -94,11 +75,26 @@ If
 		- ./philo 3 800 200 350
 		- ./philo 3 800 200 400
 
+exec projet ex:
+```bash
+	# Normal launch
+	./philo 1 800 200 200 			# (will die)
+	./philo 5 800 200 200
+	./philo 5 800 200 200 7
+	./philo 4 410 200 200 
+	./philo 4 310 200 100			# (one philo will die)
 
+	# Leaks
+	valgrind ./philo 2 800000 60 60 1
 
+	valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 60 60 1
 
-
-
+	# Data races
+	valgrind --tool=helgrind ./philo 2 800000 60 60 1
+	valgrind --tool=helgrind --history-level=full -s ./philo 2 800000 60 60 1
+	# data races complet report :
+	valgrind --tool=helgrind --verbose --history-level=full -s ./philo 2 800000 60 60 1
+```
 
 usefull comands : 
 ```bash
@@ -113,9 +109,7 @@ ps aux | grep "path of your projet"
 
 Contributions to the project are welcome! If you have any ideas, enhancements, or bug fixes, feel free to open an issue or submit a pull request.
 
-
-
 Ref proyects : 
 - https://github.com/zelhajou/ft_unix_philosophers?tab=readme-ov-file
 - https://github.com/MarkosComK/42-Philosophers
-
+- https://github.com/mcombeau/philosophers (big thaks to: mcombeau)
