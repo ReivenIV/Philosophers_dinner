@@ -142,7 +142,7 @@ Contributions to the project are welcome! If you have any ideas, enhancements, o
 Ref proyects : 
 - https://github.com/zelhajou/ft_unix_philosophers?tab=readme-ov-file
 - https://github.com/MarkosComK/42-Philosophers
-- https://github.com/mcombeau/philosophers (big thaks to: mcombeau)
+- https://github.com/mcombeau/philosophers (big thanks to: mcombeau)
 
 ## Tools
-- Usefull source to visualize the outputs. Be carefull is not perfect nor precice (check the issues) still a usefull source: https://nafuka11.github.io/philosophers-visualizer/ i used in every test to understand the behavior of my project.
+- Usefull source to visualize the outputs. Be carefull is not perfect nor precice (check the issues) still a usefull tool: https://nafuka11.github.io/philosophers-visualizer/ i used in almost every test to understand the behavior of my project. And for the thinking behavior.
