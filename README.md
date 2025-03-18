@@ -1,8 +1,24 @@
+```
+Any fool can write code that a computer can understand.
+Good programmers write code that humans can understand,
+so if you want to go fast, if you want to get done quickly,
+if you want your code to be easy to write, make it easy to read.
+
+Martin Fowler && Robert C. Martin
+```
+
 # Philosophers Project
 
-
+Project validated : mars 2025
+time spent : 44h 12min
+points : 100 / 100
 
 ## Description
+
+This project is a version of the [Dining Philosophers Problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem).
+
+The goal of this project was to learn to avoid deadlock and race conditions when creating multithreaded applications.
+
 
 The Philosophers project is a multi-threading and synchronization project aimed at simulating the classical dining philosophers problem. The goal is to implement a solution in which a set of philosophers seated at a round table engage in actions of thinking and eating while avoiding deadlock and starvation.
 
@@ -25,13 +41,16 @@ To run the Philosophers project, you need:
 2. Navigate to the project directory:
 
 	```bash
-	cd philosophers
+	cd philosophers_dinner
 	```
 
 3. Compile the program:
 
 	```bash
 	make
+
+	# or i like :
+	rm philo | make re 
 	```
 
 ## Usage
@@ -50,12 +69,22 @@ Replace the placeholders with appropriate values:
 - `[time_to_sleep]`: The time (in milliseconds) a philosopher spends sleeping after eating or thinking.
 - optional `[number_of_times_each_philosopher_must_eat]`: The number of times each philosopher must eat before the simulation ends.
 
+Each philosopher logs the following actions:
+- Taking a fork
+- Eating
+- Sleeping
+- Thinking
+- Dying
+
+The logged messages are always in sequential order.
+
 ## Keep in mind before input data : 
 
 Thinking time or "t_think" is the contention time waiting for the forks
 If
 #### Even amount of philosophers 
 	- t_die = t_eat + t_sleep + 10
+
 	- if (t_eat <= t_sleep) === 0 t_think
 		- No contention and the process is symetric philos will sleep and eat.
 		- exs: 
@@ -67,6 +96,7 @@ If
 
 #### Odd amount of philosophers :
 	- t_die = t_eat * 2 + t_sleep + 10
+
 	- if (t_eat = t_sleep) === t_think = t_eat 
 		- ./philo 3 800 200 200
 		- ./philo 3 800 100 100
@@ -84,12 +114,12 @@ exec projet ex:
 	./philo 4 410 200 200 
 	./philo 4 310 200 100			# (one philo will die)
 
-	# Leaks
+	# to check : Leaks
 	valgrind ./philo 2 800000 60 60 1
 
 	valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all ./philo 2 800000 60 60 1
 
-	# Data races
+	# to check : Data races
 	valgrind --tool=helgrind ./philo 2 800000 60 60 1
 	valgrind --tool=helgrind --history-level=full -s ./philo 2 800000 60 60 1
 	# data races complet report :
@@ -113,3 +143,6 @@ Ref proyects :
 - https://github.com/zelhajou/ft_unix_philosophers?tab=readme-ov-file
 - https://github.com/MarkosComK/42-Philosophers
 - https://github.com/mcombeau/philosophers (big thaks to: mcombeau)
+
+## Tools
+- Usefull source to visualize the outputs. Be carefull is not perfect nor precice (check the issues) still a usefull source: https://nafuka11.github.io/philosophers-visualizer/ i used in every test to understand the behavior of my project.
