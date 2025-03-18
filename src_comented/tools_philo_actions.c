@@ -63,7 +63,6 @@ void	think_process(t_table *t, t_phi *p, time_t lma)
 			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.40;
 		else
 			t_t = (t->t_t_die - (now_at() - lma) - t->t_t_eat) * 0.75;
-		printf("t_t = %li - - %li\n", t_t, t->t_t_die - (now_at() - lma) - t->t_t_eat);
 	}
 	if (t_t < 0)
 		t_t = 0;
