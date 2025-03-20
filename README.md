@@ -24,7 +24,7 @@ Martin Fowler && Robert C. Martin
 ```
 
 
-<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/ReivenIV/Philosophers_dinner/42_So_Long?color=lightblue" />
+<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/ReivenIV/Philosophers_dinner/42_So_Long?color=lightblue" />
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ReivenIV/Philosophers_dinner?color=green" />
 # Philosophers Project
 
