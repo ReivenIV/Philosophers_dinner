@@ -31,7 +31,6 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
-	$(MAKE) clean
 
 
 $(NAME): $(OBJS) 
@@ -47,4 +46,3 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-	$(MAKE) clean
