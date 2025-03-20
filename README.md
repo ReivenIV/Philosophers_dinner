@@ -1,8 +1,8 @@
 ```
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⡫⠭⣽⠿⠿⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⠋⠀⣴⡟⠠⢃⠈⣃⠹⠃⡸⠀⠻⣎⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣆⠀⢿⠹⣦⣝⣯⣶⣶⠋⠁⠂⡠⢏⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠙⣿⣛⡋⠀⣀⡴⠋⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⠋⠀⣴⡟⠠⢃⠈⣃⠹⠃⡸⠀⠻⣎⠻⣿⣿Done⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣆⠀⢿⠹⣦⣝⣯⣶⣶⠋⠁⠂⡠⢏⣼⣿⣿⣿⣿⣿⣿by⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠙⣿⣛⡋⠀⣀⡴⠋⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿Philosophers⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢦⣄⠀⠉⠙⠒⠶⣾⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠈⣿⣷⣶⣶⣶⣶⣸⢠⣿⣿⣗⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⠧⠙⠿⣿⣿⠿⢋⣵⣿⣿⡿⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -23,6 +23,9 @@ if you want your code to be easy to write, make it easy to read.
 Martin Fowler && Robert C. Martin
 ```
 
+
+<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/simon-zerisenay/42_So_Long?color=lightblue" />
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/simon-zerisenay/42_So_Long?color=green" />
 # Philosophers Project
 
 Project validated : mars 2025
